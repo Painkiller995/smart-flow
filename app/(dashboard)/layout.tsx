@@ -1,3 +1,4 @@
+import BreadcrumbHeader from "@/components/breadcrumb-header";
 import DesktopSidebar from "@/components/sidebar";
 import { Separator } from "@radix-ui/react-context-menu";
 
@@ -11,7 +12,7 @@ function layout({
       <DesktopSidebar />
       <div className="flex flex-col flex-1 min-h-screen">
         <header className="flex items-center justify-between px-6 py-4 h-[50px] container">
-          Auto FLow
+          <BreadcrumbHeader />
         </header>
         <Separator />
         <div className="overflow-auto">
