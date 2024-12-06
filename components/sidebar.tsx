@@ -1,8 +1,15 @@
 "use client";
 import React from "react";
 import Logo from "./logo";
+import { routes } from "@/config/routes";
+import Link from "next/link";
+import { buttonVariants } from "./ui/button";
+import { usePathname } from "next/navigation";
 
 const DesktopSidebar = () => {
+  const pathname = usePathname();
+  const activeRoute = routes.find((route) => pathname.includes(route.href));
+
   return (
     <div
       className="hidden relative md:block 
@@ -10,6 +17,22 @@ const DesktopSidebar = () => {
     >
       <div className="flex items-center justify-center gap-2 border-b-[1px] border-separate p-4">
         <Logo />
+      </div>
+      <div className="flex flex-col p-2">
+        {routes.map((route) => (
+          <Link
+            key={route.href}
+            href={route.href}
+            className={buttonVariants({
+              variant:
+                activeRoute && activeRoute.href === route.href
+                  ? "sidebarActiveItem"
+                  : "sidebarItem",
+            })}
+          >
+            <route.icon size={20} /> {route.label}
+          </Link>
+        ))}
       </div>
     </div>
   );
