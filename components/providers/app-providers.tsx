@@ -10,6 +10,6 @@ export function AppProviders({ children }: AppProvidersProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {children}
-    </>
+    </ThemeProvider>
   );
 }

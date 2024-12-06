@@ -1,6 +1,7 @@
 import BreadcrumbHeader from "@/components/breadcrumb-header";
 import DesktopSidebar from "@/components/sidebar";
-import { Separator } from "@radix-ui/react-context-menu";
+import { ThemeModeToggle } from "@/components/theme-mode-toggle";
+import { Separator } from "@/components/ui/separator";
 
 function layout({
   children,
@@ -13,6 +14,9 @@ function layout({
       <div className="flex flex-col flex-1 min-h-screen">
         <header className="flex items-center justify-between px-6 py-4 h-[50px] container">
           <BreadcrumbHeader />
+          <div className="flex items-center">
+            <ThemeModeToggle />
+          </div>
         </header>
         <Separator />
         <div className="overflow-auto">
