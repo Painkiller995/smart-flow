@@ -1,9 +1,10 @@
 "use client";
+
 import React from "react";
-import Logo from "./logo";
+import Logo from "../logo";
 import { routes } from "@/config/routes";
 import Link from "next/link";
-import { buttonVariants } from "./ui/button";
+import { buttonVariants } from "../ui/button";
 import { usePathname } from "next/navigation";
 
 const DesktopSidebar = () => {
