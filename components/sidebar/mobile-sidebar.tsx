@@ -46,7 +46,7 @@ const MobileSidebar = () => {
                         ? "sidebarActiveItem"
                         : "sidebarItem",
                   })}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setIsOpen((prev) => !prev)}
                 >
                   <route.icon size={20} /> {route.label}
                 </Link>
