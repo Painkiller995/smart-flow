@@ -1,5 +1,7 @@
 import { CoinsIcon, HomeIcon, Layers2Icon, ShieldCheckIcon } from "lucide-react";
 
+export const signInRoute = '/sign-in'
+
 export const routes = [
     {
         href: "",
