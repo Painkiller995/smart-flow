@@ -3,6 +3,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { waitFor } from "@/lib/helper/wait-for";
 import { AlertCircle, InboxIcon } from "lucide-react";
 import React from "react";
+import CreateWorkflowDialog from "./create-workflow-dialog";
 
 async function UserWorkflows() {
   const workflows = await GetWorkflowsForUser();
@@ -31,6 +32,7 @@ async function UserWorkflows() {
             Click the button below to create your first workflow
           </p>
         </div>
+        <CreateWorkflowDialog triggerText="Create your first workflow"></CreateWorkflowDialog>
       </div>
     );
   }
