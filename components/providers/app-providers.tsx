@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ThemeProvider } from "./theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 interface AppProvidersProps {
   children: React.ReactNode;
 }
@@ -14,6 +16,7 @@ export function AppProviders({ children }: AppProvidersProps) {
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         {children}
       </ThemeProvider>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
