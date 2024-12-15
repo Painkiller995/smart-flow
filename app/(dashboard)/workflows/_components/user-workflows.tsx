@@ -37,7 +37,7 @@ async function UserWorkflows() {
     );
   }
 
-  return <div>Test</div>;
+  return <pre> {JSON.stringify(workflows, null, 4)}</pre>;
 }
 
 export default UserWorkflows;
