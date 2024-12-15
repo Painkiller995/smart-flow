@@ -15,7 +15,7 @@ import {
   createWorkflowSchema,
   createWorkflowSchemaType,
 } from "@/schema/workflow";
-import { z } from "zod";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -41,6 +41,7 @@ const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
 
   const form = useForm<createWorkflowSchemaType>({
     resolver: zodResolver(createWorkflowSchema),
+    defaultValues: {},
   });
 
   const { mutate, isPending } = useMutation({
@@ -115,7 +116,7 @@ const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
                   </FormItem>
                 )}
               />
-              <Button className="w-full" disabled={isPending}>
+              <Button type="submit" className="w-full" disabled={isPending}>
                 {!isPending && "Proceed"}
                 {isPending && <Loader2 className="animate-spin" />}
               </Button>

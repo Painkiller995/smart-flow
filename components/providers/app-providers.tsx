@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ThemeProvider } from "./theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "../ui/sonner";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ export function AppProviders({ children }: AppProvidersProps) {
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         {children}
       </ThemeProvider>
+      <Toaster richColors />
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
