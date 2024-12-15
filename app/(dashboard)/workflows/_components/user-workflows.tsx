@@ -4,6 +4,7 @@ import { waitFor } from "@/lib/helper/wait-for";
 import { AlertCircle, InboxIcon } from "lucide-react";
 import React from "react";
 import CreateWorkflowDialog from "./create-workflow-dialog";
+import WorkflowCard from "./workflow-card";
 
 async function UserWorkflows() {
   const workflows = await GetWorkflowsForUser();
@@ -37,7 +38,13 @@ async function UserWorkflows() {
     );
   }
 
-  return <pre> {JSON.stringify(workflows, null, 4)}</pre>;
+  return (
+    <div className="grid grid-cols-1 gap-4">
+      {workflows.map((workflow, index) => {
+        return <WorkflowCard key={index} workflow={workflow}></WorkflowCard>;
+      })}
+    </div>
+  );
 }
 
 export default UserWorkflows;
