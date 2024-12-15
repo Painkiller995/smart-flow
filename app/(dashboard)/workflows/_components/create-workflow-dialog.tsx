@@ -10,12 +10,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { Layers2Icon } from "lucide-react";
 import CustomDialogHeader from "./custom-dialog-header";
+import { useForm } from "react-hook-form";
+import { createWorkflowSchema } from "@/schema/workflow";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface CreateWorkflowDialogProps {
   triggerText?: string;
 }
+
 const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
   const [open, setOpen] = useState(false);
+
+  const form = useForm<z.infer<typeof createWorkflowSchema>>({
+    resolver: zodResolver(createWorkflowSchema),
+  });
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
