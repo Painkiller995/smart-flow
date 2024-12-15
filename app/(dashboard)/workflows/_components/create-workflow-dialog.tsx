@@ -11,9 +11,23 @@ import { Button } from "@/components/ui/button";
 import { Layers2Icon } from "lucide-react";
 import CustomDialogHeader from "./custom-dialog-header";
 import { useForm } from "react-hook-form";
-import { createWorkflowSchema } from "@/schema/workflow";
+import {
+  createWorkflowSchema,
+  createWorkflowSchemaType,
+} from "@/schema/workflow";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 interface CreateWorkflowDialogProps {
   triggerText?: string;
@@ -22,7 +36,7 @@ interface CreateWorkflowDialogProps {
 const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const form = useForm<z.infer<typeof createWorkflowSchema>>({
+  const form = useForm<createWorkflowSchemaType>({
     resolver: zodResolver(createWorkflowSchema),
   });
 
@@ -31,16 +45,57 @@ const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
       <DialogTrigger asChild>
         <Button>{triggerText ?? "Create workflow"}</Button>
       </DialogTrigger>
-      <DialogContent className="px-0">
+      <DialogContent className="px-2">
         <CustomDialogHeader
           title="Create workflow"
           subTitle="Start building your workflow"
           icon={Layers2Icon}
         />
-        <DialogDescription>
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
-        </DialogDescription>
+        <div className="p-6">
+          <Form {...form}>
+            <form className="space-y-8 w-full">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex gap-1 items-center">
+                      Name:<p className="text-xs text-primary">(required)</p>
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Choose a descriptive and unique name
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex gap-1 items-center">
+                      Description:
+                      <p className="text-xs text-muted-foreground">
+                        (optional)
+                      </p>
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea className="resize-none" {...field} />
+                    </FormControl>
+                    <FormDescription>Provide description</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button className="w-full">Proceed</Button>
+            </form>
+          </Form>
+        </div>
+        <DialogDescription>Write something here</DialogDescription>
       </DialogContent>
     </Dialog>
   );
