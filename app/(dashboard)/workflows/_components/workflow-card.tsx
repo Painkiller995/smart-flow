@@ -22,7 +22,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Dropdown } from "react-day-picker";
+import TooltipWrapper from "@/components/tooltip-wrapper";
+import DeleteWorkflowDialog from "./delete-workflow-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,9 +31,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
-import TooltipWrapper from "@/components/tooltip-wrapper";
-import DeleteWorkflowDialog from "./delete-workflow-dialog";
+} from "@/components/ui/dropdown-menu";
 
 interface WorkflowCardProps {
   workflow: Workflow;
@@ -86,20 +85,29 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
             <ShuffleIcon size={16} />
             Edit
           </Link>
-          <WorkflowActions workflowName={workflow.name} />
+          <WorkflowActions
+            workflowId={workflow.id}
+            workflowName={workflow.name}
+          />
         </div>
       </CardContent>
     </Card>
   );
 };
 
-function WorkflowActions({ workflowName }: { workflowName: string }) {
+interface WorkflowActionsProps {
+  workflowId: string;
+  workflowName: string;
+}
+
+function WorkflowActions({ workflowId, workflowName }: WorkflowActionsProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   return (
     <>
       <DeleteWorkflowDialog
         open={showDeleteDialog}
         setOpen={setShowDeleteDialog}
+        workflowId={workflowId}
         workflowName={workflowName}
       />
       <DropdownMenu>
