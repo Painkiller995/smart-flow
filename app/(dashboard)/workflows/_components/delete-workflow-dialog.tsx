@@ -34,25 +34,23 @@ const DeleteWorkflowDialog = ({
   const deleteMutation = useMutation({
     mutationFn: DeleteWorkflow,
     onSuccess: () => {
-      toast.success("Workflow deleted", { id: "delete-workflow" });
+      toast.success("Workflow deleted", { id: workflowId });
     },
     onError: () => {
-      toast.error("Failed to delete the workflow", { id: "delete-workflow" });
+      toast.error("Failed to delete the workflow", { id: workflowId });
     },
   });
+
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogDescription className="space-x-1 space-y-1">
             Deleting this item is irreversible.
-            <span className="flex flex-col py-4 gap-2">
-              <span>
-                To confirm, please type <strong>{workflowName}</strong> in the
-                field below.
-              </span>
-            </span>
+            <br />
+            To confirm, please type <strong>{workflowName}</strong> in the field
+            below.
             <Input
               value={confirmText}
               onChange={(e) => {
