@@ -7,7 +7,7 @@ import { ThemeModeToggle } from "@/components/theme-mode-toggle";
 import { Separator } from "@/components/ui/separator";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 
-function layout({
+function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -37,4 +37,4 @@ function layout({
   );
 }
 
-export default layout;
+export default Layout;

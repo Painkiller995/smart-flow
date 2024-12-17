@@ -1,7 +1,7 @@
 "use client";
 import Logo from "@/components/logo";
 
-function layout({
+function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -14,4 +14,4 @@ function layout({
   );
 }
 
-export default layout;
+export default Layout;
