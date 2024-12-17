@@ -25,6 +25,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
+        proOptions={{ hideAttribution: true }}
       >
         <Controls position="top-left" />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
