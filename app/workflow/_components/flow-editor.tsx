@@ -10,13 +10,22 @@ import {
   useEdgesState,
   useNodesState,
 } from "@xyflow/react";
+import { CreateFlowNode } from "@/lib/workflow/create-flow-node";
+import { TaskType } from "@/types/task";
+import NodeComponent from "./nodes/node-component";
 
 interface EditorProps {
   workflow: Workflow;
 }
 
+const nodeTypes = {
+  AutoFLowNode: NodeComponent,
+};
+
 const FlowEditor = ({ workflow }: EditorProps) => {
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState([
+    CreateFlowNode(TaskType.LAUNCH_BROWSER),
+  ]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   return (
     <main className="h-full w-full">
@@ -25,6 +34,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
+        nodeTypes={nodeTypes}
         proOptions={{ hideAttribution: true }}
       >
         <Controls position="top-left" />
