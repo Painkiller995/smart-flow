@@ -8,7 +8,7 @@ interface EditorPageProps {
 }
 
 async function EditorPage({ params }: EditorPageProps) {
-  const { workflowId } = params;
+  const { workflowId } = await params;
 
   const { userId } = await auth();
   if (!userId) {
