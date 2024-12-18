@@ -9,6 +9,7 @@ import {
   ReactFlow,
   useEdgesState,
   useNodesState,
+  useReactFlow,
 } from "@xyflow/react";
 import NodeComponent from "./nodes/node-component";
 
@@ -26,6 +27,7 @@ const fitViewOptions = { padding: 1 };
 const FlowEditor = ({ workflow }: EditorProps) => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const { setViewport } = useReactFlow();
 
   useEffect(() => {
     try {
@@ -33,10 +35,15 @@ const FlowEditor = ({ workflow }: EditorProps) => {
       if (!flow) return;
       setNodes(flow.nodes || []);
       setEdges(flow.edges || []);
+
+      if (!flow.viewport) return;
+
+      const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+      setViewport({ x, y, zoom });
     } catch (error) {
       console.log(error);
     }
-  }, [workflow.definition, setEdges, setNodes]);
+  }, [workflow.definition, setEdges, setNodes, setViewport]);
 
   return (
     <main className="h-full w-full">
