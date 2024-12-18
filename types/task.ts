@@ -1,3 +1,16 @@
 export enum TaskType {
     LAUNCH_BROWSER = "LAUNCH_BROWSER"
+}
+
+export enum TaskParamType {
+    STRING = "STRING"
+}
+
+export interface TaskParam {
+    name: string
+    type: TaskParamType
+    helperText?: boolean
+    require?: boolean
+    hideHandle?: boolean
+    [key: string]: any
 } 
