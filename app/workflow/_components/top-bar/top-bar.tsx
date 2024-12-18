@@ -11,8 +11,9 @@ import SaveButton from "./save-button";
 interface TopBarProps {
   title: string;
   subtitle?: string;
+  workflowId: string;
 }
-const TopBar = ({ title, subtitle }: TopBarProps) => {
+const TopBar = ({ title, subtitle, workflowId }: TopBarProps) => {
   const router = useRouter();
   return (
     <header className="flex p-2 border-p-2 border-separate justify-between w-full h-[60px] sticky top-0 bg-background z-10">
@@ -38,7 +39,7 @@ const TopBar = ({ title, subtitle }: TopBarProps) => {
         </div>
       </div>
       <div className="flex gap-1 flex-1 justify-end">
-        <SaveButton />
+        <SaveButton workflowId={workflowId} />
       </div>
     </header>
   );

@@ -5,7 +5,10 @@ import { useReactFlow } from "@xyflow/react";
 import { CheckIcon } from "lucide-react";
 import React from "react";
 
-const SaveButton = () => {
+interface SaveButtonProps {
+  workflowId: string;
+}
+const SaveButton = ({ workflowId }: SaveButtonProps) => {
   const { toObject } = useReactFlow();
   return (
     <Button
