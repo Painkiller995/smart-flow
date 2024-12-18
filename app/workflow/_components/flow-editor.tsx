@@ -22,11 +22,16 @@ const nodeTypes = {
   AutoFLowNode: NodeComponent,
 };
 
+const snapGrid: [number, number] = [50, 50];
+const fitViewOptions = { padding: 1 };
+
 const FlowEditor = ({ workflow }: EditorProps) => {
   const [nodes, setNodes, onNodesChange] = useNodesState([
     CreateFlowNode(TaskType.LAUNCH_BROWSER),
   ]);
+
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
   return (
     <main className="h-full w-full">
       <ReactFlow
@@ -35,9 +40,13 @@ const FlowEditor = ({ workflow }: EditorProps) => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
+        snapToGrid
+        snapGrid={snapGrid}
+        fitView
+        fitViewOptions={fitViewOptions}
         proOptions={{ hideAttribution: true }}
       >
-        <Controls position="top-left" />
+        <Controls position="top-left" fitViewOptions={fitViewOptions} />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>
     </main>
