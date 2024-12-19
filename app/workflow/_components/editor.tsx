@@ -3,6 +3,7 @@ import React from "react";
 import { ReactFlowProvider } from "@xyflow/react";
 import FlowEditor from "./flow-editor";
 import TopBar from "./top-bar/top-bar";
+import TaskMenu from "./task-menu";
 
 interface EditorProps {
   workflow: Workflow;
@@ -17,6 +18,7 @@ const Editor = ({ workflow }: EditorProps) => {
           workflowId={workflow.id}
         />
         <section className="flex h-full overflow-auto">
+          <TaskMenu />
           <FlowEditor workflow={workflow} />
         </section>
       </div>
