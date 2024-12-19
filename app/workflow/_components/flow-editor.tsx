@@ -9,6 +9,7 @@ import {
   Connection,
   Controls,
   Edge,
+  Node,
   ReactFlow,
   useEdgesState,
   useNodesState,
@@ -19,6 +20,7 @@ import { CreateFlowNode } from "@/lib/workflow/create-flow-node";
 import { TaskType } from "@/types/task";
 import { AppNode } from "@/types/app-node";
 import DeletableEdge from "./edges/deletable-edge";
+import { toast } from "sonner";
 
 interface EditorProps {
   workflow: Workflow;
@@ -38,7 +40,8 @@ const fitViewOptions = { padding: 1 };
 const FlowEditor = ({ workflow }: EditorProps) => {
   const [nodes, setNodes, onNodesChange] = useNodesState<AppNode>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
-  const { setViewport, screenToFlowPosition, updateNodeData } = useReactFlow();
+  const { setViewport, screenToFlowPosition, updateNodeData, getNode } =
+    useReactFlow();
 
   useEffect(() => {
     try {
@@ -79,19 +82,22 @@ const FlowEditor = ({ workflow }: EditorProps) => {
 
   const onConnect = useCallback(
     (connection: Connection) => {
+      //////////////////////
+      // Need more work later
+      const node = getNode(connection.target);
+      if (!node) return;
+      const inputs = node.data.inputs as Record<string, unknown>;
+      const existedValue = inputs[connection.targetHandle!];
+      if (existedValue) {
+        toast.warning(
+          "Please remove the user input before making the connection"
+        );
+        return;
+      }
+      //////////////////////
+
       setEdges((eds) => addEdge({ ...connection, animated: true }, eds));
       if (!connection.targetHandle) return;
-
-      // Remove input value if is present on connection
-      const node = nodes.find((nd) => nd.id === connection.target);
-      if (!node) return;
-
-      const nodeInputs = node.data.inputs;
-
-      //delete nodeInputs[connection.targetHandle];
-      updateNodeData(node.id, {
-        inputs: { ...nodeInputs, [connection.targetHandle]: "" },
-      });
     },
     [setEdges, updateNodeData]
   );
