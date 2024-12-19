@@ -90,7 +90,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
       const existedValue = inputs[connection.targetHandle!];
       if (existedValue) {
         toast.warning(
-          "Please remove the user input before making the connection"
+          "Please remove the preset input before making connection"
         );
         return;
       }
