@@ -5,11 +5,11 @@ import { ParamProps } from "@/types/app-node";
 import React, { useEffect, useId, useState } from "react";
 
 const StringParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
-  const [internalValue, setInternalValue] = useState(value);
+  const [internalValue, setInternalValue] = useState(value || "");
   const id = useId();
 
   useEffect(() => {
-    setInternalValue(value);
+    setInternalValue(value || "");
   }, [value]);
 
   return (
