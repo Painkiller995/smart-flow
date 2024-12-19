@@ -15,4 +15,10 @@ export const PageToHtmlTask = {
       require: true,
     },
   ],
+  output: [
+    {
+      name: "HTML",
+      type: TaskParamType.STRING,
+    },
+  ],
 };
