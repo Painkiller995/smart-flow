@@ -56,7 +56,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
     } catch (error) {
       console.log(error);
     }
-  }, [workflow.definition, setEdges, setNodes, setViewport]);
+  }, [setEdges, setNodes, setViewport, workflow.definition]);
 
   const onDragOver = useCallback((event: React.DragEvent) => {
     event.preventDefault();
@@ -96,7 +96,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
       setEdges((eds) => addEdge({ ...connection, animated: true }, eds));
       if (!connection.targetHandle) return;
     },
-    [setEdges, updateNodeData]
+    [getNode, setEdges]
   );
 
   return (
