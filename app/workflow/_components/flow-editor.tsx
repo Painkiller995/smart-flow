@@ -1,6 +1,7 @@
 'use client';
 
 import { CreateFlowNode } from '@/lib/workflow/create-flow-node';
+import { TaskRegistry } from '@/lib/workflow/task/registry';
 import { AppNode } from '@/types/app-node';
 import { TaskType } from '@/types/task';
 import { Workflow } from '@prisma/client';
@@ -63,21 +64,24 @@ const FlowEditor = ({ workflow }: EditorProps) => {
     event.dataTransfer.dropEffect = 'move';
   }, []);
 
-  const onDrop = useCallback((event: React.DragEvent) => {
-    event.preventDefault();
+  const onDrop = useCallback(
+    (event: React.DragEvent) => {
+      event.preventDefault();
 
-    const taskType = event.dataTransfer.getData('application/reactflow');
-    if (typeof taskType === undefined || !taskType) return;
+      const taskType = event.dataTransfer.getData('application/reactflow');
+      if (typeof taskType === undefined || !taskType) return;
 
-    const position = screenToFlowPosition({
-      x: event.clientX,
-      y: event.clientY,
-    });
+      const position = screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
 
-    const newNode = CreateFlowNode(taskType as TaskType, position);
+      const newNode = CreateFlowNode(taskType as TaskType, position);
 
-    setNodes((nds) => nds.concat(newNode));
-  }, []);
+      setNodes((nds) => nds.concat(newNode));
+    },
+    [screenToFlowPosition, setNodes]
+  );
 
   const onConnect = useCallback(
     (connection: Connection) => {
@@ -99,6 +103,29 @@ const FlowEditor = ({ workflow }: EditorProps) => {
     [getNode, setEdges]
   );
 
+  const isValidConnection = useCallback(
+    (connection: Edge | Connection) => {
+      // No self-connection allowed
+      if (connection.source === connection.target) return false;
+
+      // Same taskParam type connection
+      const sourceNode = nodes.find((node) => node.id === connection.source);
+      const targetNode = nodes.find((node) => node.id === connection.target);
+
+      if (!sourceNode || !targetNode) return false;
+
+      // Same type for input and output
+      const sourceTask = TaskRegistry[sourceNode.data.type];
+      const targetTask = TaskRegistry[targetNode.data.type];
+      const output = sourceTask.output.find((o) => o.name === connection.sourceHandle);
+      const input = targetTask.inputs.find((o) => o.name === connection.targetHandle);
+      if (input?.type !== output?.type) return false;
+
+      return true;
+    },
+    [nodes]
+  );
+
   return (
     <main className="h-full w-full">
       <ReactFlow
@@ -116,6 +143,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
         onDragOver={onDragOver}
         onDrop={onDrop}
         onConnect={onConnect}
+        isValidConnection={isValidConnection}
       >
         <Controls position="top-left" fitViewOptions={fitViewOptions} />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
