@@ -1,7 +1,9 @@
-"use client";
-import "@xyflow/react/dist/style.css";
-import { Workflow } from "@prisma/client";
-import React, { useCallback, useEffect } from "react";
+'use client';
+
+import { CreateFlowNode } from '@/lib/workflow/create-flow-node';
+import { AppNode } from '@/types/app-node';
+import { TaskType } from '@/types/task';
+import { Workflow } from '@prisma/client';
 import {
   addEdge,
   Background,
@@ -9,18 +11,16 @@ import {
   Connection,
   Controls,
   Edge,
-  Node,
   ReactFlow,
   useEdgesState,
   useNodesState,
   useReactFlow,
-} from "@xyflow/react";
-import NodeComponent from "./nodes/node-component";
-import { CreateFlowNode } from "@/lib/workflow/create-flow-node";
-import { TaskType } from "@/types/task";
-import { AppNode } from "@/types/app-node";
-import DeletableEdge from "./edges/deletable-edge";
-import { toast } from "sonner";
+} from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
+import React, { useCallback, useEffect } from 'react';
+import { toast } from 'sonner';
+import DeletableEdge from './edges/deletable-edge';
+import NodeComponent from './nodes/node-component';
 
 interface EditorProps {
   workflow: Workflow;
@@ -40,8 +40,7 @@ const fitViewOptions = { padding: 1 };
 const FlowEditor = ({ workflow }: EditorProps) => {
   const [nodes, setNodes, onNodesChange] = useNodesState<AppNode>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
-  const { setViewport, screenToFlowPosition, updateNodeData, getNode } =
-    useReactFlow();
+  const { setViewport, screenToFlowPosition, updateNodeData, getNode } = useReactFlow();
 
   useEffect(() => {
     try {
@@ -61,13 +60,13 @@ const FlowEditor = ({ workflow }: EditorProps) => {
 
   const onDragOver = useCallback((event: React.DragEvent) => {
     event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
+    event.dataTransfer.dropEffect = 'move';
   }, []);
 
   const onDrop = useCallback((event: React.DragEvent) => {
     event.preventDefault();
 
-    const taskType = event.dataTransfer.getData("application/reactflow");
+    const taskType = event.dataTransfer.getData('application/reactflow');
     if (typeof taskType === undefined || !taskType) return;
 
     const position = screenToFlowPosition({
@@ -89,9 +88,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
       const inputs = node.data.inputs as Record<string, unknown>;
       const existedValue = inputs[connection.targetHandle!];
       if (existedValue) {
-        toast.warning(
-          "Please remove the preset input before establishing a connection."
-        );
+        toast.warning('Please remove the preset input before establishing a connection.');
         return;
       }
       //////////////////////
