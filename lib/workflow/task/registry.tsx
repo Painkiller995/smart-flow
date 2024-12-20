@@ -5,8 +5,9 @@ import { LaunchBrowserTask } from './launch-browser';
 import { PageToHtmlTask } from './page-to-html';
 
 type Registry = {
-  [K in TaskType]: WorkflowTask;
+  [K in TaskType]: WorkflowTask & { type: K };
 };
+
 export const TaskRegistry: Registry = {
   LAUNCH_BROWSER: LaunchBrowserTask,
   PAGE_TO_HTML: PageToHtmlTask,
