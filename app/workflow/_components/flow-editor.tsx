@@ -118,7 +118,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
       // Same type for input and output
       const sourceTask = TaskRegistry[sourceNode.data.type];
       const targetTask = TaskRegistry[targetNode.data.type];
-      const output = sourceTask.output.find((o) => o.name === connection.sourceHandle);
+      const output = sourceTask.outputs.find((o) => o.name === connection.sourceHandle);
       const input = targetTask.inputs.find((o) => o.name === connection.targetHandle);
       if (input?.type !== output?.type) return false;
 
