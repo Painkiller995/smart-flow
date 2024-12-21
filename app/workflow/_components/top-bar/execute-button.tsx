@@ -16,7 +16,7 @@ const ExecuteButton = ({ workflowId }: ExecuteButtonProps) => {
       onClick={() => {
         const plan = generate();
         console.log('---Plan---');
-        console.log(plan);
+        console.table(plan);
       }}
     >
       <PlayIcon size={16} className="stroke-orange-400" />
