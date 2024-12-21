@@ -61,6 +61,7 @@ function getInvalidInputs(node: AppNode, edges: Edge[], planned: Set<string>) {
     const inputs = TaskRegistry[node.data.type].inputs
 
     for (const input of inputs) {
+
         const inputValue = node.data.inputs[input.name]
         const inputValueProvided = inputValue?.length > 0
 
