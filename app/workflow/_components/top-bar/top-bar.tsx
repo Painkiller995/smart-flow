@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import TooltipWrapper from "@/components/tooltip-wrapper";
-import { Button } from "@/components/ui/button";
-import { ChevronLeftIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import TooltipWrapper from '@/components/tooltip-wrapper';
+import { Button } from '@/components/ui/button';
+import { ChevronLeftIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-import React from "react";
-import SaveButton from "./save-button";
+import ExecuteButton from './execute-button';
+import SaveButton from './save-button';
 
 interface TopBarProps {
   title: string;
@@ -16,7 +16,7 @@ interface TopBarProps {
 const TopBar = ({ title, subtitle, workflowId }: TopBarProps) => {
   const router = useRouter();
   return (
-    <header className="flex p-2 border-b-2 border-separate justify-between w-full h-[60px] sticky top-0 bg-background z-10">
+    <header className="sticky top-0 z-10 flex h-[60px] w-full border-separate justify-between border-b-2 bg-background p-2">
       <div className="flex flex-1 gap-1">
         <TooltipWrapper content="Back">
           <Button
@@ -30,15 +30,14 @@ const TopBar = ({ title, subtitle, workflowId }: TopBarProps) => {
           </Button>
         </TooltipWrapper>
         <div>
-          <p className="font-bold text-ellipsis truncate">{title}</p>
+          <p className="truncate text-ellipsis font-bold">{title}</p>
           {subtitle && (
-            <p className="text-xs text-muted-foreground truncate text-ellipsis">
-              {subtitle}
-            </p>
+            <p className="truncate text-ellipsis text-xs text-muted-foreground">{subtitle}</p>
           )}
         </div>
       </div>
-      <div className="flex gap-1 flex-1 justify-end">
+      <div className="flex flex-1 justify-end gap-1">
+        <ExecuteButton workflowId={workflowId} />
         <SaveButton workflowId={workflowId} />
       </div>
     </header>
