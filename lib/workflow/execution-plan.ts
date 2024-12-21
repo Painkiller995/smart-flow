@@ -50,8 +50,8 @@ export function FlowToExecutionPlan(nodes: AppNode[], edges: Edge[]): FlowToExec
 
         }
 
-        for (const node of nextPhase.nodes) {
-            planned.add(node.id)
+        for (const phaseNode of nextPhase.nodes) {
+            planned.add(phaseNode.id)
         }
 
         executionPlan.push(nextPhase)
