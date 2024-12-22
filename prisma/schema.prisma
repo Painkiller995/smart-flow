@@ -29,15 +29,17 @@ model Workflow {
 }
 
 model WorkflowExecution {
-  id          String           @id @default(cuid())
-  workflowId  String
-  userId      String
-  trigger     String
-  status      String
-  createdAt   DateTime         @default(now())
-  startedAt   DateTime?
-  completedAt DateTime?
-  phases      ExecutionPhase[]
+  id              String    @id @default(cuid())
+  workflowId      String
+  userId          String
+  trigger         String
+  status          String
+  createdAt       DateTime  @default(now())
+  startedAt       DateTime?
+  completedAt     DateTime?
+  creditsConsumed Int       @default(0)
+
+  phases ExecutionPhase[]
 
   workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
 }

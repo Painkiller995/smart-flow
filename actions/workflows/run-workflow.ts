@@ -83,7 +83,7 @@ export async function RunWorkflow(form: { workflowId: string, flowDefinition?: s
     }
 
 
-    ExecuteWorkflow(workflow.id)
+    ExecuteWorkflow(execution.id)
 
     redirect(`/workflow/runs/${workflowId}/${execution.id}`)
 
