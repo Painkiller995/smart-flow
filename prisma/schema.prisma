@@ -11,16 +11,47 @@ datasource db {
 }
 
 model Workflow {
-  id          String  @id @default(cuid())
+  id          String              @id @default(cuid())
   userId      String
   name        String
   description String?
-
-  definition String
-  status     String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  definition  String
+  status      String
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  execution   WorkflowExecution[]
 
   // User cannot have tow workflows with the same name
   @@unique([name, userId])
+}
+
+model WorkflowExecution {
+  id          String           @id @default(cuid())
+  workflowId  String
+  userId      String
+  trigger     String
+  status      String
+  createdAt   DateTime         @default(now())
+  startedAt   DateTime?
+  completedAt DateTime?
+  phases      ExecutionPhase[]
+
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+}
+
+model ExecutionPhase {
+  id          String    @id @default(cuid())
+  userId      String
+  status      String
+  number      Int
+  node        String
+  name        String
+  startedAt   DateTime?
+  completedAt DateTime?
+  inputs      String?
+  outputs     String?
+  creditsCost Int?
+
+  WorkflowExecutionId String
+  execution           WorkflowExecution @relation(fields: [WorkflowExecutionId], references: [id], onDelete: Cascade)
 }
