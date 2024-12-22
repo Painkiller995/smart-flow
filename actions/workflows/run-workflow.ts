@@ -5,6 +5,7 @@ import { FlowToExecutionPlan } from "@/lib/workflow/execution-plan"
 import { TaskRegistry } from "@/lib/workflow/task/registry"
 import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, WorkflowExecutionTrigger } from "@/types/workflow"
 import { auth } from "@clerk/nextjs/server"
+import { redirect } from "next/navigation"
 
 export async function RunWorkflow(form: { workflowId: string, flowDefinition?: string }) {
 
@@ -52,7 +53,6 @@ export async function RunWorkflow(form: { workflowId: string, flowDefinition?: s
 
     executionPlan = result.executionPlan
 
-
     const execution = await prisma.workflowExecution.create({
         data: {
             workflowId,
@@ -80,4 +80,6 @@ export async function RunWorkflow(form: { workflowId: string, flowDefinition?: s
     if (!execution) {
         throw new Error("Workflow execution is not created")
     }
+
+    redirect(`/workflow/runs/${workflowId}/${execution.id}`)
 }

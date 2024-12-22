@@ -12,8 +12,9 @@ interface TopBarProps {
   title: string;
   subtitle?: string;
   workflowId: string;
+  hideButtons?: boolean;
 }
-const TopBar = ({ title, subtitle, workflowId }: TopBarProps) => {
+const TopBar = ({ title, subtitle, workflowId, hideButtons = false }: TopBarProps) => {
   const router = useRouter();
   return (
     <header className="sticky top-0 z-10 flex h-[60px] w-full border-separate justify-between border-b-2 bg-background p-2">
@@ -37,8 +38,12 @@ const TopBar = ({ title, subtitle, workflowId }: TopBarProps) => {
         </div>
       </div>
       <div className="flex flex-1 justify-end gap-1">
-        <ExecuteButton workflowId={workflowId} />
-        <SaveButton workflowId={workflowId} />
+        {!hideButtons && (
+          <>
+            <ExecuteButton workflowId={workflowId} />
+            <SaveButton workflowId={workflowId} />
+          </>
+        )}
       </div>
     </header>
   );
