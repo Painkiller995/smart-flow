@@ -9,6 +9,7 @@ import NodeParamField from './node-param-field';
 interface NodeInputsProps {
   children: ReactNode;
 }
+
 const NodeInputs = ({ children }: NodeInputsProps) => {
   return <div className="flex flex-col gap-2 divide-y">{children}</div>;
 };
