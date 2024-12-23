@@ -15,5 +15,6 @@ export async function GetWorkflowPhaseDetails(phaseId: string) {
             id: phaseId,
             execution: { userId }
         },
+        include: { logs: true }
     });
 }
