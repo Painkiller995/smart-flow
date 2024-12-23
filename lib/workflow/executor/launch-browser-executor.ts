@@ -16,8 +16,8 @@ export async function LaunchBrowserExecutor(environment: ExecutionEnvironment<ty
 
         return true
 
-    } catch (err) {
-        console.error(err)
+    } catch (err: any) {
+        environment.log.error(err.message)
         return false
     }
 }
