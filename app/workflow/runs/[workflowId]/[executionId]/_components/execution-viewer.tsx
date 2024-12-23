@@ -32,7 +32,7 @@ import {
   LucideIcon,
   WorkflowIcon,
 } from 'lucide-react';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import PhaseStatusBadge from './phase-status-badge';
 type ExecutionData = Awaited<ReturnType<typeof GetWorkflowExecutionWithPhases>>;
 
@@ -62,6 +62,17 @@ const ExecutionViewer = ({ initialData }: ExecutionViewerProps) => {
   const duration = DatesToDurationString(query.data?.completedAt, query.data?.startedAt);
 
   const creditsConsumed = GetPhasesTotalCost(query.data?.phases || []);
+
+  useEffect(() => {
+    const phases = query.data?.phases || [];
+    if (isRunning) {
+      const phaseToSelect = phases.toSorted((a, b) => (a.startedAt! > b.startedAt! ? -1 : 1))[0];
+      setSelectedPhase(phaseToSelect.id);
+      return;
+    }
+    const phaseToSelect = phases.toSorted((a, b) => (a.completedAt! > b.completedAt! ? -1 : 1))[0];
+    setSelectedPhase(phaseToSelect.id);
+  }, [isRunning, query.data?.phases]);
 
   return (
     <div className="flex h-full w-full">
