@@ -159,13 +159,13 @@ async function executeWorkflowPhase(phase: ExecutionPhase, edges: Edge[], enviro
     const success = await executePhase(phase, node, environment, logCollector)
 
     const outputs = environment.phases[node.id].outputs
-    await finalizePhase(phase.id, success, outputs)
+    await finalizePhase(phase.id, success, outputs, logCollector)
 
     return { success }
 
 }
 
-async function finalizePhase(phaseId: string, success: boolean, outputs: any) {
+async function finalizePhase(phaseId: string, success: boolean, outputs: any, logCollector: LogCollector) {
 
     const finalStatus = success
         ? ExecutionPhaseStatus.COMPLETED
@@ -178,7 +178,16 @@ async function finalizePhase(phaseId: string, success: boolean, outputs: any) {
         data: {
             status: finalStatus,
             completedAt: new Date(),
-            outputs: JSON.stringify(outputs)
+            outputs: JSON.stringify(outputs),
+            logs: {
+                createMany: {
+                    data: logCollector.getAll().map((log) => ({
+                        message: log.message,
+                        timestamp: log.timestamp,
+                        logLevel: log.level
+                    }))
+                }
+            }
         }
     })
 
