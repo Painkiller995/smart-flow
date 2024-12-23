@@ -35,6 +35,7 @@ import {
 } from 'lucide-react';
 import { ReactNode, useEffect, useState } from 'react';
 import PhaseStatusBadge from './phase-status-badge';
+import WorkflowStatusBadge from './workflow-status-badge';
 
 type ExecutionData = Awaited<ReturnType<typeof GetWorkflowExecutionWithPhases>>;
 
@@ -80,7 +81,15 @@ const ExecutionViewer = ({ initialData }: ExecutionViewerProps) => {
     <div className="flex h-full w-full">
       <aside className="flex w-[440px] min-w-[440px] max-w-[440px] flex-grow border-separate flex-col overflow-hidden border-r-2">
         <div className="px-2 py-4">
-          <ExecutionLabel label="Status" icon={CircleDashedIcon} value={query.data?.status} />
+          <ExecutionLabel
+            label="Status"
+            icon={CircleDashedIcon}
+            value={
+              <div>
+                <WorkflowStatusBadge status={query.data?.status as WorkflowExecutionStatus} />
+              </div>
+            }
+          />
           <ExecutionLabel
             label="Started at"
             icon={CalendarIcon}
