@@ -18,6 +18,7 @@ CREATE TABLE "WorkflowExecution" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "workflowId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
+    "definition" TEXT NOT NULL,
     "trigger" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

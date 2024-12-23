@@ -5,10 +5,16 @@ import { ExtractTextFromElementTask } from '../task/extract-text-from-element';
 export async function ExtractTextFromElementExecutor(environment: ExecutionEnvironment<typeof ExtractTextFromElementTask>): Promise<boolean> {
     try {
         const selector = environment.getInput("Selector")
-        if (!selector) return false
+        if (!selector) {
+            console.error("Selector not defined")
+            return false
+        }
 
         const html = environment.getInput("HTML")
-        if (!html) return false
+        if (!html) {
+            console.error("HTML not defined")
+            return false
+        }
 
         const $ = cheerio.load(html)
 

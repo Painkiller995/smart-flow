@@ -3,6 +3,7 @@ import { Environment, ExecutionEnvironment } from "@/types/executor";
 import { TaskParamType } from "@/types/task";
 import { ExecutionPhaseStatus, WorkflowExecutionStatus } from "@/types/workflow";
 import { ExecutionPhase } from "@prisma/client";
+import { Edge } from "@xyflow/react";
 import { revalidatePath } from "next/cache";
 import { Browser, Page } from 'puppeteer';
 import "server-only";
@@ -24,6 +25,8 @@ export async function ExecuteWorkflow(executionId: string) {
         throw new Error("execution not found")
     }
 
+    const edges = JSON.parse(execution.workflow.definition).edges as Edge[]
+
     const environment: Environment = {
         phases: {
 
@@ -36,7 +39,7 @@ export async function ExecuteWorkflow(executionId: string) {
     let creditsConsumed = 0
     let executionFailed = false
     for (const phase of execution.phases) {
-        const phaseExecution = await executeWorkflowPhase(phase, environment)
+        const phaseExecution = await executeWorkflowPhase(phase, edges, environment)
         if (!phaseExecution.success) {
             executionFailed = true
             break
@@ -125,11 +128,12 @@ async function finalizeWorkflowExecution(
 
 }
 
-async function executeWorkflowPhase(phase: ExecutionPhase, environment: Environment) {
+async function executeWorkflowPhase(phase: ExecutionPhase, edges: Edge[], environment: Environment) {
+
     const startedAt = new Date()
     const node = JSON.parse(phase.node) as AppNode
 
-    setupEnvironmentForPhase(node, environment)
+    setupEnvironmentForPhase(node, edges, environment)
 
     //Update status
     await prisma.executionPhase.update(
@@ -187,7 +191,7 @@ async function executePhase(phase: ExecutionPhase, node: AppNode, environment: E
     return await runFn(executionEnvironment)
 }
 
-function setupEnvironmentForPhase(node: AppNode, environment: Environment) {
+function setupEnvironmentForPhase(node: AppNode, edges: Edge[], environment: Environment) {
     environment.phases[node.id] = { inputs: {}, outputs: {} }
     const inputs = TaskRegistry[node.data.type].inputs
     for (const input of inputs) {
@@ -197,6 +201,14 @@ function setupEnvironmentForPhase(node: AppNode, environment: Environment) {
             environment.phases[node.id].inputs[input.name] = inputValue
             continue
         }
+
+        const connectedEdge = edges.find((edge) => edge.target === node.id && edge.targetHandle === input.name)
+        if (!connectedEdge) {
+            console.error("Missing edge for input", input.name, "Node id:", node.id)
+            continue
+        }
+        const outputValue = environment.phases[connectedEdge.source].outputs[connectedEdge.sourceHandle!]
+        environment.phases[node.id].inputs[input.name] = outputValue
     }
 }
 

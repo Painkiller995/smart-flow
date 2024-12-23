@@ -32,6 +32,7 @@ model WorkflowExecution {
   id              String    @id @default(cuid())
   workflowId      String
   userId          String
+  definition      String    @default("{}")
   trigger         String
   status          String
   createdAt       DateTime  @default(now())
