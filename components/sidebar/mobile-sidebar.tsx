@@ -1,18 +1,14 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import Logo from "../logo";
-import { routes } from "@/config/routes";
-import Link from "next/link";
-import { Button, buttonVariants } from "../ui/button";
-import { usePathname } from "next/navigation";
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { MenuIcon } from "lucide-react";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { routes } from '@/config/routes';
+import { MenuIcon } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import Logo from '../logo';
+import { Button, buttonVariants } from '../ui/button';
+import UserAvailableBadge from '../user-available-badge';
 
 const MobileSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,11 +26,13 @@ const MobileSidebar = () => {
               </Button>
             </SheetTitle>
           </SheetTrigger>
-          <SheetContent
-            side="left"
-            className="w-[400px] sm:w-[540px] space-y-4"
-          >
+          <SheetContent side="left" className="w-[400px] space-y-4 sm:w-[540px]">
             <Logo />
+
+            <div className="p-2">
+              <UserAvailableBadge />
+            </div>
+
             <div className="flex flex-col gap-1">
               {routes.map((route) => (
                 <Link
@@ -43,8 +41,8 @@ const MobileSidebar = () => {
                   className={buttonVariants({
                     variant:
                       activeRoute && activeRoute.href === route.href
-                        ? "sidebarActiveItem"
-                        : "sidebarItem",
+                        ? 'sidebarActiveItem'
+                        : 'sidebarItem',
                   })}
                   onClick={() => setIsOpen((prev) => !prev)}
                 >
