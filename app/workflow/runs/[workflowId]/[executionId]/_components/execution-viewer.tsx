@@ -4,6 +4,7 @@ import { GetWorkflowExecutionWithPhases } from '@/actions/workflows/get-workflow
 import { GetWorkflowPhaseDetails } from '@/actions/workflows/get-workflow-phase-details';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { DatesToDurationString } from '@/lib/helper/dates';
 import { GetPhasesTotalCost } from '@/lib/helper/phases';
@@ -103,7 +104,49 @@ const ExecutionViewer = ({ initialData }: ExecutionViewerProps) => {
         </div>
       </aside>
       <div className="flex h-full w-full">
-        <pre>{JSON.stringify(phaseDetails.data, null, 4)}</pre>
+        {isRunning && (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+            <p className="font-bold">Run in progress, Please wait</p>
+          </div>
+        )}
+        {!isRunning && !selectedPhase && (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+            <div className="flex flex-col gap-1 text-center">
+              <p className="font-bold">No phase selected</p>
+              <p className="text-sm text-muted-foreground">Select a phase to view details</p>
+            </div>
+          </div>
+        )}
+        {!isRunning && selectedPhase && phaseDetails.data && (
+          <div className="container flex flex-col gap-4 overflow-auto py-4">
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="space-x-4">
+                <div className="flex items-center gap-1">
+                  <CoinsIcon size={18} className="stroke-muted-foreground" />
+                  <span>Credits</span>
+                </div>
+                <span>Todo</span>
+              </Badge>
+              <Badge variant="outline" className="space-x-4">
+                <div className="flex items-center gap-1">
+                  <ClockIcon size={18} className="stroke-muted-foreground" />
+                  <span>Duration</span>
+                </div>
+                <span>
+                  {DatesToDurationString(
+                    phaseDetails.data.completedAt,
+                    phaseDetails.data.startedAt
+                  ) || '-'}
+                </span>
+              </Badge>
+            </div>
+            <ParameterViewer
+              title="Inputs"
+              subtitle="Inputs used for this phase"
+              paramsJson={phaseDetails.data.inputs}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -127,6 +170,26 @@ function ExecutionLabel({
       </div>
       <div className="flex items-center gap-2 font-semibold capitalize">{value}</div>
     </div>
+  );
+}
+
+function ParameterViewer({
+  title,
+  subtitle,
+  paramsJson,
+}: {
+  title: string;
+  subtitle: string;
+  paramsJson: string | null;
+}) {
+  const param = paramsJson ? JSON.parse(paramsJson) : undefined;
+  return (
+    <Card>
+      <CardHeader className="rounded-lg rounded-b-none border-b bg-gray-50 py-4 dark:bg-background">
+        <CardTitle className="text-base">{title}</CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">{subtitle}</CardDescription>
+      </CardHeader>
+    </Card>
   );
 }
 
