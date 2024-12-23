@@ -45,6 +45,8 @@ export async function ExecuteWorkflow(executionId: string) {
 
     await finalizeWorkflowExecution(executionId, execution.workflowId, executionFailed, creditsConsumed)
 
+    await cleanupEnvironment(environment)
+
     revalidatePath("/workflow/runs")
 }
 
@@ -204,4 +206,12 @@ function createExecutionEnvironment(node: AppNode, environment: Environment) {
         getPage: () => environment.page,
         setPage: (page: Page) => (environment.page = page)
     }
-} 
+}
+
+async function cleanupEnvironment(environment: Environment) {
+    if (environment.browser) {
+        await environment.browser
+            .close()
+            .catch(err => console.error("cannot close browser, reason:", err))
+    }
+}
