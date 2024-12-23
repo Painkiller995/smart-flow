@@ -2,6 +2,7 @@
 
 import { GetWorkflowExecutionWithPhases } from '@/actions/workflows/get-workflow-execution-with-phases';
 import { GetWorkflowPhaseDetails } from '@/actions/workflows/get-workflow-phase-details';
+import ReactCountupWrapper from '@/components/react-countup-wrapper';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -34,6 +35,7 @@ import {
 } from 'lucide-react';
 import { ReactNode, useEffect, useState } from 'react';
 import PhaseStatusBadge from './phase-status-badge';
+
 type ExecutionData = Awaited<ReturnType<typeof GetWorkflowExecutionWithPhases>>;
 
 interface ExecutionViewerProps {
@@ -95,7 +97,11 @@ const ExecutionViewer = ({ initialData }: ExecutionViewerProps) => {
             icon={ClockIcon}
             value={duration ? duration : <Loader2Icon className="animate-spin" size={20} />}
           />
-          <ExecutionLabel label="Credits consumed" icon={CoinsIcon} value={creditsConsumed} />
+          <ExecutionLabel
+            label="Credits consumed"
+            icon={CoinsIcon}
+            value={<ReactCountupWrapper value={creditsConsumed} />}
+          />
         </div>
         <Separator />
         <div className="flex items-center justify-center px-4 py-2">
@@ -149,7 +155,7 @@ const ExecutionViewer = ({ initialData }: ExecutionViewerProps) => {
                   <CoinsIcon size={18} className="stroke-muted-foreground" />
                   <span>Credits</span>
                 </div>
-                <span>Todo</span>
+                <span>{phaseDetails.data.creditsConsumed}</span>
               </Badge>
               <Badge variant="outline" className="space-x-4">
                 <div className="flex items-center gap-1">
