@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import React from "react";
-import Logo from "../logo";
-import { routes } from "@/config/routes";
-import Link from "next/link";
-import { buttonVariants } from "../ui/button";
-import { usePathname } from "next/navigation";
+import { routes } from '@/config/routes';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Logo from '../logo';
+import { buttonVariants } from '../ui/button';
+import UserAvailableBadge from '../user-available-badge';
 
 const DesktopSidebar = () => {
   const pathname = usePathname();
   const activeRoute = routes.find((route) => pathname.includes(route.href));
 
   return (
-    <div
-      className="hidden relative md:block 
-    min-w-[280px] max-w-[280px] h-screen overflow-hidden w-full bg-primary/5 dark:bg-secondary/30 dark:text-foreground text-muted-foreground border-r-2 border-separate"
-    >
-      <div className="flex items-center justify-center gap-2 border-b-[1px] border-separate p-4">
+    <div className="relative hidden h-screen w-full min-w-[280px] max-w-[280px] border-separate overflow-hidden border-r-2 bg-primary/5 text-muted-foreground dark:bg-secondary/30 dark:text-foreground md:block">
+      <div className="flex border-separate items-center justify-center gap-2 border-b-[1px] p-4">
         <Logo />
       </div>
-      <div className="flex flex-col p-2 gap-1">
+      <div className="p-2">
+        <UserAvailableBadge />
+      </div>
+      <div className="flex flex-col gap-1 p-2">
         {routes.map((route) => (
           <Link
             key={route.href}
@@ -27,8 +27,8 @@ const DesktopSidebar = () => {
             className={buttonVariants({
               variant:
                 activeRoute && activeRoute.href === route.href
-                  ? "sidebarActiveItem"
-                  : "sidebarItem",
+                  ? 'sidebarActiveItem'
+                  : 'sidebarItem',
             })}
           >
             <route.icon size={20} /> {route.label}
