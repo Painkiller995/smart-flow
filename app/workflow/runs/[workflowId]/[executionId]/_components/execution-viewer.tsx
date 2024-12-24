@@ -85,8 +85,9 @@ const ExecutionViewer = ({ initialData }: ExecutionViewerProps) => {
             label="Status"
             icon={CircleDashedIcon}
             value={
-              <div>
+              <div className="flex items-center gap-2 font-semibold capitalize">
                 <WorkflowStatusBadge status={query.data?.status as WorkflowExecutionStatus} />
+                <span>{query.data?.status}</span>
               </div>
             }
           />
