@@ -4,6 +4,7 @@ import { Workflow } from '@prisma/client';
 import { useState } from 'react';
 
 import TooltipWrapper from '@/components/tooltip-wrapper';
+import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -16,10 +17,20 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { WorkflowStatus } from '@/types/workflow';
-import { FileTextIcon, MoreVerticalIcon, PlayIcon, ShuffleIcon, TrashIcon } from 'lucide-react';
+import {
+  CoinsIcon,
+  CornerDownRight,
+  FileTextIcon,
+  MoreVerticalIcon,
+  MoveRightIcon,
+  PlayIcon,
+  ShuffleIcon,
+  TrashIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import DeleteWorkflowDialog from './delete-workflow-dialog';
 import RunWorkflowButton from './run-workflow-button';
+import SchedulerDialog from './scheduler-dialog';
 
 interface WorkflowCardProps {
   workflow: Workflow;
@@ -48,18 +59,26 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
               <PlayIcon className="h-5 w-5 text-white" />
             )}
           </div>
-          <div className="flex items-center text-base font-bold text-muted-foreground">
-            <Link
-              href={`/workflow/editor/${workflow.id}`}
-              className="flex items-center hover:underline"
-            >
-              {workflow.name}
-            </Link>
-            {isDraft && (
-              <span className="text-sx ml-2 rounded-full bg-yellow-100 px-2 py-0.5 font-medium text-yellow-800">
-                Draft
-              </span>
-            )}
+          <div>
+            <h3 className="flex items-center text-base font-bold text-muted-foreground">
+              <Link
+                href={`/workflow/editor/${workflow.id}`}
+                className="flex items-center hover:underline"
+              >
+                {workflow.name}
+              </Link>
+              {isDraft && (
+                <span className="text-sx ml-2 rounded-full bg-yellow-100 px-2 py-0.5 font-medium text-yellow-800">
+                  Draft
+                </span>
+              )}
+            </h3>
+            <SchedulerSection
+              workflowId={workflow.id}
+              isDraft={isDraft}
+              creditCost={workflow.creditsCost}
+              cron={workflow.cron}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-2">
@@ -122,4 +141,35 @@ function WorkflowActions({ workflowId, workflowName }: WorkflowActionsProps) {
     </>
   );
 }
+
+function SchedulerSection({
+  workflowId,
+  isDraft,
+  creditCost,
+  cron,
+}: {
+  workflowId: string;
+  isDraft: boolean;
+  creditCost: number;
+  cron: string | null;
+}) {
+  if (isDraft) return null;
+
+  return (
+    <div className="flex items-center gap-2">
+      <CornerDownRight className="h-4 w-4 text-muted-foreground" />
+      <SchedulerDialog workflowId={workflowId} cron={cron} />
+      <MoveRightIcon className="h-4 w-4 text-muted-foreground" />
+      <TooltipWrapper content="Credit consumption for full run">
+        <div className="gap3 flex items-center">
+          <Badge variant="outline" className="space-x-2 rounded-sm text-muted-foreground">
+            <CoinsIcon className="h-4 w-4" />
+            <span>{creditCost}</span>
+          </Badge>
+        </div>
+      </TooltipWrapper>
+    </div>
+  );
+}
+
 export default WorkflowCard;
