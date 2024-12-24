@@ -3,7 +3,8 @@
         "Countup",
         "datasource",
         "outgoer",
-        "reactflow"
+        "reactflow",
+        "Unpublishing"
     ],
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
