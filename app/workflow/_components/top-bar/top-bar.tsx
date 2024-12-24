@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 
 import ExecuteButton from './execute-button';
 import NavigationTabs from './navigation-tabs';
+import PublishButton from './publish-button';
 import SaveButton from './save-button';
 
 interface TopBarProps {
@@ -44,6 +45,7 @@ const TopBar = ({ title, subtitle, workflowId, hideButtons = false }: TopBarProp
           <>
             <ExecuteButton workflowId={workflowId} />
             <SaveButton workflowId={workflowId} />
+            <PublishButton workflowId={workflowId} />
           </>
         )}
       </div>
