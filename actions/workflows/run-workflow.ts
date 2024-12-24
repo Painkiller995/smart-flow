@@ -41,6 +41,8 @@ export async function RunWorkflow(form: { workflowId: string, flowDefinition?: s
 
     let executionPlan: WorkflowExecutionPlan
 
+    let workflowDefinition = flowDefinition
+
     if (workflow.status === WorkflowStatus.PUBLISHED) {
 
         if (!workflow.executionPlan) {
@@ -48,6 +50,8 @@ export async function RunWorkflow(form: { workflowId: string, flowDefinition?: s
         }
 
         executionPlan = JSON.parse(workflow.executionPlan)
+
+        workflowDefinition = workflow.definition
 
     } else {
 
@@ -77,7 +81,7 @@ export async function RunWorkflow(form: { workflowId: string, flowDefinition?: s
             status: WorkflowExecutionStatus.PENDING,
             startedAt: new Date(),
             trigger: WorkflowExecutionTrigger.MANUAL,
-            definition: flowDefinition,
+            definition: workflowDefinition,
             phases: {
                 create: executionPlan.flatMap(phase => {
                     return phase.nodes.flatMap((node) => {
