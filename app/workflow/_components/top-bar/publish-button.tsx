@@ -5,7 +5,7 @@ import UseExecutionPlan from '@/components/hooks/use-execution-plan';
 import { Button } from '@/components/ui/button';
 import { useMutation } from '@tanstack/react-query';
 import { useReactFlow } from '@xyflow/react';
-import { PlayIcon } from 'lucide-react';
+import { UploadIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface PublishButtonProps {
@@ -18,10 +18,10 @@ const PublishButton = ({ workflowId }: PublishButtonProps) => {
   const mutation = useMutation({
     mutationFn: PublishWorkflow,
     onSuccess: () => {
-      toast.success('Workflow published', { id: 'flow-execution' });
+      toast.success('Workflow published', { id: workflowId });
     },
     onError: () => {
-      toast.error('Something went wrong', { id: 'flow-execution' });
+      toast.error('Something went wrong', { id: workflowId });
     },
   });
 
@@ -35,11 +35,12 @@ const PublishButton = ({ workflowId }: PublishButtonProps) => {
         if (!plan) {
           return;
         }
-        mutation.mutate({ workflowId: workflowId, flowDefinition: JSON.stringify(toObject()) });
+        toast.loading('Publishing workflow...', { id: workflowId });
+        mutation.mutate({ id: workflowId, flowDefinition: JSON.stringify(toObject()) });
       }}
     >
-      <PlayIcon size={16} className="stroke-orange-400" />
-      Execute
+      <UploadIcon size={16} className="stroke-blue-400" />
+      Publish
     </Button>
   );
 };
