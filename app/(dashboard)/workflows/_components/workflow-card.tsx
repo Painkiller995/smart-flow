@@ -158,7 +158,7 @@ function SchedulerSection({
   return (
     <div className="flex items-center gap-2">
       <CornerDownRight className="h-4 w-4 text-muted-foreground" />
-      <SchedulerDialog workflowId={workflowId} cron={cron} />
+      <SchedulerDialog key={`${cron}-${workflowId}`} workflowId={workflowId} cron={cron} />
       <MoveRightIcon className="h-4 w-4 text-muted-foreground" />
       <TooltipWrapper content="Credit consumption for full run">
         <div className="gap3 flex items-center">
