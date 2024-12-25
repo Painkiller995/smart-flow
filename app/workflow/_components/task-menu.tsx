@@ -14,7 +14,11 @@ import React from 'react';
 const TaskMenu = () => {
   return (
     <aside className="h-full w-[340px] min-w-[340px] border-separate overflow-auto border-r-2 p-2 px-4">
-      <Accordion type="multiple" className="w-full" defaultValue={['extraction', 'interactions']}>
+      <Accordion
+        type="multiple"
+        className="w-full"
+        defaultValue={['extraction', 'interactions', 'timing']}
+      >
         <AccordionItem value="extraction">
           <AccordionTrigger className="font-bold">Data extraction</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
@@ -27,6 +31,12 @@ const TaskMenu = () => {
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.FILL_INPUT} />
             <TaskMenuButton taskType={TaskType.CLICK_ELEMENT} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="timing">
+          <AccordionTrigger className="font-bold">Timing controls</AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.WAIT_FOR_ELEMENT} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

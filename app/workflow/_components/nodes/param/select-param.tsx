@@ -1,0 +1,50 @@
+'use client';
+
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { ParamProps } from '@/types/app-node';
+import { useId } from 'react';
+
+type OptionType = {
+  label: string;
+  value: string;
+};
+
+const SelectParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
+  const id = useId();
+  return (
+    <p className="flex w-full flex-col gap-1">
+      <Label htmlFor={id} className="flex text-xs">
+        {param.name}
+        {param.require && <p className="px-2 text-red-400">*</p>}
+      </Label>
+      <Select defaultValue={value} onValueChange={(value) => updateNodeParamValue(value)}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Select an option" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Options</SelectLabel>
+            {param.options.map((option: OptionType) => {
+              return (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              );
+            })}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </p>
+  );
+};
+
+export default SelectParam;

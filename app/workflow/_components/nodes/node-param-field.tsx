@@ -1,10 +1,10 @@
-import { Input } from "@/components/ui/input";
-import { TaskParam, TaskParamType } from "@/types/task";
-import React, { useCallback } from "react";
-import StringParam from "./param/string-param";
-import { useReactFlow } from "@xyflow/react";
-import { AppNode } from "@/types/app-node";
-import BrowserInstanceParam from "./param/browser-instance-param";
+import { AppNode } from '@/types/app-node';
+import { TaskParam, TaskParamType } from '@/types/task';
+import { useReactFlow } from '@xyflow/react';
+import { useCallback } from 'react';
+import BrowserInstanceParam from './param/browser-instance-param';
+import SelectParam from './param/select-param';
+import StringParam from './param/string-param';
 
 interface NodeParamFieldProps {
   nodeId: string;
@@ -43,10 +43,16 @@ const NodeParamField = ({ nodeId, param, disabled }: NodeParamFieldProps) => {
       );
     case TaskParamType.BROWSER_INSTANCE:
       return (
-        <BrowserInstanceParam
+        <BrowserInstanceParam param={param} value="" updateNodeParamValue={updateNodeParamValue} />
+      );
+
+    case TaskParamType.SELECT:
+      return (
+        <SelectParam
           param={param}
-          value=""
+          value={value}
           updateNodeParamValue={updateNodeParamValue}
+          disabled={disabled}
         />
       );
 
