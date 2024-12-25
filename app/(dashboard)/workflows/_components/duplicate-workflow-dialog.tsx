@@ -14,25 +14,27 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 import { duplicateWorkflowSchema, duplicateWorkflowSchemaType } from '@/schema/workflow';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Layers2Icon, Loader2 } from 'lucide-react';
+import { CopyIcon, Layers2Icon, Loader2 } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import CustomDialogHeader from './custom-dialog-header';
 
 interface DuplicateWorkflowDialogProps {
-  triggerText?: string;
+  workflowId?: string;
 }
 
-const DuplicateWorkflowDialog = ({ triggerText }: DuplicateWorkflowDialogProps) => {
+const DuplicateWorkflowDialog = ({ workflowId }: DuplicateWorkflowDialogProps) => {
   const [open, setOpen] = useState(false);
 
   const form = useForm<duplicateWorkflowSchemaType>({
     resolver: zodResolver(duplicateWorkflowSchema),
     defaultValues: {
+      workflowId,
       name: '',
       description: '',
     },
@@ -65,7 +67,15 @@ const DuplicateWorkflowDialog = ({ triggerText }: DuplicateWorkflowDialogProps) 
       }}
     >
       <DialogTrigger asChild>
-        <Button>Duplicate workflow</Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className={cn(
+            'ml-2 opacity-0 transition-opacity duration-200 group-hover/card:opacity-100'
+          )}
+        >
+          <CopyIcon className="h-4 w-4 cursor-pointer text-muted-foreground" />
+        </Button>
       </DialogTrigger>
       <DialogContent className="px-2">
         <CustomDialogHeader title="Duplicate workflow" icon={Layers2Icon} />

@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import DeleteWorkflowDialog from './delete-workflow-dialog';
+import DuplicateWorkflowDialog from './duplicate-workflow-dialog';
 import LastRunDetails from './last-run-detials';
 import RunWorkflowButton from './run-workflow-button';
 import SchedulerDialog from './scheduler-dialog';
@@ -45,7 +46,7 @@ const statusColors = {
 const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
   const isDraft = workflow.status === WorkflowStatus.DRAFT;
   return (
-    <Card className="border-separate overflow-hidden rounded-lg border shadow-sm hover:shadow-md dark:shadow-primary/30">
+    <Card className="group/card border-separate overflow-hidden rounded-lg border shadow-sm hover:shadow-md dark:shadow-primary/30">
       <CardContent className="flex h-[100px] items-center justify-between p-4">
         <div className="flex items-center justify-end space-x-3">
           <div
@@ -73,8 +74,9 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
                   Draft
                 </span>
               )}
+              <DuplicateWorkflowDialog workflowId={workflow.id} />
             </h3>
-            <SchedulerSection
+            <ScheduleSection
               workflowId={workflow.id}
               isDraft={isDraft}
               creditCost={workflow.creditsCost}
@@ -144,7 +146,7 @@ function WorkflowActions({ workflowId, workflowName }: WorkflowActionsProps) {
   );
 }
 
-function SchedulerSection({
+function ScheduleSection({
   workflowId,
   isDraft,
   creditCost,
