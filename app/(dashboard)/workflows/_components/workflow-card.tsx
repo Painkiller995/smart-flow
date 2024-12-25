@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import DeleteWorkflowDialog from './delete-workflow-dialog';
+import LastRunDetails from './last-run-detials';
 import RunWorkflowButton from './run-workflow-button';
 import SchedulerDialog from './scheduler-dialog';
 
@@ -96,6 +97,7 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
           <WorkflowActions workflowId={workflow.id} workflowName={workflow.name} />
         </div>
       </CardContent>
+      <LastRunDetails workflow={workflow} />
     </Card>
   );
 };
