@@ -1,4 +1,5 @@
 import ExecutionStatusIndicator from '@/app/workflow/runs/[workflowId]/[executionId]/_components/execution-status-indicator';
+import ExecutionStatusLabel from '@/app/workflow/runs/[workflowId]/[executionId]/_components/execution-status-label';
 import { WorkflowExecutionStatus, WorkflowStatus } from '@/types/workflow';
 import { Workflow } from '@prisma/client';
 import { format, formatDistanceToNow } from 'date-fns';
@@ -27,7 +28,7 @@ const LastRunDetails = ({ workflow }: { workflow: Workflow }) => {
           >
             <span>Last run:</span>
             <ExecutionStatusIndicator status={lastRunStatus as WorkflowExecutionStatus} />
-            <span>{lastRunStatus}</span>
+            <ExecutionStatusLabel status={lastRunStatus as WorkflowExecutionStatus} />
             <span>{formatStartedAt}</span>
             <ChevronRightIcon
               size={14}
