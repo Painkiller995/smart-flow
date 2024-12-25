@@ -17,7 +17,7 @@ export async function GET(request: Request) {
         triggerWorkflow(workflow.id)
     }
 
-    return new Response(null, { status: 200 })
+    return Response.json({ workflowsToRun: workflows.length }, { status: 200 })
 }
 
 
