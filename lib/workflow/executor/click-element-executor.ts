@@ -1,7 +1,7 @@
 import { ExecutionEnvironment } from '@/types/executor';
-import { FillInputTask } from '../task/fill-input';
+import { ClickElementTask } from '../task/click-element';
 
-export async function ClickElementExecutor(environment: ExecutionEnvironment<typeof FillInputTask>): Promise<boolean> {
+export async function ClickElementExecutor(environment: ExecutionEnvironment<typeof ClickElementTask>): Promise<boolean> {
     try {
 
         const selector = environment.getInput("Selector")
