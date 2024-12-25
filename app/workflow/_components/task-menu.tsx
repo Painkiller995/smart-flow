@@ -14,12 +14,18 @@ import React from 'react';
 const TaskMenu = () => {
   return (
     <aside className="h-full w-[340px] min-w-[340px] border-separate overflow-auto border-r-2 p-2 px-4">
-      <Accordion type="multiple" className="w-full" defaultValue={['extraction']}>
+      <Accordion type="multiple" className="w-full" defaultValue={['extraction', 'interactions']}>
         <AccordionItem value="extraction">
           <AccordionTrigger className="font-bold">Data extraction</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.PAGE_TO_HTML} />
             <TaskMenuButton taskType={TaskType.EXTRACT_TEXT_FROM_ELEMENT} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="interactions">
+          <AccordionTrigger className="font-bold">User interactions</AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.FILL_INPUT} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
