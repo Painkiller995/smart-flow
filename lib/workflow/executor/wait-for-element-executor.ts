@@ -16,7 +16,11 @@ export async function WaitForElementExecutor(environment: ExecutionEnvironment<t
             environment.log.error("visibility value is not defined")
         }
 
-        await environment.getPage()!.waitForSelector(selector)
+        await environment.getPage()!.waitForSelector(selector, {
+            visible: visibility === "visible",
+            hidden: visibility === "hidden"
+        })
+        environment.log.info(`Element ${selector} became: ${visibility}`)
         return true
     } catch (err: any) {
         environment.log.error(err.message)
