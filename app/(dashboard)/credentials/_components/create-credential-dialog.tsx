@@ -54,18 +54,14 @@ const CreateCredentialDialog = ({ triggerText }: CreateCredentialDialogProps) =>
     (values: createCredentialSchemaType) => {
       toast.loading('Creating new credential...', { id: 'create-credential' });
       mutate(values);
+      form.reset();
+      setOpen(!open);
     },
-    [mutate]
+    [form, mutate, open]
   );
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(open) => {
-        form.reset();
-        setOpen(open);
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>{triggerText ?? 'Create credential'}</Button>
       </DialogTrigger>

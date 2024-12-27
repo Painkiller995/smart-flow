@@ -3,6 +3,7 @@ import { TaskType } from "@/types/task";
 import { WorkflowTask } from "@/types/workflow";
 import { ClickElementExecutor } from "./click-element-executor";
 import { DeliverViaWebhookExecutor } from "./deliver-via-webhook-executor";
+import { ExtractDataWithAiExecutor } from "./extract-data-with-ai-executor";
 import { ExtractTextFromElementExecutor } from "./extract-text-from-element";
 import { FillInputExecutor } from "./fill-input-executor";
 import { LaunchBrowserExecutor } from "./launch-browser-executor";
@@ -23,5 +24,6 @@ export const ExecutorRegistry: RegistryType = {
     FILL_INPUT: FillInputExecutor,
     CLICK_ELEMENT: ClickElementExecutor,
     WAIT_FOR_ELEMENT: WaitForElementExecutor,
-    DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor
+    DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
+    EXTRACT_DATA_WITH_AI: ExtractDataWithAiExecutor
 }

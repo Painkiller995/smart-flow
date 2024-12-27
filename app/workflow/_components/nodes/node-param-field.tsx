@@ -3,6 +3,7 @@ import { TaskParam, TaskParamType } from '@/types/task';
 import { useReactFlow } from '@xyflow/react';
 import { useCallback } from 'react';
 import BrowserInstanceParam from './param/browser-instance-param';
+import CredentialsParam from './param/credentials-param';
 import SelectParam from './param/select-param';
 import StringParam from './param/string-param';
 
@@ -41,21 +42,28 @@ const NodeParamField = ({ nodeId, param, disabled }: NodeParamFieldProps) => {
           updateNodeParamValue={updateNodeParamValue}
         />
       );
-    case TaskParamType.BROWSER_INSTANCE:
-      return (
-        <BrowserInstanceParam param={param} value="" updateNodeParamValue={updateNodeParamValue} />
-      );
-
     case TaskParamType.SELECT:
       return (
         <SelectParam
           param={param}
           value={value}
-          updateNodeParamValue={updateNodeParamValue}
           disabled={disabled}
+          updateNodeParamValue={updateNodeParamValue}
         />
       );
-
+    case TaskParamType.CREDENTIAL:
+      return (
+        <CredentialsParam
+          param={param}
+          value={value}
+          disabled={disabled}
+          updateNodeParamValue={updateNodeParamValue}
+        />
+      );
+    case TaskParamType.BROWSER_INSTANCE:
+      return (
+        <BrowserInstanceParam param={param} value="" updateNodeParamValue={updateNodeParamValue} />
+      );
     default:
       return (
         <div className="w-full">

@@ -5,10 +5,14 @@ CREATE TABLE "Workflow" (
     "name" TEXT NOT NULL,
     "description" TEXT,
     "definition" TEXT NOT NULL,
+    "executionPlan" TEXT,
+    "creditsCost" INTEGER NOT NULL DEFAULT 0,
+    "cron" TEXT,
     "status" TEXT NOT NULL,
     "lastRunAt" DATETIME,
     "lastRunId" TEXT,
     "lastRunStatus" TEXT,
+    "nextRunAt" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
@@ -18,7 +22,7 @@ CREATE TABLE "WorkflowExecution" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "workflowId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "definition" TEXT NOT NULL,
+    "definition" TEXT NOT NULL DEFAULT '{}',
     "trigger" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -45,5 +49,33 @@ CREATE TABLE "ExecutionPhase" (
     CONSTRAINT "ExecutionPhase_WorkflowExecutionId_fkey" FOREIGN KEY ("WorkflowExecutionId") REFERENCES "WorkflowExecution" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "ExecutionLog" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "logLevel" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "timestamp" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "executionPhaseId" TEXT NOT NULL,
+    CONSTRAINT "ExecutionLog_executionPhaseId_fkey" FOREIGN KEY ("executionPhaseId") REFERENCES "ExecutionPhase" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "UserBalance" (
+    "userId" TEXT NOT NULL PRIMARY KEY,
+    "credits" INTEGER NOT NULL DEFAULT 0
+);
+
+-- CreateTable
+CREATE TABLE "Credential" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Workflow_name_userId_key" ON "Workflow"("name", "userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Credential_userId_name_key" ON "Credential"("userId", "name");
