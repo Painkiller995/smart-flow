@@ -23,6 +23,7 @@ const TaskMenu = () => {
           <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.EXTRACT_DATA_WITH_AI} />
+            <TaskMenuButton taskType={TaskType.READ_PROPERTY_FROM_JSON} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="browser">
