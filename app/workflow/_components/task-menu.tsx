@@ -17,27 +17,23 @@ const TaskMenu = () => {
       <Accordion
         type="multiple"
         className="w-full"
-        defaultValue={['extraction', 'interactions', 'timing', 'result']}
+        defaultValue={['data-handling', 'browser', 'result']}
       >
-        <AccordionItem value="extraction">
-          <AccordionTrigger className="font-bold">Data extraction</AccordionTrigger>
+        <AccordionItem value="data-handling">
+          <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
-            <TaskMenuButton taskType={TaskType.PAGE_TO_HTML} />
-            <TaskMenuButton taskType={TaskType.EXTRACT_TEXT_FROM_ELEMENT} />
             <TaskMenuButton taskType={TaskType.EXTRACT_DATA_WITH_AI} />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="interactions">
-          <AccordionTrigger className="font-bold">User interactions</AccordionTrigger>
+        <AccordionItem value="browser">
+          <AccordionTrigger className="font-bold">Browser (Beta)</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.LAUNCH_BROWSER} />
+            <TaskMenuButton taskType={TaskType.PAGE_TO_HTML} />
+            <TaskMenuButton taskType={TaskType.EXTRACT_TEXT_FROM_ELEMENT} />
             <TaskMenuButton taskType={TaskType.FILL_INPUT} />
-            <TaskMenuButton taskType={TaskType.CLICK_ELEMENT} />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="timing">
-          <AccordionTrigger className="font-bold">Timing controls</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.WAIT_FOR_ELEMENT} />
+            <TaskMenuButton taskType={TaskType.CLICK_ELEMENT} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="result">
