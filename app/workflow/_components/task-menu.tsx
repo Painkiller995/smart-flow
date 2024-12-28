@@ -36,6 +36,7 @@ const TaskMenu = () => {
             <TaskMenuButton taskType={TaskType.FILL_INPUT} />
             <TaskMenuButton taskType={TaskType.WAIT_FOR_ELEMENT} />
             <TaskMenuButton taskType={TaskType.CLICK_ELEMENT} />
+            <TaskMenuButton taskType={TaskType.NAVIGATE_URL} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="result">

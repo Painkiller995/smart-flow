@@ -8,6 +8,7 @@ import { ExtractDataWithAiExecutor } from "./extract-data-with-ai-executor";
 import { ExtractTextFromElementExecutor } from "./extract-text-from-element";
 import { FillInputExecutor } from "./fill-input-executor";
 import { LaunchBrowserExecutor } from "./launch-browser-executor";
+import { NavigateUrlExecutor } from "./navigate-url-executor";
 import { PageToHtmlExecutor } from "./page-to-html-executor";
 import { ReadPropertyFromJsonExecutor } from "./read-property-from-json-executor";
 import { WaitForElementExecutor } from "./wait-for-element-executor";
@@ -26,9 +27,10 @@ export const ExecutorRegistry: RegistryType = {
     FILL_INPUT: FillInputExecutor,
     CLICK_ELEMENT: ClickElementExecutor,
     WAIT_FOR_ELEMENT: WaitForElementExecutor,
-    DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
+    NAVIGATE_URL: NavigateUrlExecutor,
     EXTRACT_DATA_WITH_AI: ExtractDataWithAiExecutor,
     READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonExecutor,
-    ADD_PROPERTY_TO_JSON: AddPropertyToJsonExecutor
+    ADD_PROPERTY_TO_JSON: AddPropertyToJsonExecutor,
+    DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
 
 } 

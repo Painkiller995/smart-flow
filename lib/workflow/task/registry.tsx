@@ -7,6 +7,7 @@ import { ExtractDataWithAiTask } from './extract-data-with-ai';
 import { ExtractTextFromElementTask } from './extract-text-from-element';
 import { FillInputTask } from './fill-input';
 import { LaunchBrowserTask } from './launch-browser';
+import { NavigateUrlTask } from './navigate-url';
 import { PageToHtmlTask } from './page-to-html';
 import { ReadPropertyFromJsonTask } from './read-property-from-json';
 import { WaitForElementTask } from './wait-for-element';
@@ -22,8 +23,9 @@ export const TaskRegistry: Registry = {
   FILL_INPUT: FillInputTask,
   CLICK_ELEMENT: ClickElementTask,
   WAIT_FOR_ELEMENT: WaitForElementTask,
-  DELIVER_VIA_WEBHOOK: DeliverViaWebhookTask,
+  NAVIGATE_URL: NavigateUrlTask,
   EXTRACT_DATA_WITH_AI: ExtractDataWithAiTask,
   READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonTask,
   ADD_PROPERTY_TO_JSON: AddPropertyToJsonTask,
+  DELIVER_VIA_WEBHOOK: DeliverViaWebhookTask,
 };
