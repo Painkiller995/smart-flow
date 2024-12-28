@@ -47,7 +47,7 @@ export async function ExtractDataWithAiExecutor(environment: ExecutionEnvironmen
             messages: [
                 {
                     role: "system",
-                    content: 'You are a webScraper helper that extracts data from HTML or text'
+                    content: 'You are a webScraper helper that extracts data from HTML or text. your answer should be json only like {}'
                 },
                 {
                     role: 'user',
