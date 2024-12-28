@@ -24,6 +24,7 @@ const TaskMenu = () => {
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.EXTRACT_DATA_WITH_AI} />
             <TaskMenuButton taskType={TaskType.READ_PROPERTY_FROM_JSON} />
+            <TaskMenuButton taskType={TaskType.ADD_PROPERTY_TO_JSON} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="browser">
