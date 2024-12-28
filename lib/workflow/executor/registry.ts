@@ -11,6 +11,7 @@ import { LaunchBrowserExecutor } from "./launch-browser-executor";
 import { NavigateUrlExecutor } from "./navigate-url-executor";
 import { PageToHtmlExecutor } from "./page-to-html-executor";
 import { ReadPropertyFromJsonExecutor } from "./read-property-from-json-executor";
+import { ScrollToElementExecutor } from "./scroll-to-element-executor";
 import { WaitForElementExecutor } from "./wait-for-element-executor";
 
 
@@ -27,10 +28,10 @@ export const ExecutorRegistry: RegistryType = {
     FILL_INPUT: FillInputExecutor,
     CLICK_ELEMENT: ClickElementExecutor,
     WAIT_FOR_ELEMENT: WaitForElementExecutor,
+    SCROLL_TO_ELEMENT: ScrollToElementExecutor,
     NAVIGATE_URL: NavigateUrlExecutor,
     EXTRACT_DATA_WITH_AI: ExtractDataWithAiExecutor,
     READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonExecutor,
     ADD_PROPERTY_TO_JSON: AddPropertyToJsonExecutor,
     DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
-
-} 
+}

@@ -10,6 +10,7 @@ import { LaunchBrowserTask } from './launch-browser';
 import { NavigateUrlTask } from './navigate-url';
 import { PageToHtmlTask } from './page-to-html';
 import { ReadPropertyFromJsonTask } from './read-property-from-json';
+import { ScrollToElementTask } from './scroll-to-element';
 import { WaitForElementTask } from './wait-for-element';
 
 type Registry = {
@@ -23,6 +24,7 @@ export const TaskRegistry: Registry = {
   FILL_INPUT: FillInputTask,
   CLICK_ELEMENT: ClickElementTask,
   WAIT_FOR_ELEMENT: WaitForElementTask,
+  SCROLL_TO_ELEMENT: ScrollToElementTask,
   NAVIGATE_URL: NavigateUrlTask,
   EXTRACT_DATA_WITH_AI: ExtractDataWithAiTask,
   READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonTask,
