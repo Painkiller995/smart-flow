@@ -1,5 +1,6 @@
 import { GetPeriods } from '@/actions/analytics/get-periods';
 import { GetStatsCardsValues } from '@/actions/analytics/get-stats-cards-values';
+import { GetWorkflowExecutionStats } from '@/actions/analytics/get-workflow-execution-stats';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
 import { CirclePlayIcon, CoinsIcon, WaypointsIcon } from 'lucide-react';
@@ -35,6 +36,9 @@ const HomePage = async ({ searchParams }: HomePageProps) => {
         <Suspense fallback={<StatsCardsSkeleton />}>
           <StatsCards selectedPeriod={period} />
         </Suspense>
+        <Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
+          <StatsExecutionStatus selectedPeriod={period} />
+        </Suspense>
       </div>
     </div>
   );
@@ -64,6 +68,12 @@ function StatsCardsSkeleton() {
       ))}
     </div>
   );
+}
+
+async function StatsExecutionStatus({ selectedPeriod }: { selectedPeriod: Period }) {
+  const data = await GetWorkflowExecutionStats(selectedPeriod);
+
+  return <pre>{JSON.stringify(data, null, 4)}</pre>;
 }
 
 export default HomePage;
