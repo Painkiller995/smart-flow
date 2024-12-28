@@ -2,8 +2,10 @@ import { GetPeriods } from '@/actions/analytics/get-periods';
 import { GetStatsCardsValues } from '@/actions/analytics/get-stats-cards-values';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
+import { CirclePlayIcon, CoinsIcon, WaypointsIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import PeriodSelector from './_components/period-selector';
+import StatsCard from './_components/stats-card';
 
 interface HomePageProps {
   searchParams: {
@@ -27,7 +29,11 @@ const HomePage = ({ searchParams }: HomePageProps) => {
           <PeriodSelectorWrapper selectedPeriod={period} />
         </Suspense>
       </div>
-      <StatsCards selectedPeriod={period} />
+      <div className="flex h-full flex-col gap-4 py-6">
+        <Suspense fallback={<StatsCardsSkeleton />}>
+          <StatsCards selectedPeriod={period} />
+        </Suspense>
+      </div>
     </div>
   );
 };
@@ -39,7 +45,23 @@ async function PeriodSelectorWrapper({ selectedPeriod }: { selectedPeriod: Perio
 
 async function StatsCards({ selectedPeriod }: { selectedPeriod: Period }) {
   const data = await GetStatsCardsValues(selectedPeriod);
-  return <pre>{JSON.stringify(data, null, 4)}</pre>;
+  return (
+    <div className="min-h-[120px]: grid gap-3 lg:grid-cols-3 lg:gap-8">
+      <StatsCard title="Workflow executions" value={data.workflowExecution} icon={CirclePlayIcon} />
+      <StatsCard title="Phase executions" value={data.phaseExecutions} icon={WaypointsIcon} />
+      <StatsCard title="Credits consumed" value={data.creditsConsumed} icon={CoinsIcon} />
+    </div>
+  );
+}
+
+function StatsCardsSkeleton() {
+  return (
+    <div className="grid gap-3 lg:grid-cols-3 lg:gap-8">
+      {[1, 2, 3].map((i) => (
+        <Skeleton key={i} className="min-h-[120px] w-full" />
+      ))}
+    </div>
+  );
 }
 
 export default HomePage;
