@@ -10,7 +10,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { ChartColumnStackedIcon } from 'lucide-react';
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 
 type ChartData = Awaited<ReturnType<typeof GetCreditsUsageInPeriod>>;
 
@@ -43,7 +43,7 @@ const CreditsUsageChart = ({ title, description, data }: CreditsUsageChartProps)
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="max-h-[200px] w-full">
-          <AreaChart data={data} height={200} accessibilityLayer margin={{ top: 20 }}>
+          <BarChart data={data} height={200} accessibilityLayer margin={{ top: 20 }}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey={'date'}
@@ -58,25 +58,23 @@ const CreditsUsageChart = ({ title, description, data }: CreditsUsageChartProps)
             />
             <ChartLegend content={<ChartLegendContent />} />
             <ChartTooltip content={<ChartTooltipContent className="w-[250px]" />} />
-            <Area
-              min={0}
-              type="bump"
+            <Bar
+              radius={[0, 0, 4, 4]}
               fill="var(--color-success)"
-              fillOpacity={0.6}
+              fillOpacity={0.8}
               stroke="var(--color-success)"
               dataKey="success"
               stackId="a"
             />
-            <Area
-              min={0}
-              type="bump"
+            <Bar
+              radius={[4, 4, 0, 0]}
               fill="var(--color-failed)"
-              fillOpacity={0.6}
+              fillOpacity={0.8}
               stroke="var(--color-failed)"
               dataKey="failed"
               stackId="a"
             />
-          </AreaChart>
+          </BarChart>
         </ChartContainer>
       </CardContent>
     </Card>
