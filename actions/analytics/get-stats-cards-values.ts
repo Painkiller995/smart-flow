@@ -17,7 +17,7 @@ export async function GetStatsCardsValues(period: Period) {
 
     const dateRange = PeriodToDateRange(period)
 
-    const executions = prisma.workflowExecution.findMany({
+    const executions = await prisma.workflowExecution.findMany({
         where: {
             userId,
             startedAt: {
@@ -41,5 +41,13 @@ export async function GetStatsCardsValues(period: Period) {
         }
     })
 
-    return executions
+    const stats = {
+        workflowExecution: executions.length,
+        creditsConsumed: 0,
+        phaseExecutions: 0
+    }
+    stats.creditsConsumed = executions.reduce((sum, execution) => sum + execution.creditsConsumed, 0)
+    stats.phaseExecutions = executions.reduce((sum, execution) => sum + execution.phases.length, 0)
+
+    return stats
 }
