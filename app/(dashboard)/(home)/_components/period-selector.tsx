@@ -29,13 +29,15 @@ const MONTH_NAMES = [
 
 interface PeriodSelectorProps {
   periods: Period[];
+  selectedPeriod: Period;
 }
 
-const PeriodSelector = ({ periods }: PeriodSelectorProps) => {
+const PeriodSelector = ({ periods, selectedPeriod }: PeriodSelectorProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   return (
     <Select
+      value={`${selectedPeriod.month}-${selectedPeriod.year}`}
       onValueChange={(value) => {
         const [month, year] = value.split('-');
         const params = new URLSearchParams(searchParams);
