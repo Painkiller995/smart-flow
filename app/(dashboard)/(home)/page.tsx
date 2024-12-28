@@ -1,3 +1,4 @@
+import { GetCreditsUsageInPeriod } from '@/actions/analytics/get-credits-usage-in-period';
 import { GetPeriods } from '@/actions/analytics/get-periods';
 import { GetStatsCardsValues } from '@/actions/analytics/get-stats-cards-values';
 import { GetWorkflowExecutionStats } from '@/actions/analytics/get-workflow-execution-stats';
@@ -5,6 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
 import { CirclePlayIcon, CoinsIcon, WaypointsIcon } from 'lucide-react';
 import { Suspense } from 'react';
+import CreditsUsageChart from '../billing/_components/credits-usage-chart';
 import ExecutionStatusChart from './_components/execution-status-chart';
 import PeriodSelector from './_components/period-selector';
 import StatsCard from './_components/stats-card';
@@ -40,6 +42,9 @@ const HomePage = async ({ searchParams }: HomePageProps) => {
         <Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
           <StatsExecutionStatus selectedPeriod={period} />
         </Suspense>
+        <Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
+          <CreditsUsageInPeriod selectedPeriod={period} />
+        </Suspense>
       </div>
     </div>
   );
@@ -74,6 +79,17 @@ function StatsCardsSkeleton() {
 async function StatsExecutionStatus({ selectedPeriod }: { selectedPeriod: Period }) {
   const data = await GetWorkflowExecutionStats(selectedPeriod);
   return <ExecutionStatusChart data={data} />;
+}
+
+async function CreditsUsageInPeriod({ selectedPeriod }: { selectedPeriod: Period }) {
+  const data = await GetCreditsUsageInPeriod(selectedPeriod);
+  return (
+    <CreditsUsageChart
+      data={data}
+      title="Daily credits spent"
+      description="Daily credit consumed in selected period"
+    />
+  );
 }
 
 export default HomePage;
