@@ -13,12 +13,14 @@ interface HomePageProps {
     year?: string;
   };
 }
-const HomePage = ({ searchParams }: HomePageProps) => {
+const HomePage = async ({ searchParams }: HomePageProps) => {
   const currentDate = new Date();
-  const { month, year } = searchParams;
+
+  const { month, year } = await searchParams;
+
   const period: Period = {
-    month: month ? parseInt(month) : currentDate.getMonth(),
-    year: year ? parseInt(year) : currentDate.getFullYear(),
+    month: month ? parseInt(month, 10) : currentDate.getMonth(),
+    year: year ? parseInt(year, 10) : currentDate.getFullYear(),
   };
 
   return (

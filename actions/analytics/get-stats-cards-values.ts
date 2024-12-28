@@ -46,6 +46,7 @@ export async function GetStatsCardsValues(period: Period) {
         creditsConsumed: 0,
         phaseExecutions: 0
     }
+
     stats.creditsConsumed = executions.reduce((sum, execution) => sum + execution.creditsConsumed, 0)
     stats.phaseExecutions = executions.reduce((sum, execution) => sum + execution.phases.length, 0)
 
