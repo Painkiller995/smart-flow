@@ -22,7 +22,7 @@ export async function AddPropertyToJsonExecutor(environment: ExecutionEnvironmen
     const json = JSON.parse(jsonData)
     json[propertyName] = propertyValue
 
-    environment.setOutput('Updated JSON', json)
+    environment.setOutput('Updated JSON', JSON.stringify(json))
     return true
   } catch (err: any) {
     environment.log.error(err.message)
