@@ -5,6 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
 import { CirclePlayIcon, CoinsIcon, WaypointsIcon } from 'lucide-react';
 import { Suspense } from 'react';
+import ExecutionStatusChart from './_components/execution-status-chart';
 import PeriodSelector from './_components/period-selector';
 import StatsCard from './_components/stats-card';
 
@@ -72,8 +73,7 @@ function StatsCardsSkeleton() {
 
 async function StatsExecutionStatus({ selectedPeriod }: { selectedPeriod: Period }) {
   const data = await GetWorkflowExecutionStats(selectedPeriod);
-
-  return <pre>{JSON.stringify(data, null, 4)}</pre>;
+  return <ExecutionStatusChart data={data} />;
 }
 
 export default HomePage;

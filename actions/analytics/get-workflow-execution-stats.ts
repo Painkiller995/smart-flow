@@ -7,7 +7,7 @@ import { WorkflowExecutionStatus } from "@/types/workflow"
 import { auth } from "@clerk/nextjs/server"
 import { eachDayOfInterval, format } from "date-fns"
 
-type Stats = Record<string, { success: number; failed: number }>;
+type Stats = { date: string; success: number; failed: number }[];
 
 export async function GetWorkflowExecutionStats(period: Period) {
     const { userId } = await auth()
@@ -29,22 +29,21 @@ export async function GetWorkflowExecutionStats(period: Period) {
         }
     })
 
-    const dateFormat = 'yyyy-MM-dd'
+    const dateFormat = "yyyy-MM-dd";
 
-    const stats: Stats = Object.fromEntries(
-        eachDayOfInterval({ start: dateRange.startDate, end: dateRange.endDate }).map((date) => [
-            format(date, dateFormat),
-            { success: 0, failed: 0 },
-        ])
-    );
+    const stats: Stats = eachDayOfInterval({ start: dateRange.startDate, end: dateRange.endDate }).map((date) => {
 
-    executions.forEach(({ startedAt, status }) => {
-        const date = format(startedAt!, dateFormat);
-        if (stats[date]) {
-            if (status === WorkflowExecutionStatus.COMPLETED) stats[date].success += 1;
-            if (status === WorkflowExecutionStatus.FAILED) stats[date].failed += 1;
-        }
+        const formattedDate = format(date, dateFormat);
+
+        const dailyExecutions = executions.filter(
+            (execution) => format(execution.startedAt!, dateFormat) === formattedDate
+        );
+
+        const success = dailyExecutions.filter((exec) => exec.status === WorkflowExecutionStatus.COMPLETED).length;
+        const failed = dailyExecutions.filter((exec) => exec.status === WorkflowExecutionStatus.FAILED).length;
+
+        return { date: formattedDate, success, failed };
     });
 
-    return stats
+    return stats;
 }
