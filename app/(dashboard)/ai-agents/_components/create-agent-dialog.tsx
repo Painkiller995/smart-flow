@@ -81,7 +81,7 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="px-2">
-        <CustomDialogHeader title="Create agent" icon={BotIcon} />
+        <CustomDialogHeader title={triggerText ?? 'Create agent'} icon={BotIcon} />
         <div className="p-6">
           <Form {...form}>
             <form className="w-full space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
