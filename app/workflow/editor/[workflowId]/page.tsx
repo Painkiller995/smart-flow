@@ -1,10 +1,9 @@
-import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
-import React from "react";
-import Editor from "../../_components/editor";
+import prisma from '@/lib/prisma';
+import { auth } from '@clerk/nextjs/server';
+import Editor from '../../_components/editor';
 
 interface EditorPageProps {
-  params: { workflowId: string };
+  params: Promise<{ workflowId: string }>;
 }
 
 async function EditorPage({ params }: EditorPageProps) {

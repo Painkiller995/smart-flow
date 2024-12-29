@@ -12,11 +12,12 @@ import PeriodSelector from './_components/period-selector';
 import StatsCard from './_components/stats-card';
 
 interface HomePageProps {
-  searchParams: {
+  searchParams: Promise<{
     month?: string;
     year?: string;
-  };
+  }>;
 }
+
 const HomePage = async ({ searchParams }: HomePageProps) => {
   const currentDate = new Date();
 

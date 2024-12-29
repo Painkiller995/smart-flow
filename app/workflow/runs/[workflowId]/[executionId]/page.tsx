@@ -6,11 +6,11 @@ import { Loader2Icon } from 'lucide-react';
 import { Suspense } from 'react';
 import ExecutionViewer from './_components/execution-viewer';
 
-const ExecutionViewerPage = async ({
-  params,
-}: {
-  params: { workflowId: string; executionId: string };
-}) => {
+interface ExecutionViewerPagePops {
+  params: Promise<{ workflowId: string; executionId: string }>;
+}
+
+const ExecutionViewerPage = async ({ params }: ExecutionViewerPagePops) => {
   const { workflowId, executionId } = await params;
   return (
     <div className="flex h-screen w-full flex-col overflow-hidden">

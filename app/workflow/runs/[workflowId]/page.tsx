@@ -3,7 +3,11 @@ import { Suspense } from 'react';
 import TopBar from '../../_components/top-bar/top-bar';
 import ExecutionsTableWrapper from './[executionId]/_components/execution-table-wrapper';
 
-const ExecutionsPage = async ({ params }: { params: { workflowId: string } }) => {
+interface ExecutionsPageProps {
+  params: Promise<{ workflowId: string }>;
+}
+
+const ExecutionsPage = async ({ params }: ExecutionsPageProps) => {
   const { workflowId } = await params;
   return (
     <div className="h-full w-full overflow-auto">
