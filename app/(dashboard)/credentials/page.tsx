@@ -44,7 +44,7 @@ async function UserCredentials() {
   if (credentials.length === 0) {
     return (
       <Card className="w-full p-4">
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-accent">
             <ShieldOffIcon size={40} className="stroke-primary" />
           </div>
