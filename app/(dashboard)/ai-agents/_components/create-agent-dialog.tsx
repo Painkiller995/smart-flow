@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 
-import { BotIcon, Loader2 } from 'lucide-react';
+import { BotIcon, FilePlusIcon, Loader2, PencilIcon } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -75,7 +75,10 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>{triggerText ?? 'Create agent'}</Button>
+        <Button variant={'outline'}>
+          {agent ? <PencilIcon /> : <FilePlusIcon />}
+          {triggerText ?? 'Create agent'}
+        </Button>
       </DialogTrigger>
       <DialogContent className="px-2">
         <CustomDialogHeader title="Create agent" icon={BotIcon} />

@@ -76,8 +76,10 @@ async function UserAgents() {
                 <p className="text-xs text-muted-foreground">{createdAt}</p>
               </div>
             </div>
-            <CreateAgentDialog triggerText="Modify Agent" agent={agent} />
-            <DeleteAgentDialog agentName={agent.name} />
+            <div className="flex items-center gap-2">
+              <CreateAgentDialog triggerText="Modify Agent" agent={agent} />
+              <DeleteAgentDialog agentName={agent.name} />
+            </div>
           </Card>
         );
       })}
