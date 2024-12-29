@@ -7,6 +7,7 @@ import { ExtractDataWithAiTask } from './extract-data-with-ai';
 import { ExtractTextFromElementTask } from './extract-text-from-element';
 import { FillInputTask } from './fill-input';
 import { LaunchBrowserTask } from './launch-browser';
+import { MergeTwoJsonTask } from './merge-two-json';
 import { NavigateUrlTask } from './navigate-url';
 import { PageToHtmlTask } from './page-to-html';
 import { ReadPropertyFromJsonTask } from './read-property-from-json';
@@ -29,5 +30,6 @@ export const TaskRegistry: Registry = {
   EXTRACT_DATA_WITH_AI: ExtractDataWithAiTask,
   READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonTask,
   ADD_PROPERTY_TO_JSON: AddPropertyToJsonTask,
+  MERGE_TWO_JSON: MergeTwoJsonTask,
   DELIVER_VIA_WEBHOOK: DeliverViaWebhookTask,
 };

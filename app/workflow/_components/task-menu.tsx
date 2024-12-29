@@ -27,6 +27,7 @@ const TaskMenu = () => {
             <TaskMenuButton taskType={TaskType.EXTRACT_DATA_WITH_AI} />
             <TaskMenuButton taskType={TaskType.READ_PROPERTY_FROM_JSON} />
             <TaskMenuButton taskType={TaskType.ADD_PROPERTY_TO_JSON} />
+            <TaskMenuButton taskType={TaskType.MERGE_TWO_JSON} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="browser">
