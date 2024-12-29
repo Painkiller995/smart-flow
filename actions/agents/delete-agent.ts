@@ -18,9 +18,9 @@ export async function DeleteAgent(name: string) {
             userId_name: {
                 userId,
                 name,
-            }
-        }
-    })
+            },
+        },
+    });
 
     revalidatePath("/agents")
 }

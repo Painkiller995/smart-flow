@@ -3,7 +3,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatDistanceToNow } from 'date-fns';
-import { BotIcon, BrainIcon, LockKeyholeIcon } from 'lucide-react';
+import { BotIcon, BrainIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import CreateAgentDialog from './_components/create-agent-dialog';
 import DeleteAgentDialog from './_components/delete-agent-dialog';
@@ -69,7 +69,7 @@ async function UserAgents() {
           <Card key={agent.id} className="flex w-full justify-between p-4">
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-                <LockKeyholeIcon size={18} className="stroke-primary" />
+                <BotIcon size={18} className="stroke-primary" />
               </div>
               <div>
                 <p className="font-bold">{agent.name}</p>

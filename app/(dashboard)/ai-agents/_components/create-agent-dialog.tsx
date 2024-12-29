@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 
-import { Loader2, ShieldEllipsis } from 'lucide-react';
+import { BotIcon, Loader2 } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -69,7 +69,7 @@ const CreateAgentDialog = ({ triggerText }: CreateAgentDialogProps) => {
         <Button>{triggerText ?? 'Create agent'}</Button>
       </DialogTrigger>
       <DialogContent className="px-2">
-        <CustomDialogHeader title="Create agent" icon={ShieldEllipsis} />
+        <CustomDialogHeader title="Create agent" icon={BotIcon} />
         <div className="p-6">
           <Form {...form}>
             <form className="w-full space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
@@ -115,13 +115,15 @@ const CreateAgentDialog = ({ triggerText }: CreateAgentDialogProps) => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center gap-1">
-                      Value:
-                      <p className="text-xs text-primary">(required)</p>
+                      Model:<p className="text-xs text-primary">(required)</p>
                     </FormLabel>
                     <FormControl>
-                      <Textarea className="resize-none" {...field} />
+                      <Input {...field} />
                     </FormControl>
-                    <FormDescription>Provide description</FormDescription>
+                    <FormDescription>
+                      Choose a descriptive and unique name, <br /> This name will be used to
+                      identify the agent
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -136,7 +138,7 @@ const CreateAgentDialog = ({ triggerText }: CreateAgentDialogProps) => {
                       <p className="text-xs text-primary">(required)</p>
                     </FormLabel>
                     <FormControl>
-                      <Textarea className="resize-none" {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormDescription>Provide description</FormDescription>
                     <FormMessage />

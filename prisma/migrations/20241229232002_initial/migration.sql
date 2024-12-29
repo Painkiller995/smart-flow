@@ -85,8 +85,23 @@ CREATE TABLE "UserPurchase" (
     "date" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- CreateTable
+CREATE TABLE "AiAgent" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "model" TEXT NOT NULL,
+    "temperature" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Workflow_name_userId_key" ON "Workflow"("name", "userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Credential_userId_name_key" ON "Credential"("userId", "name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "AiAgent_userId_name_key" ON "AiAgent"("userId", "name");

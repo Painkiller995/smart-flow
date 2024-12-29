@@ -14,14 +14,14 @@ export const routes = [
         icon: Layers2Icon,
     },
     {
-        href: "credentials",
-        label: "Credentials",
-        icon: ShieldCheckIcon
-    },
-    {
         href: "ai-agents",
         label: "AI agents",
         icon: BotIcon
+    },
+    {
+        href: "credentials",
+        label: "Credentials",
+        icon: ShieldCheckIcon
     },
     {
         href: "billing",
