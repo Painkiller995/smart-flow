@@ -16,6 +16,7 @@ import { ArrowLeftRightIcon, CoinsIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import CreditsPurchase from './_components/credits-purchase';
 import CreditsUsageChart from './_components/credits-usage-chart';
+import InvoiceButton from './_components/invoice-button';
 
 const BillingPage = () => {
   return (
@@ -97,8 +98,9 @@ async function TransactionHistoryCard() {
                 <p className="font-medium">{formatDate(purchase.date)}</p>
                 <p className="text-sm text-muted-foreground">{purchase.description}</p>
               </div>
-              <div className="text-right">
+              <div className="text-center">
                 <p className="font-medium">{formatAmount(purchase.amount, purchase.currency)}</p>
+                <InvoiceButton id={purchase.id} />
               </div>
             </div>
           );
