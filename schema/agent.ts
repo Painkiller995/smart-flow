@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const createAgentSchema = z.object({
+    id: z.string().cuid().optional(),
     name: z
         .string()
         .min(1, { message: "Name must have at least 1 character." })

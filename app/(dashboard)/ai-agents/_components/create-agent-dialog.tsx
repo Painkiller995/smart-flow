@@ -19,32 +19,37 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
-import { CreateAgent } from '@/actions/agents/create-agent';
+import { CreateOrUpdateAgent } from '@/actions/agents/create-or-update-agent';
+import { GetAgentsForUser } from '@/actions/agents/get-agents-for-user';
 import { createAgentSchema, createAgentSchemaType } from '@/schema/agent';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import CustomDialogHeader from '../../workflows/_components/custom-dialog-header';
 
+type Agent = Awaited<ReturnType<typeof GetAgentsForUser>>[0];
+
 interface CreateAgentDialogProps {
+  agent?: Agent;
   triggerText?: string;
 }
 
-const CreateAgentDialog = ({ triggerText }: CreateAgentDialogProps) => {
+const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
   const [open, setOpen] = useState(false);
 
   const form = useForm<createAgentSchemaType>({
     resolver: zodResolver(createAgentSchema),
     defaultValues: {
-      name: '',
-      description: '',
-      model: '',
-      temperature: 1,
+      id: agent && agent.id,
+      name: agent ? agent.name : '',
+      description: agent ? agent.description : '',
+      model: agent ? agent.model : '',
+      temperature: agent ? agent.temperature : 1,
     },
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: CreateAgent,
+    mutationFn: CreateOrUpdateAgent,
     onSuccess: () => {
       toast.success('Agent created', { id: 'create-agent' });
     },

@@ -5,7 +5,7 @@ import { createAgentSchema, createAgentSchemaType } from "@/schema/agent"
 import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache"
 
-export async function CreateAgent(form: createAgentSchemaType) {
+export async function CreateOrUpdateAgent(form: createAgentSchemaType) {
 
     const { success, data } = createAgentSchema.safeParse(form)
 
@@ -20,8 +20,17 @@ export async function CreateAgent(form: createAgentSchemaType) {
     }
 
 
-    const result = await prisma.aiAgent.create({
-        data: {
+    const result = await prisma.aiAgent.upsert({
+        where: {
+            id: data.id || ""
+        },
+        update: {
+            name: data.name,
+            description: data.description,
+            model: data.model,
+            temperature: data.temperature,
+        },
+        create: {
             userId,
             name: data.name,
             description: data.description,
@@ -34,6 +43,6 @@ export async function CreateAgent(form: createAgentSchemaType) {
         throw new Error('Failed to create agent')
     }
 
-    revalidatePath('/agents')
+    revalidatePath('/ai-agents')
 
 }
