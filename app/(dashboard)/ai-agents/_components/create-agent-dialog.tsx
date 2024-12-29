@@ -51,16 +51,20 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
   const { mutate, isPending } = useMutation({
     mutationFn: CreateOrUpdateAgent,
     onSuccess: () => {
-      toast.success('Agent created', { id: 'create-agent' });
+      toast.success(`Agent ${agent ? 'updated' : 'created'} successfully`, {
+        id: 'create-agent',
+      });
     },
     onError: () => {
-      toast.error('Failed to create the agent', { id: 'create-agent' });
+      toast.error(`Failed to ${agent ? 'update' : 'create'} the agent`, {
+        id: 'create-agent',
+      });
     },
   });
 
   const onSubmit = useCallback(
     (values: createAgentSchemaType) => {
-      toast.loading('Creating new agent...', { id: 'create-agent' });
+      toast.loading('Creating or updating agent...', { id: 'create-agent' });
       mutate(values);
       form.reset();
       setOpen(!open);
