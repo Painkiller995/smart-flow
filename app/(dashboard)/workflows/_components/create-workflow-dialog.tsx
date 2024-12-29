@@ -41,17 +41,11 @@ const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: CreateWorkflow,
-    onSuccess: () => {
-      toast.success('Workflow created', { id: 'create-workflow' });
-    },
-    onError: () => {
-      toast.error('Failed to create the workflow', { id: 'create-workflow' });
-    },
   });
 
   const onSubmit = useCallback(
     (values: createWorkflowSchemaType) => {
-      toast.loading('Creating new workflow...', { id: 'create-workflow' });
+      toast.info('Creating new workflow...', { id: 'create-workflow' });
       mutate(values);
     },
     [mutate]

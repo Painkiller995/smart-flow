@@ -17,12 +17,6 @@ const ExecuteButton = ({ workflowId }: ExecuteButtonProps) => {
 
   const mutation = useMutation({
     mutationFn: RunWorkflow,
-    onSuccess: () => {
-      toast.success('Execution started', { id: 'flow-execution' });
-    },
-    onError: () => {
-      toast.error('Something went wrong', { id: 'flow-execution' });
-    },
   });
 
   return (
@@ -35,6 +29,7 @@ const ExecuteButton = ({ workflowId }: ExecuteButtonProps) => {
         if (!plan) {
           return;
         }
+        toast.info('Execution started', { id: workflowId });
         mutation.mutate({ workflowId: workflowId, flowDefinition: JSON.stringify(toObject()) });
       }}
     >

@@ -12,12 +12,6 @@ interface RunWorkflowButtonProps {
 const RunWorkflowButton = ({ workflowId }: RunWorkflowButtonProps) => {
   const mutation = useMutation({
     mutationFn: RunWorkflow,
-    onSuccess: () => {
-      toast.success('Workflow started', { id: workflowId });
-    },
-    onError: () => {
-      toast.error('Something went wrong', { id: workflowId });
-    },
   });
 
   return (
@@ -27,7 +21,7 @@ const RunWorkflowButton = ({ workflowId }: RunWorkflowButtonProps) => {
       className="flex items-center gap-2"
       disabled={mutation.isPending}
       onClick={() => {
-        toast.loading('Scheduling run...', { id: workflowId });
+        toast.info('Scheduling run...', { id: workflowId });
         mutation.mutate({ workflowId });
       }}
     >
