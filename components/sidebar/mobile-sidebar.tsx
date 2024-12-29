@@ -13,7 +13,8 @@ import UserAvailableBadge from '../user-available-badge';
 const MobileSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const activeRoute = routes.find((route) => pathname.includes(route.href));
+  const activeRoute =
+    routes.find((route) => route.href.length > 0 && pathname.includes(route.href)) || routes[0];
 
   return (
     <div className="block border-separate bg-background md:hidden">
@@ -37,7 +38,7 @@ const MobileSidebar = () => {
               {routes.map((route) => (
                 <Link
                   key={route.href}
-                  href={route.href}
+                  href={`/${route.href}`}
                   className={buttonVariants({
                     variant:
                       activeRoute && activeRoute.href === route.href

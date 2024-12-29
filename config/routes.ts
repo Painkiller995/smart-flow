@@ -4,7 +4,7 @@ export const signInRoute = '/sign-in'
 
 export const routes = [
     {
-        href: "/",
+        href: "",
         label: "Home",
         icon: HomeIcon,
     },
