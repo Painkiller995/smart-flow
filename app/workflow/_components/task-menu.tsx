@@ -19,14 +19,19 @@ const TaskMenu = () => {
       <Accordion
         type="multiple"
         className="w-full"
-        defaultValue={['data-handling', 'browser', 'result']}
+        defaultValue={['data-handling', 'json-data', 'result']}
       >
         <AccordionItem value="data-handling">
           <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.EXTRACT_DATA_WITH_AI} />
-            <TaskMenuButton taskType={TaskType.READ_PROPERTY_FROM_JSON} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="json-data">
+          <AccordionTrigger className="font-bold">JSON</AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.ADD_PROPERTY_TO_JSON} />
+            <TaskMenuButton taskType={TaskType.READ_PROPERTY_FROM_JSON} />
             <TaskMenuButton taskType={TaskType.MERGE_TWO_JSON} />
           </AccordionContent>
         </AccordionItem>
