@@ -6,7 +6,6 @@ export const ClickElementTask = {
   type: TaskType.CLICK_ELEMENT,
   label: 'Click element',
   icon: (props: LucideProps) => <MousePointerClick className="stroke-orange-400" {...props} />,
-  isEntryPoint: false,
   credits: 1,
   inputs: [
     {

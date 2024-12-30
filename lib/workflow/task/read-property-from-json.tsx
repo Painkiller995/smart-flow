@@ -6,7 +6,6 @@ export const ReadPropertyFromJsonTask = {
   type: TaskType.READ_PROPERTY_FROM_JSON,
   label: 'Read property from JSON',
   icon: (props: LucideProps) => <FileJson2Icon className="stroke-rose-400" {...props} />,
-  isEntryPoint: false,
   credits: 1,
   inputs: [
     {

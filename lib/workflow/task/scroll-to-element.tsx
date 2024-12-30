@@ -6,7 +6,6 @@ export const ScrollToElementTask = {
   type: TaskType.SCROLL_TO_ELEMENT,
   label: 'Scroll to element',
   icon: (props: LucideProps) => <ArrowUpIcon className="stroke-orange-400" {...props} />,
-  isEntryPoint: false,
   credits: 1,
   inputs: [
     {

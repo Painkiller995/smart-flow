@@ -6,7 +6,6 @@ export const AddPropertyToJsonTask = {
   type: TaskType.ADD_PROPERTY_TO_JSON,
   label: 'Add property to JSON',
   icon: (props: LucideProps) => <DatabaseIcon className="stroke-amber-400" {...props} />,
-  isEntryPoint: false,
   credits: 1,
   inputs: [
     {

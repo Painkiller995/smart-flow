@@ -6,7 +6,6 @@ export const FillInputTask = {
   type: TaskType.FILL_INPUT,
   label: 'Fill input',
   icon: (props: LucideProps) => <Edit3Icon className="stroke-orange-400" {...props} />,
-  isEntryPoint: false,
   credits: 1,
   inputs: [
     {

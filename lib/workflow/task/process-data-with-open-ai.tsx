@@ -6,7 +6,6 @@ export const ProcessDataWithOpenAiTask = {
   type: TaskType.PROCESS_DATA_WITH_OPEN_AI,
   label: 'Process data with open AI',
   icon: (props: LucideProps) => <BrainIcon className="stroke-rose-400" {...props} />,
-  isEntryPoint: false,
   credits: 4,
   inputs: [
     {

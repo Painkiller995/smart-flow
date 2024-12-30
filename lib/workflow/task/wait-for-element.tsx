@@ -6,7 +6,6 @@ export const WaitForElementTask = {
   type: TaskType.WAIT_FOR_ELEMENT,
   label: 'Wait for element',
   icon: (props: LucideProps) => <EyeIcon className="stroke-amber-400" {...props} />,
-  isEntryPoint: false,
   credits: 1,
   inputs: [
     {
