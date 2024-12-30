@@ -11,14 +11,24 @@ import { TaskType } from '@/types/task';
 import { useReactFlow } from '@xyflow/react';
 import { CoinsIcon, CopyIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }) => {
   const [node, setNode] = useState<AppNode | null>(null);
   const task = TaskRegistry[taskType];
-  const { deleteElements, getNode, addNodes, updateNode } = useReactFlow();
+  const { deleteElements, getNode, getNodes, addNodes, updateNode } = useReactFlow();
 
   const handleToggleEntryPoint = () => {
-    if (!node) return;
+    const nodes = getNodes();
+    if (!nodes || !node) return;
+
+    const isThereEntry = nodes.some((n) => n.data.isEntryPoint && n.id !== node.id);
+
+    if (isThereEntry) {
+      toast.error('An entry point already exists. You cannot add another.');
+      return;
+    }
+
     const updatedNode = { ...node };
     updatedNode.data.isEntryPoint = !updatedNode.data.isEntryPoint;
     updateNode(nodeId, updatedNode);
