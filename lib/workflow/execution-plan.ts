@@ -5,6 +5,7 @@ import { TaskRegistry } from "./task/registry";
 
 export enum FlowToExecutionPlanValidationError {
     "NO_ENTRY_POINT",
+    "MULTIPLE_ENTRY_POINTS_NOT_ALLOWED",
     "INVALID_INPUTS"
 }
 
@@ -18,11 +19,17 @@ type FlowToExecutionPlanType = {
 
 export function FlowToExecutionPlan(nodes: AppNode[], edges: Edge[]): FlowToExecutionPlanType {
 
-    const entryPoint = nodes.find((node) => TaskRegistry[node.data.type].isEntryPoint)
+    const entryPoints = nodes.filter((n) => n.data.isEntryPoint);
 
-    if (!entryPoint) {
-        return { error: { type: FlowToExecutionPlanValidationError.NO_ENTRY_POINT } }
+    if (entryPoints.length > 1) {
+        return { error: { type: FlowToExecutionPlanValidationError.MULTIPLE_ENTRY_POINTS_NOT_ALLOWED } };
     }
+
+    if (entryPoints.length === 0) {
+        return { error: { type: FlowToExecutionPlanValidationError.NO_ENTRY_POINT } };
+    }
+
+    const entryPoint = entryPoints[0];
 
     const inputsWithErrors: AppNodeMissingInputs[] = []
 
