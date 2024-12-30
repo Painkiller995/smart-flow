@@ -2,9 +2,9 @@ import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
 import { BrainIcon, LucideProps } from 'lucide-react';
 
-export const ExtractDataWithAiTask = {
-  type: TaskType.EXTRACT_DATA_WITH_AI,
-  label: 'Extract data with AI',
+export const ProcessDataWithOpenAiTask = {
+  type: TaskType.PROCESS_DATA_WITH_OPEN_AI,
+  label: 'Process data with open AI',
   icon: (props: LucideProps) => <BrainIcon className="stroke-rose-400" {...props} />,
   isEntryPoint: false,
   credits: 4,
@@ -17,6 +17,11 @@ export const ExtractDataWithAiTask = {
     {
       name: 'Credentials',
       type: TaskParamType.CREDENTIAL,
+      require: true,
+    },
+    {
+      name: 'Agents',
+      type: TaskParamType.AGENT,
       require: true,
     },
     {

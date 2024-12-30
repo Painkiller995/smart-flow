@@ -4,12 +4,13 @@ import { WorkflowTask } from "@/types/workflow";
 import { AddPropertyToJsonExecutor } from "./add-property-to-json-executor";
 import { ClickElementExecutor } from "./click-element-executor";
 import { DeliverViaWebhookExecutor } from "./deliver-via-webhook-executor";
-import { ExtractDataWithAiExecutor } from "./extract-data-with-ai-executor";
 import { ExtractTextFromElementExecutor } from "./extract-text-from-element";
 import { FillInputExecutor } from "./fill-input-executor";
 import { LaunchBrowserExecutor } from "./launch-browser-executor";
+import { MergeTwoJsonExecutor } from "./merge-two-json-executor";
 import { NavigateUrlExecutor } from "./navigate-url-executor";
 import { PageToHtmlExecutor } from "./page-to-html-executor";
+import { ProcessDataWithOpenAiExecutor } from "./process-data-with-open-ai-executor";
 import { ReadPropertyFromJsonExecutor } from "./read-property-from-json-executor";
 import { ScrollToElementExecutor } from "./scroll-to-element-executor";
 import { WaitForElementExecutor } from "./wait-for-element-executor";
@@ -30,8 +31,9 @@ export const ExecutorRegistry: RegistryType = {
     WAIT_FOR_ELEMENT: WaitForElementExecutor,
     SCROLL_TO_ELEMENT: ScrollToElementExecutor,
     NAVIGATE_URL: NavigateUrlExecutor,
-    EXTRACT_DATA_WITH_AI: ExtractDataWithAiExecutor,
+    PROCESS_DATA_WITH_OPEN_AI: ProcessDataWithOpenAiExecutor,
     READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonExecutor,
     ADD_PROPERTY_TO_JSON: AddPropertyToJsonExecutor,
+    MERGE_TWO_JSON: MergeTwoJsonExecutor,
     DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
 }

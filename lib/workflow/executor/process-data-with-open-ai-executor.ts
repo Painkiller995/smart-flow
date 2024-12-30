@@ -2,15 +2,21 @@ import { symmetricDecrypt } from '@/lib/encryption';
 import prisma from '@/lib/prisma';
 import { ExecutionEnvironment } from '@/types/executor';
 import OpenAI from 'openai';
-import { ExtractDataWithAiTask } from '../task/extract-data-with-ai';
+import { ProcessDataWithOpenAiTask } from '../task/process-data-with-open-ai';
 
-export async function ExtractDataWithAiExecutor(environment: ExecutionEnvironment<typeof ExtractDataWithAiTask>): Promise<boolean> {
+export async function ProcessDataWithOpenAiExecutor(environment: ExecutionEnvironment<typeof ProcessDataWithOpenAiTask>): Promise<boolean> {
     try {
 
         const credentials = environment.getInput("Credentials")
         if (!credentials) {
             environment.log.error("Credentials value is not defined")
         }
+
+        const agents = environment.getInput("Agents")
+        if (!agents) {
+            environment.log.error("Agents value is not defined")
+        }
+
 
         const prompt = environment.getInput("Prompt")
         if (!prompt) {
@@ -31,6 +37,15 @@ export async function ExtractDataWithAiExecutor(environment: ExecutionEnvironmen
             return false
         }
 
+        const agent = await prisma.aiAgent.findUnique({
+            where: { id: agents }
+        })
+
+        if (!agent) {
+            environment.log.error("Agent not found")
+            return false
+        }
+
         const plainCredentialValue = symmetricDecrypt(credential.value)
 
         if (!plainCredentialValue) {
@@ -43,11 +58,11 @@ export async function ExtractDataWithAiExecutor(environment: ExecutionEnvironmen
         })
 
         const response = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
+            model: agent.model,
             messages: [
                 {
                     role: "system",
-                    content: 'You are a webScraper helper that extracts data from HTML or text. your answer should be json only like {}'
+                    content: agent.description
                 },
                 {
                     role: 'user',
@@ -58,7 +73,7 @@ export async function ExtractDataWithAiExecutor(environment: ExecutionEnvironmen
                     content: prompt
                 }
             ],
-            temperature: 1,
+            temperature: agent.temperature,
         })
 
         environment.log.info(`Prompt tokens: ${response.usage?.prompt_tokens}`)
@@ -77,4 +92,4 @@ export async function ExtractDataWithAiExecutor(environment: ExecutionEnvironmen
         environment.log.error(err.message)
         return false
     }
-}
+} 

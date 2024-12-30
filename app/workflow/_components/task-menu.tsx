@@ -24,7 +24,7 @@ const TaskMenu = () => {
         <AccordionItem value="data-handling">
           <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
-            <TaskMenuButton taskType={TaskType.EXTRACT_DATA_WITH_AI} />
+            <TaskMenuButton taskType={TaskType.PROCESS_DATA_WITH_OPEN_AI} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="json-data">
