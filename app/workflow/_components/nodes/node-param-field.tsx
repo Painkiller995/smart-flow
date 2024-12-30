@@ -2,6 +2,7 @@ import { AppNode } from '@/types/app-node';
 import { TaskParam, TaskParamType } from '@/types/task';
 import { useReactFlow } from '@xyflow/react';
 import { useCallback } from 'react';
+import AgentsParam from './param/agents-param';
 import BrowserInstanceParam from './param/browser-instance-param';
 import CredentialsParam from './param/credentials-param';
 import SelectParam from './param/select-param';
@@ -54,6 +55,15 @@ const NodeParamField = ({ nodeId, param, disabled }: NodeParamFieldProps) => {
     case TaskParamType.CREDENTIAL:
       return (
         <CredentialsParam
+          param={param}
+          value={value}
+          disabled={disabled}
+          updateNodeParamValue={updateNodeParamValue}
+        />
+      );
+    case TaskParamType.AGENT:
+      return (
+        <AgentsParam
           param={param}
           value={value}
           disabled={disabled}
