@@ -277,7 +277,7 @@ async function decrementCredits(userId: string, amount: number, logCollector: Lo
         })
         return true
     } catch (err) {
-        logCollector.error("insufficient balance")
+        logCollector.error("Insufficient balance")
         return false
     }
 }
