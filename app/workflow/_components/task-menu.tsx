@@ -19,7 +19,7 @@ const TaskMenu = () => {
       <Accordion
         type="multiple"
         className="w-full"
-        defaultValue={['data-handling', 'json-data', 'result']}
+        defaultValue={['data-handling', 'json-data', 'requests']}
       >
         <AccordionItem value="data-handling">
           <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
@@ -48,8 +48,8 @@ const TaskMenu = () => {
             <TaskMenuButton taskType={TaskType.NAVIGATE_URL} />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="result">
-          <AccordionTrigger className="font-bold">Result delivery</AccordionTrigger>
+        <AccordionItem value="requests">
+          <AccordionTrigger className="font-bold">Requests</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.EXECUTE_REQUEST} />
             <TaskMenuButton taskType={TaskType.DELIVER_VIA_WEBHOOK} />

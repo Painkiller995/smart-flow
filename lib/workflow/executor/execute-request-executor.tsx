@@ -71,9 +71,11 @@ export async function ExecuteRequestExecutor(
       if (contentType.includes('application/json')) {
         const responseBody = await response.json();
         environment.log.info(`Response Body: ${JSON.stringify(responseBody, null, 4)}`);
+        environment.setOutput('Response', JSON.stringify(responseBody, null, 4));
       } else if (contentType.includes('text/plain') || contentType.includes('text/html')) {
         const responseBody = await response.text();
         environment.log.info(`Response Body (Text): ${responseBody}`);
+        environment.setOutput('Response', responseBody);
       } else {
         environment.log.info('Response is not in JSON or Text format.');
       }

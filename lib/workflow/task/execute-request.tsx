@@ -41,7 +41,7 @@ export const ExecuteRequestTask = {
   ] as const,
   outputs: [
     {
-      name: 'Extracted text',
+      name: 'Response',
       type: TaskParamType.STRING,
     },
   ] as const,
