@@ -4,6 +4,7 @@ import { WorkflowTask } from "@/types/workflow";
 import { AddPropertyToJsonExecutor } from "./add-property-to-json-executor";
 import { ClickElementExecutor } from "./click-element-executor";
 import { DeliverViaWebhookExecutor } from "./deliver-via-webhook-executor";
+import { ExecuteRequestExecutor } from "./execute-request-executor";
 import { ExtractTextFromElementExecutor } from "./extract-text-from-element";
 import { FillInputExecutor } from "./fill-input-executor";
 import { LaunchBrowserExecutor } from "./launch-browser-executor";
@@ -35,5 +36,6 @@ export const ExecutorRegistry: RegistryType = {
     READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonExecutor,
     ADD_PROPERTY_TO_JSON: AddPropertyToJsonExecutor,
     MERGE_TWO_JSON: MergeTwoJsonExecutor,
+    EXECUTE_REQUEST: ExecuteRequestExecutor,
     DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
 }

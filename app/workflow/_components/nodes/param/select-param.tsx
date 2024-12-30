@@ -24,7 +24,7 @@ const SelectParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
     <p className="flex w-full flex-col gap-1">
       <Label htmlFor={id} className="flex text-xs">
         {param.name}
-        {param.require && <p className="px-2 text-red-400">*</p>}
+        {param.require && <span className="px-2 text-red-400">*</span>}
       </Label>
       <Select defaultValue={value} onValueChange={(value) => updateNodeParamValue(value)}>
         <SelectTrigger className="w-full">

@@ -3,6 +3,7 @@ import { WorkflowTask } from '@/types/workflow';
 import { AddPropertyToJsonTask } from './add-property-to-json';
 import { ClickElementTask } from './click-element';
 import { DeliverViaWebhookTask } from './deliver-via-webhook';
+import { ExecuteRequestTask } from './execute-request';
 import { ExtractTextFromElementTask } from './extract-text-from-element';
 import { FillInputTask } from './fill-input';
 import { LaunchBrowserTask } from './launch-browser';
@@ -31,5 +32,6 @@ export const TaskRegistry: Registry = {
   READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonTask,
   ADD_PROPERTY_TO_JSON: AddPropertyToJsonTask,
   MERGE_TWO_JSON: MergeTwoJsonTask,
+  EXECUTE_REQUEST: ExecuteRequestTask,
   DELIVER_VIA_WEBHOOK: DeliverViaWebhookTask,
 };

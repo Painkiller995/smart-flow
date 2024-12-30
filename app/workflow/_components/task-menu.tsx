@@ -51,6 +51,7 @@ const TaskMenu = () => {
         <AccordionItem value="result">
           <AccordionTrigger className="font-bold">Result delivery</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.EXECUTE_REQUEST} />
             <TaskMenuButton taskType={TaskType.DELIVER_VIA_WEBHOOK} />
           </AccordionContent>
         </AccordionItem>
