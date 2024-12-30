@@ -42,7 +42,7 @@ const fitViewOptions = { padding: 1 };
 const FlowEditor = ({ workflow }: EditorProps) => {
   const [nodes, setNodes, onNodesChange] = useNodesState<AppNode>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
-  const { setViewport, screenToFlowPosition, updateNodeData, getNode } = useReactFlow();
+  const { setViewport, screenToFlowPosition, getNode } = useReactFlow();
 
   useEffect(() => {
     try {
