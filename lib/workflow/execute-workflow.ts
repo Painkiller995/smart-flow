@@ -265,6 +265,9 @@ async function cleanupEnvironment(environment: Environment) {
 }
 
 async function decrementCredits(userId: string, amount: number, logCollector: LogCollector) {
+    if (process.env.DISABLE_CREDIT_CONSUMPTION === 'true') {
+        return true;
+    }
     try {
         await prisma.userBalance.update({
             where: { userId, credits: { gte: amount } },
