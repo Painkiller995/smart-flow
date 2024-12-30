@@ -1,17 +1,36 @@
 'use client';
 
+import TooltipWrapper from '@/components/tooltip-wrapper';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 import { CreateFlowNode } from '@/lib/workflow/create-flow-node';
 import { TaskRegistry } from '@/lib/workflow/task/registry';
 import { AppNode } from '@/types/app-node';
 import { TaskType } from '@/types/task';
 import { useReactFlow } from '@xyflow/react';
 import { CoinsIcon, CopyIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }) => {
+  const [node, setNode] = useState<AppNode | null>(null);
   const task = TaskRegistry[taskType];
-  const { deleteElements, getNode, addNodes } = useReactFlow();
+  const { deleteElements, getNode, addNodes, updateNode } = useReactFlow();
+
+  const handleToggleEntryPoint = () => {
+    if (!node) return;
+    const updatedNode = { ...node };
+    updatedNode.data.isEntryPoint = !updatedNode.data.isEntryPoint;
+    updateNode(nodeId, updatedNode);
+    setNode(updatedNode);
+  };
+
+  useEffect(() => {
+    const node = getNode(nodeId) as AppNode;
+    if (!node) return;
+    setNode(node);
+  }, [getNode, nodeId]);
+
   return (
     <div className="flex items-center gap-2 p-2">
       <task.icon size={30} />
@@ -26,6 +45,15 @@ const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }
         </Badge>
         {!task.isEntryPoint && (
           <>
+            <TooltipWrapper content="Entry Point">
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id={nodeId}
+                  checked={node?.data?.isEntryPoint || false}
+                  onClick={handleToggleEntryPoint}
+                />
+              </div>
+            </TooltipWrapper>
             <Button
               variant="ghost"
               size="icon"
@@ -51,6 +79,7 @@ const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }
             </Button>
           </>
         )}
+
         <Button variant="ghost" size="icon" className="drag-handle cursor-grab">
           <GripVerticalIcon size={20} />
         </Button>

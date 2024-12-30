@@ -2,6 +2,7 @@ import { Node } from "@xyflow/react"
 import { TaskParam, TaskType } from "./task"
 
 export interface AppNodeData {
+    isEntryPoint?: boolean
     type: TaskType
     inputs: Record<string, string>
     [key: string]: any
