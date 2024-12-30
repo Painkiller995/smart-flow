@@ -1,3 +1,5 @@
+import { symmetricDecrypt } from '@/lib/encryption';
+import prisma from '@/lib/prisma';
 import { ExecutionEnvironment } from '@/types/executor';
 import { ExecuteRequestTask } from '../task/execute-request';
 
@@ -29,11 +31,33 @@ export async function ExecuteRequestExecutor(
       return false;
     }
 
+    const bearerTokenId = environment.getInput('Bearer Token');
+    let plainBearerToken: string | null = null;
+
+    if (bearerTokenId) {
+      const bearerToken = await prisma.credential.findUnique({
+        where: { id: bearerTokenId },
+      });
+
+      if (!bearerToken) {
+        environment.log.error('Bearer token not found');
+        return false;
+      }
+
+      plainBearerToken = symmetricDecrypt(bearerToken.value);
+    }
+
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+
+    if (plainBearerToken) {
+      headers['Authorization'] = `Bearer ${plainBearerToken}`;
+    }
+
     const response = await fetch(targetUrl, {
       method: requestMethod,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headers,
       body: body && JSON.stringify(body),
     });
 

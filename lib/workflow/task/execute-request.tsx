@@ -1,17 +1,21 @@
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
-import { DatabaseIcon, LucideProps } from 'lucide-react';
+import { EthernetPortIcon, LucideProps } from 'lucide-react';
 
 export const ExecuteRequestTask = {
   type: TaskType.EXECUTE_REQUEST,
   label: 'Execute request',
-  icon: (props: LucideProps) => <DatabaseIcon className="stroke-rose-400" {...props} />,
+  icon: (props: LucideProps) => <EthernetPortIcon className="stroke-rose-400" {...props} />,
   credits: 2,
   inputs: [
     {
       name: 'Target URL',
       type: TaskParamType.STRING,
       require: true,
+    },
+    {
+      name: 'Bearer Token',
+      type: TaskParamType.CREDENTIAL,
     },
     {
       name: 'Method',
