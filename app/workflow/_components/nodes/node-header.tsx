@@ -48,48 +48,42 @@ const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }
         <p className="text-xs font-bold uppercase text-muted-foreground">{task.label}</p>
       </div>
       <div className="flex items-center gap-1">
-        {task.isEntryPoint && <Badge>Entry</Badge>}
         <Badge className="flex items-center gap-2 text-xs">
           <CoinsIcon size={16}></CoinsIcon>
           {task.credits}
         </Badge>
-        {!task.isEntryPoint && (
-          <>
-            <TooltipWrapper content="Entry Point">
-              <div className="flex items-center space-x-2">
-                <Switch
-                  id={nodeId}
-                  checked={node?.data?.isEntryPoint || false}
-                  onClick={handleToggleEntryPoint}
-                />
-              </div>
-            </TooltipWrapper>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                const node = getNode(nodeId) as AppNode;
-                if (!node) return;
-                const newX = node.position.x;
-                const newY = node.position.y + node.measured?.height! + 20;
-                const newNode = CreateFlowNode(node.data.type, { x: newX, y: newY });
-                addNodes([newNode]);
-              }}
-            >
-              <CopyIcon size={12} />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                deleteElements({ nodes: [{ id: nodeId }] });
-              }}
-            >
-              <TrashIcon size={12} />
-            </Button>
-          </>
-        )}
-
+        <TooltipWrapper content="Entry Point">
+          <div className="flex items-center space-x-2">
+            <Switch
+              id={nodeId}
+              checked={node?.data?.isEntryPoint || false}
+              onClick={handleToggleEntryPoint}
+            />
+          </div>
+        </TooltipWrapper>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => {
+            const node = getNode(nodeId) as AppNode;
+            if (!node) return;
+            const newX = node.position.x;
+            const newY = node.position.y + node.measured?.height! + 20;
+            const newNode = CreateFlowNode(node.data.type, { x: newX, y: newY });
+            addNodes([newNode]);
+          }}
+        >
+          <CopyIcon size={12} />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => {
+            deleteElements({ nodes: [{ id: nodeId }] });
+          }}
+        >
+          <TrashIcon size={12} />
+        </Button>
         <Button variant="ghost" size="icon" className="drag-handle cursor-grab">
           <GripVerticalIcon size={20} />
         </Button>
