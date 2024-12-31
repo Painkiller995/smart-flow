@@ -13,6 +13,7 @@ import { PageToHtmlTask } from './page-to-html';
 import { ProcessDataWithOpenAiTask } from './process-data-with-open-ai';
 import { ReadPropertyFromJsonTask } from './read-property-from-json';
 import { ScrollToElementTask } from './scroll-to-element';
+import { TriggerActionOnConditionTask } from './trigger-action-on-condition';
 import { WaitForElementTask } from './wait-for-element';
 
 type Registry = {
@@ -34,4 +35,5 @@ export const TaskRegistry: Registry = {
   MERGE_TWO_JSON: MergeTwoJsonTask,
   EXECUTE_REQUEST: ExecuteRequestTask,
   DELIVER_VIA_WEBHOOK: DeliverViaWebhookTask,
+  TRIGGER_ACTION_ON_CONDITION: TriggerActionOnConditionTask,
 };

@@ -14,6 +14,7 @@ import { PageToHtmlExecutor } from "./page-to-html-executor";
 import { ProcessDataWithOpenAiExecutor } from "./process-data-with-open-ai-executor";
 import { ReadPropertyFromJsonExecutor } from "./read-property-from-json-executor";
 import { ScrollToElementExecutor } from "./scroll-to-element-executor";
+import { TriggerActionOnConditionExecutor } from "./trigger-action-on-condition-executor";
 import { WaitForElementExecutor } from "./wait-for-element-executor";
 
 
@@ -38,4 +39,5 @@ export const ExecutorRegistry: RegistryType = {
     MERGE_TWO_JSON: MergeTwoJsonExecutor,
     EXECUTE_REQUEST: ExecuteRequestExecutor,
     DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
+    TRIGGER_ACTION_ON_CONDITION: TriggerActionOnConditionExecutor
 }
