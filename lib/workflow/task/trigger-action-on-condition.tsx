@@ -4,7 +4,7 @@ import { LucideProps, SquareCheckIcon } from 'lucide-react';
 
 export const TriggerActionOnConditionTask = {
   type: TaskType.TRIGGER_ACTION_ON_CONDITION,
-  label: 'Add property to JSON',
+  label: 'Trigger action on condition',
   icon: (props: LucideProps) => <SquareCheckIcon className="stroke-amber-400" {...props} />,
   credits: 1,
   inputs: [
