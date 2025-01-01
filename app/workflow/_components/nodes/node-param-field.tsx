@@ -5,6 +5,7 @@ import { useCallback } from 'react';
 import AgentsParam from './param/agents-param';
 import BrowserInstanceParam from './param/browser-instance-param';
 import CredentialsParam from './param/credentials-param';
+import JsonEncryptedPropertyParam from './param/json-encrypted-property-param';
 import SelectParam from './param/select-param';
 import StringParam from './param/string-param';
 
@@ -55,6 +56,15 @@ const NodeParamField = ({ nodeId, param, disabled }: NodeParamFieldProps) => {
     case TaskParamType.CREDENTIAL:
       return (
         <CredentialsParam
+          param={param}
+          value={value}
+          disabled={disabled}
+          updateNodeParamValue={updateNodeParamValue}
+        />
+      );
+    case TaskParamType.JSON_ENCRYPTED_PROPERTY:
+      return (
+        <JsonEncryptedPropertyParam
           param={param}
           value={value}
           disabled={disabled}

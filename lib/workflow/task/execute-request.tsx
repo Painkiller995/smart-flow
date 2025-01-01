@@ -38,6 +38,11 @@ export const ExecuteRequestTask = {
       name: 'Body',
       type: TaskParamType.STRING,
     },
+    {
+      name: 'Encrypted keys',
+      type: TaskParamType.JSON_ENCRYPTED_PROPERTY,
+      hideHandle: true,
+    },
   ] as const,
   outputs: [
     {
