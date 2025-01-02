@@ -25,7 +25,7 @@ const SecretsParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   });
 
   return (
-    <p className="flex w-full flex-col gap-1">
+    <div className="flex w-full flex-col gap-1">
       <Label htmlFor={id} className="flex text-xs">
         {param.name}
         {param.require && <span className="px-2 text-red-400">*</span>}
@@ -47,7 +47,7 @@ const SecretsParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </p>
+    </div>
   );
 };
 
