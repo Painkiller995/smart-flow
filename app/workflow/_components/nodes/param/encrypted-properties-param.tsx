@@ -46,7 +46,7 @@ const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamP
   });
 
   const handleAddEncryptedEntry = () => {
-    const newPropertyId = `newKey_${Date.now()}`; // Generate a unique ID for the new entry
+    const newPropertyId = Date.now();
     setParsedValue((prev) => ({
       ...prev,
       [newPropertyId]: { value: '' },
@@ -127,11 +127,7 @@ const EncryptedPropertyParam = ({
   return (
     <div className="flex gap-2">
       <div className="flex w-full gap-1">
-        <Input
-          value={value}
-          onChange={handleInputChange}
-          placeholder={`Enter value for ${propertyId}`}
-        />
+        <Input value={value} onChange={handleInputChange} placeholder={'Key name'} />
         <Select value={selectedSecretId} onValueChange={handleSelectChange}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select an option" />
