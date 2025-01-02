@@ -69,7 +69,7 @@ const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamP
         {param.require && <span className="px-2 text-red-400">*</span>}
       </Label>
       {Object.entries(parsedValue).map(([propertyId, { value, selectedSecretId }]) => (
-        <JsonEncryptedPropertyParam
+        <EncryptedPropertyParam
           key={propertyId}
           propertyId={propertyId}
           value={value}
