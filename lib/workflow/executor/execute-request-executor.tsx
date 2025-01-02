@@ -22,6 +22,7 @@ export async function ExecuteRequestExecutor(
 
     let stringifiedBody = environment.getInput('Body');
     let body: Record<string, any> | null = null;
+    const encryptedProperties = environment.getInput('Encrypted properties');
 
     if (stringifiedBody && typeof stringifiedBody === 'string') {
       try {
@@ -34,6 +35,13 @@ export async function ExecuteRequestExecutor(
 
     if (['POST', 'PUT', 'PATCH'].includes(requestMethod) && !body) {
       environment.log.error('Body is required but not defined');
+      return false;
+    }
+
+    if (['GET', 'DELETE'].includes(requestMethod) && (body || encryptedProperties)) {
+      environment.log.error(
+        'Body or encryptedProperties should not be provided for GET or DELETE requests'
+      );
       return false;
     }
 
@@ -51,7 +59,6 @@ export async function ExecuteRequestExecutor(
       plainBearerToken = symmetricDecrypt(bearerToken.value);
     }
 
-    const encryptedProperties = environment.getInput('Encrypted properties');
     if (encryptedProperties && body) {
       const parsedEncryptedProperties: Record<string, EncryptedValueObject> =
         JSON.parse(encryptedProperties);

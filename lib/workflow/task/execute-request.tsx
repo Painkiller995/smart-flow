@@ -28,10 +28,6 @@ export const ExecuteRequestTask = {
         { label: 'PUT', value: 'PUT' },
         { label: 'PATCH', value: 'PATCH' },
         { label: 'DELETE', value: 'DELETE' },
-        { label: 'HEAD', value: 'HEAD' },
-        { label: 'OPTIONS', value: 'OPTIONS' },
-        { label: 'CONNECT', value: 'CONNECT' },
-        { label: 'TRACE', value: 'TRACE' },
       ],
     },
     {
