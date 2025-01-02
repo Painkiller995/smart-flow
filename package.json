@@ -74,6 +74,7 @@
   },
   "devDependencies": {
     "@tanstack/react-query-devtools": "5.62.11",
+    "@types/lodash": "^4.17.13",
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
