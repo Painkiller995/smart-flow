@@ -6,4 +6,5 @@ export const colorForHandle: Record<TaskParamType, string> = {
   SELECT: '!bg-rose-400',
   CREDENTIAL: '!bg-teal-400',
   AGENT: '!bg-rose-400',
+  JSON_ENCRYPTED_PROPERTIES: '!bg-rose-400',
 };

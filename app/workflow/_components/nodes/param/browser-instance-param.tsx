@@ -1,13 +1,8 @@
-"use client";
+'use client';
 
-import { ParamProps } from "@/types/app-node";
-import React from "react";
+import { ParamProps } from '@/types/app-node';
 
-const BrowserInstanceParam = ({
-  param,
-  value,
-  updateNodeParamValue,
-}: ParamProps) => {
+const BrowserInstanceParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   return <p className="text-xs">{param.name}</p>;
 };
 

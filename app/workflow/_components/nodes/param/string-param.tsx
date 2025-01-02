@@ -1,33 +1,28 @@
-"use client";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { ParamProps } from "@/types/app-node";
-import React, { ReactEventHandler, useEffect, useId, useState } from "react";
+'use client';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { ParamProps } from '@/types/app-node';
+import { useEffect, useId, useState } from 'react';
 
-const StringParam = ({
-  param,
-  value,
-  disabled,
-  updateNodeParamValue,
-}: ParamProps) => {
-  const [internalValue, setInternalValue] = useState(value || "");
+const StringParam = ({ param, value, disabled, updateNodeParamValue }: ParamProps) => {
+  const [internalValue, setInternalValue] = useState(value || '');
   const id = useId();
 
   useEffect(() => {
-    setInternalValue(value || "");
+    setInternalValue(value || '');
   }, [value]);
 
   let Component: any = Input;
-  if (param.variant === "textarea") {
+  if (param.variant === 'textarea') {
     Component = Textarea;
   }
 
   return (
-    <div className="space-y-1 p-1 w-full">
-      <Label htmlFor={id} className="text-xs flex">
+    <div className="w-full space-y-1 p-1">
+      <Label htmlFor={id} className="flex text-xs">
         {param.name}
-        {param.require && <p className="text-red-400 px-2">*</p>}
+        {param.require && <p className="px-2 text-red-400">*</p>}
       </Label>
       <Component
         id={id}
@@ -38,9 +33,7 @@ const StringParam = ({
         onBlur={(e: any) => updateNodeParamValue(e.target.value)}
         disabled={disabled}
       />
-      {param.helperText && (
-        <p className="text-muted-foreground px-2">{param.helperText}</p>
-      )}
+      {param.helperText && <p className="px-2 text-muted-foreground">{param.helperText}</p>}
     </div>
   );
 };
