@@ -40,7 +40,7 @@ export async function ExecuteRequestExecutor(
 
     if (['GET', 'DELETE'].includes(requestMethod) && (body || encryptedProperties)) {
       environment.log.error(
-        'Body or encryptedProperties should not be provided for GET or DELETE requests'
+        'Body or encrypted properties should not be provided for GET or DELETE requests'
       );
       return false;
     }
