@@ -7,7 +7,7 @@ import { Loader2, ShieldEllipsis } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { CreateCredential } from '@/actions/credentials/create-credential';
+import { CreateSecret } from '@/actions/secrets/create-secret';
 import {
   Form,
   FormControl,
@@ -19,21 +19,21 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { createCredentialSchema, createCredentialSchemaType } from '@/schema/credential';
+import { createSecretSchema, createSecretSchemaType } from '@/schema/secret';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import CustomDialogHeader from '../../workflows/_components/custom-dialog-header';
 
-interface CreateCredentialDialogProps {
+interface CreateSecretDialogProps {
   triggerText?: string;
 }
 
-const CreateCredentialDialog = ({ triggerText }: CreateCredentialDialogProps) => {
+const CreateSecretDialog = ({ triggerText }: CreateSecretDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const form = useForm<createCredentialSchemaType>({
-    resolver: zodResolver(createCredentialSchema),
+  const form = useForm<createSecretSchemaType>({
+    resolver: zodResolver(createSecretSchema),
     defaultValues: {
       name: '',
       value: '',
@@ -41,18 +41,18 @@ const CreateCredentialDialog = ({ triggerText }: CreateCredentialDialogProps) =>
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: CreateCredential,
+    mutationFn: CreateSecret,
     onSuccess: () => {
-      toast.success('Credential created', { id: 'create-credential' });
+      toast.success('Secret created', { id: 'create-secret' });
     },
     onError: () => {
-      toast.error('Failed to create the credential', { id: 'create-credential' });
+      toast.error('Failed to create the secret', { id: 'create-secret' });
     },
   });
 
   const onSubmit = useCallback(
-    (values: createCredentialSchemaType) => {
-      toast.loading('Creating new credential...', { id: 'create-credential' });
+    (values: createSecretSchemaType) => {
+      toast.loading('Creating new secret...', { id: 'create-secret' });
       mutate(values);
       form.reset();
       setOpen(!open);
@@ -63,10 +63,10 @@ const CreateCredentialDialog = ({ triggerText }: CreateCredentialDialogProps) =>
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>{triggerText ?? 'Create credential'}</Button>
+        <Button>{triggerText ?? 'Create secret'}</Button>
       </DialogTrigger>
       <DialogContent className="px-2">
-        <CustomDialogHeader title="Create credential" icon={ShieldEllipsis} />
+        <CustomDialogHeader title="Create secret" icon={ShieldEllipsis} />
         <div className="p-6">
           <Form {...form}>
             <form className="w-full space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
@@ -83,7 +83,7 @@ const CreateCredentialDialog = ({ triggerText }: CreateCredentialDialogProps) =>
                     </FormControl>
                     <FormDescription>
                       Choose a descriptive and unique name, <br /> This name will be used to
-                      identify the credential
+                      identify the secret
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -119,4 +119,4 @@ const CreateCredentialDialog = ({ triggerText }: CreateCredentialDialogProps) =>
   );
 };
 
-export default CreateCredentialDialog;
+export default CreateSecretDialog;

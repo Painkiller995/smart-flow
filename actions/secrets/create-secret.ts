@@ -2,13 +2,13 @@
 
 import { symmetricEncrypt } from "@/lib/encryption"
 import prisma from "@/lib/prisma"
-import { createCredentialSchema, createCredentialSchemaType } from "@/schema/credential"
+import { createSecretSchema, createSecretSchemaType } from "@/schema/secret"
 import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache"
 
-export async function CreateCredential(form: createCredentialSchemaType) {
+export async function CreateSecret(form: createSecretSchemaType) {
 
-    const { success, data } = createCredentialSchema.safeParse(form)
+    const { success, data } = createSecretSchema.safeParse(form)
 
     if (!success) {
         throw new Error("invalid form data")
@@ -22,7 +22,7 @@ export async function CreateCredential(form: createCredentialSchemaType) {
 
     const encryptedValue = symmetricEncrypt(data.value)
 
-    const result = await prisma.credential.create({
+    const result = await prisma.secret.create({
         data: {
             userId,
             name: data.name,
@@ -31,9 +31,9 @@ export async function CreateCredential(form: createCredentialSchemaType) {
     })
 
     if (!result) {
-        throw new Error('Failed to create credential')
+        throw new Error('Failed to create secret')
     }
 
-    revalidatePath('/credentials')
+    revalidatePath('/secrets')
 
 }

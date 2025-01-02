@@ -22,10 +22,10 @@ const CreditsPurchase = () => {
   const mutation = useMutation({
     mutationFn: PurchaseCredits,
     onSuccess: () => {
-      //   toast.success('Credential created', { id: 'create-credential' });
+      //   toast.success('Secret created', { id: 'create-secret' });
     },
     onError: () => {
-      //  toast.error('Failed to create the credential', { id: 'create-credential' });
+      //  toast.error('Failed to create the secret', { id: 'create-secret' });
     },
   });
 

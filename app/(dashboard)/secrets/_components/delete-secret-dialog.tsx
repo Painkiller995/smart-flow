@@ -1,6 +1,6 @@
 'use client';
 
-import { DeleteCredential } from '@/actions/credentials/delete-credential';
+import { DeleteSecret } from '@/actions/secrets/delete-secret';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,21 +19,21 @@ import { XIcon } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-interface DeleteCredentialDialogProps {
-  credentialName: string;
+interface DeleteSecretDialogProps {
+  secretName: string;
 }
 
-const DeleteCredentialDialog = ({ credentialName }: DeleteCredentialDialogProps) => {
+const DeleteSecretDialog = ({ secretName }: DeleteSecretDialogProps) => {
   const [open, setOpen] = useState(false);
   const [confirmText, setConfirmText] = useState('');
 
   const deleteMutation = useMutation({
-    mutationFn: DeleteCredential,
+    mutationFn: DeleteSecret,
     onSuccess: () => {
-      toast.success('Credential deleted', { id: credentialName });
+      toast.success('Secret deleted', { id: secretName });
     },
     onError: () => {
-      toast.error('Failed to delete the credential', { id: credentialName });
+      toast.error('Failed to delete the secret', { id: secretName });
     },
   });
 
@@ -50,7 +50,7 @@ const DeleteCredentialDialog = ({ credentialName }: DeleteCredentialDialogProps)
           <AlertDialogDescription className="space-x-1 space-y-1">
             Deleting this item is irreversible.
             <br />
-            To confirm, please type <strong>{credentialName}</strong> in the field below.
+            To confirm, please type <strong>{secretName}</strong> in the field below.
             <Input
               value={confirmText}
               onChange={(e) => {
@@ -68,10 +68,10 @@ const DeleteCredentialDialog = ({ credentialName }: DeleteCredentialDialogProps)
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            disabled={credentialName !== confirmText || deleteMutation.isPending}
+            disabled={secretName !== confirmText || deleteMutation.isPending}
             onClick={() => {
-              toast.loading('Deleting credential...', { id: credentialName });
-              deleteMutation.mutate(credentialName);
+              toast.loading('Deleting secret...', { id: secretName });
+              deleteMutation.mutate(secretName);
               setConfirmText('');
             }}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
@@ -84,4 +84,4 @@ const DeleteCredentialDialog = ({ credentialName }: DeleteCredentialDialogProps)
   );
 };
 
-export default DeleteCredentialDialog;
+export default DeleteSecretDialog;

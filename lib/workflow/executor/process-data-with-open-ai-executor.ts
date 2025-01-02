@@ -7,9 +7,9 @@ import { ProcessDataWithOpenAiTask } from '../task/process-data-with-open-ai';
 export async function ProcessDataWithOpenAiExecutor(environment: ExecutionEnvironment<typeof ProcessDataWithOpenAiTask>): Promise<boolean> {
     try {
 
-        const credentials = environment.getInput("Credentials")
-        if (!credentials) {
-            environment.log.error("Credentials value is not defined")
+        const secrets = environment.getInput("Secrets")
+        if (!secrets) {
+            environment.log.error("Secrets value is not defined")
         }
 
         const agents = environment.getInput("Agents")
@@ -28,12 +28,12 @@ export async function ProcessDataWithOpenAiExecutor(environment: ExecutionEnviro
             environment.log.error("Content value is not defined")
         }
 
-        const credential = await prisma.credential.findUnique({
-            where: { id: credentials }
+        const secret = await prisma.secret.findUnique({
+            where: { id: secrets }
         })
 
-        if (!credential) {
-            environment.log.error("Credentials not found")
+        if (!secret) {
+            environment.log.error("Secrets not found")
             return false
         }
 
@@ -46,15 +46,15 @@ export async function ProcessDataWithOpenAiExecutor(environment: ExecutionEnviro
             return false
         }
 
-        const plainCredentialValue = symmetricDecrypt(credential.value)
+        const plainSecretValue = symmetricDecrypt(secret.value)
 
-        if (!plainCredentialValue) {
-            environment.log.error("Cannot decrypt credential")
+        if (!plainSecretValue) {
+            environment.log.error("Cannot decrypt secret")
             return false
         }
 
         const openai = new OpenAI({
-            apiKey: plainCredentialValue
+            apiKey: plainSecretValue
         })
 
         const response = await openai.chat.completions.create({

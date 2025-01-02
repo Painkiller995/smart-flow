@@ -35,7 +35,7 @@ export async function ExecuteRequestExecutor(
     let plainBearerToken: string | null = null;
 
     if (bearerTokenId) {
-      const bearerToken = await prisma.credential.findUnique({
+      const bearerToken = await prisma.secret.findUnique({
         where: { id: bearerTokenId },
       });
 

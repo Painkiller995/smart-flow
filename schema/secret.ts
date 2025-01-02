@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const createCredentialSchema = z.object({
+export const createSecretSchema = z.object({
     name: z
         .string()
         .min(1, { message: "Name must have at least 1 character." })
@@ -8,4 +8,4 @@ export const createCredentialSchema = z.object({
     value: z.string().min(1).max(500)
 })
 
-export type createCredentialSchemaType = z.infer<typeof createCredentialSchema>
+export type createSecretSchemaType = z.infer<typeof createSecretSchema>

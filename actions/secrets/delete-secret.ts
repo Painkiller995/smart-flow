@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache"
 
 
-export async function DeleteCredential(name: string) {
+export async function DeleteSecret(name: string) {
 
     const { userId } = await auth()
 
@@ -13,7 +13,7 @@ export async function DeleteCredential(name: string) {
         throw new Error("unauthenticated")
     }
 
-    await prisma.credential.delete({
+    await prisma.secret.delete({
         where: {
             userId_name: {
                 userId,
@@ -21,5 +21,5 @@ export async function DeleteCredential(name: string) {
             }
         }
     })
-    revalidatePath("/credentials")
+    revalidatePath("/secrets")
 }

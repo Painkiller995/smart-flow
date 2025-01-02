@@ -19,8 +19,8 @@ export const routes = [
         icon: BotIcon
     },
     {
-        href: "credentials",
-        label: "Credentials",
+        href: "secrets",
+        label: "Secrets",
         icon: ShieldCheckIcon
     },
     {

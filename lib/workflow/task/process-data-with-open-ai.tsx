@@ -14,7 +14,7 @@ export const ProcessDataWithOpenAiTask = {
       require: true,
     },
     {
-      name: 'Credentials',
+      name: 'Secrets',
       type: TaskParamType.CREDENTIAL,
       require: true,
     },

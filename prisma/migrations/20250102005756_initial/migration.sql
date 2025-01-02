@@ -66,7 +66,7 @@ CREATE TABLE "UserBalance" (
 );
 
 -- CreateTable
-CREATE TABLE "Credential" (
+CREATE TABLE "Secret" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "userId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE "AiAgent" (
 CREATE UNIQUE INDEX "Workflow_name_userId_key" ON "Workflow"("name", "userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Credential_userId_name_key" ON "Credential"("userId", "name");
+CREATE UNIQUE INDEX "Secret_userId_name_key" ON "Secret"("userId", "name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "AiAgent_userId_name_key" ON "AiAgent"("userId", "name");

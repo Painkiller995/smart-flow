@@ -1,6 +1,6 @@
 'use client';
 
-import { GetCredentialsForUser } from '@/actions/credentials/get-credentials-for-user';
+import { GetSecretsForUser } from '@/actions/secrets/get-secrets-for-user';
 import { Label } from '@/components/ui/label';
 import {
   Select,
@@ -15,12 +15,12 @@ import { ParamProps } from '@/types/app-node';
 import { useQuery } from '@tanstack/react-query';
 import { useId } from 'react';
 
-const CredentialsParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
+const SecretsParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   const id = useId();
 
   const query = useQuery({
-    queryKey: ['credentials-for-user'],
-    queryFn: GetCredentialsForUser,
+    queryKey: ['secrets-for-user'],
+    queryFn: GetSecretsForUser,
     refetchInterval: 10000,
   });
 
@@ -36,11 +36,11 @@ const CredentialsParam = ({ param, value, updateNodeParamValue }: ParamProps) =>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Credentials</SelectLabel>
-            {query.data?.map((credential) => {
+            <SelectLabel>Secrets</SelectLabel>
+            {query.data?.map((secret) => {
               return (
-                <SelectItem key={credential.id} value={credential.id}>
-                  {credential.name}
+                <SelectItem key={secret.id} value={secret.id}>
+                  {secret.name}
                 </SelectItem>
               );
             })}
@@ -51,4 +51,4 @@ const CredentialsParam = ({ param, value, updateNodeParamValue }: ParamProps) =>
   );
 };
 
-export default CredentialsParam;
+export default SecretsParam;

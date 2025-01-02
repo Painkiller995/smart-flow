@@ -1,6 +1,6 @@
 'use client';
 
-import { GetCredentialsForUser } from '@/actions/credentials/get-credentials-for-user';
+import { GetSecretsForUser } from '@/actions/secrets/get-secrets-for-user';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -21,7 +21,7 @@ import { useEffect, useId, useState } from 'react';
 interface ValueObject {
   [key: string]: {
     value: string;
-    selectedCredentialId?: string;
+    selectedSecretId?: string;
   };
 }
 
@@ -40,8 +40,8 @@ const JsonEncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: Pa
   const [parsedValue, setParsedValue] = useState<ValueObject>(initialParsedValue);
 
   const query = useQuery({
-    queryKey: ['credentials-for-user'],
-    queryFn: GetCredentialsForUser,
+    queryKey: ['secrets-for-user'],
+    queryFn: GetSecretsForUser,
     refetchInterval: 10000,
   });
 
@@ -68,13 +68,13 @@ const JsonEncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: Pa
         {param.name}
         {param.require && <span className="px-2 text-red-400">*</span>}
       </Label>
-      {Object.entries(parsedValue).map(([propertyId, { value, selectedCredentialId }]) => (
+      {Object.entries(parsedValue).map(([propertyId, { value, selectedSecretId }]) => (
         <JsonEncryptedPropertyParam
           key={propertyId}
           propertyId={propertyId}
           value={value}
-          selectedCredentialId={selectedCredentialId}
-          credentials={query.data}
+          selectedSecretId={selectedSecretId}
+          secrets={query.data}
           setParsedValue={setParsedValue}
         />
       ))}
@@ -92,14 +92,14 @@ const JsonEncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: Pa
 const JsonEncryptedPropertyParam = ({
   propertyId,
   value,
-  selectedCredentialId,
-  credentials,
+  selectedSecretId,
+  secrets,
   setParsedValue,
 }: {
   propertyId: string;
   value: string;
-  selectedCredentialId?: string;
-  credentials?: Awaited<ReturnType<typeof GetCredentialsForUser>>;
+  selectedSecretId?: string;
+  secrets?: Awaited<ReturnType<typeof GetSecretsForUser>>;
   setParsedValue: React.Dispatch<React.SetStateAction<ValueObject>>;
 }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +113,7 @@ const JsonEncryptedPropertyParam = ({
   const handleSelectChange = (selectedValue: string) => {
     setParsedValue((prev) => ({
       ...prev,
-      [propertyId]: { ...prev[propertyId], selectedCredentialId: selectedValue },
+      [propertyId]: { ...prev[propertyId], selectedSecretId: selectedValue },
     }));
   };
 
@@ -132,15 +132,15 @@ const JsonEncryptedPropertyParam = ({
           onChange={handleInputChange}
           placeholder={`Enter value for ${propertyId}`}
         />
-        <Select value={selectedCredentialId} onValueChange={handleSelectChange}>
+        <Select value={selectedSecretId} onValueChange={handleSelectChange}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select an option" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {credentials?.map((credential) => (
-                <SelectItem key={credential.id} value={credential.id}>
-                  {credential.name}
+              {secrets?.map((secret) => (
+                <SelectItem key={secret.id} value={secret.id}>
+                  {secret.name}
                 </SelectItem>
               ))}
             </SelectGroup>

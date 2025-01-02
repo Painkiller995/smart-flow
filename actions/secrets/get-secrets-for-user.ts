@@ -3,14 +3,14 @@
 import prisma from "@/lib/prisma"
 import { auth } from "@clerk/nextjs/server"
 
-export async function GetCredentialsForUser() {
+export async function GetSecretsForUser() {
     const { userId } = await auth()
 
     if (!userId) {
         throw new Error("unauthenticated")
     }
 
-    return await prisma.credential.findMany({
+    return await prisma.secret.findMany({
         where: {
             userId
         },
