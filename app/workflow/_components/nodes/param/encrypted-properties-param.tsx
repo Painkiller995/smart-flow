@@ -13,22 +13,16 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { ParamProps } from '@/types/app-node';
+import { EncryptedValueObject } from '@/types/param';
 import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash';
 import { CircleXIcon } from 'lucide-react';
 import { useEffect, useId, useState } from 'react';
 
-interface ValueObject {
-  [key: string]: {
-    value: string;
-    selectedSecretId?: string;
-  };
-}
-
 const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   const id = useId();
 
-  const safeParse = (jsonString: string, fallback: ValueObject): ValueObject => {
+  const safeParse = (jsonString: string, fallback: EncryptedValueObject): EncryptedValueObject => {
     try {
       return JSON.parse(jsonString);
     } catch {
@@ -37,7 +31,7 @@ const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamP
   };
 
   const initialParsedValue = safeParse(value, {});
-  const [parsedValue, setParsedValue] = useState<ValueObject>(initialParsedValue);
+  const [parsedValue, setParsedValue] = useState<EncryptedValueObject>(initialParsedValue);
 
   const query = useQuery({
     queryKey: ['secrets-for-user'],
@@ -100,7 +94,7 @@ const EncryptedPropertyParam = ({
   value: string;
   selectedSecretId?: string;
   secrets?: Awaited<ReturnType<typeof GetSecretsForUser>>;
-  setParsedValue: React.Dispatch<React.SetStateAction<ValueObject>>;
+  setParsedValue: React.Dispatch<React.SetStateAction<EncryptedValueObject>>;
 }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
