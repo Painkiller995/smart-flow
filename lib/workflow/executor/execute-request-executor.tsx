@@ -56,20 +56,27 @@ export async function ExecuteRequestExecutor(
       const parsedEncryptedProperties: Record<string, EncryptedValueObject> =
         JSON.parse(encryptedProperties);
 
-      Object.entries(parsedEncryptedProperties).forEach(([key, keyValuePair]) => {
+      for (const [key, keyValuePair] of Object.entries(parsedEncryptedProperties)) {
         const { selectedSecretId, value } = keyValuePair;
-        if (
-          selectedSecretId &&
-          value &&
-          typeof value === 'string' &&
-          typeof selectedSecretId === 'string'
-        ) {
-          const decryptedValue = symmetricDecrypt(selectedSecretId);
+
+        if (typeof selectedSecretId === 'string' && typeof value === 'string') {
+          const secret = await prisma.secret.findUnique({
+            where: {
+              id: selectedSecretId,
+            },
+          });
+
+          if (!secret) {
+            environment.log.error(`Unable to find secret value for the key ${key}`);
+            return false;
+          }
+
+          const decryptedValue = symmetricDecrypt(secret.value);
           body[value] = decryptedValue;
         } else {
           console.warn(`Skipping invalid entry for key "${key}":`, keyValuePair);
         }
-      });
+      }
     }
 
     const headers: Record<string, string> = {
