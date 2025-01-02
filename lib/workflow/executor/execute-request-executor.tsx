@@ -38,13 +38,6 @@ export async function ExecuteRequestExecutor(
       return false;
     }
 
-    if (['GET', 'DELETE'].includes(requestMethod) && (body || encryptedProperties)) {
-      environment.log.error(
-        'Body or encrypted properties should not be provided for GET or DELETE requests'
-      );
-      return false;
-    }
-
     const bearerTokenId = environment.getInput('Bearer Token');
     let plainBearerToken: string | null = null;
     if (bearerTokenId) {
@@ -92,6 +85,13 @@ export async function ExecuteRequestExecutor(
 
     if (plainBearerToken) {
       headers['Authorization'] = `Bearer ${plainBearerToken}`;
+    }
+
+    if (['GET', 'DELETE'].includes(requestMethod)) {
+      environment.log.info(
+        `Request method "${requestMethod}" does not require a body. Any provided body will be ignored.`
+      );
+      body = null;
     }
 
     const response = await fetch(targetUrl, {
