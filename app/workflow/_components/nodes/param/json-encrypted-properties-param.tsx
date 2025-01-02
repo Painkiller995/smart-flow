@@ -79,7 +79,7 @@ const JsonEncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: Pa
         />
       ))}
       <Button
-        className="items-end justify-end text-xs"
+        className="items-end justify-end text-xs text-primary"
         variant="ghost"
         onClick={handleAddEncryptedEntry}
       >
