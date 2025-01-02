@@ -40,7 +40,7 @@ export const ExecuteRequestTask = {
     },
     {
       name: 'Encrypted properties',
-      type: TaskParamType.JSON_ENCRYPTED_PROPERTIES,
+      type: TaskParamType.ENCRYPTED_PROPERTIES,
       hideHandle: true,
     },
   ] as const,

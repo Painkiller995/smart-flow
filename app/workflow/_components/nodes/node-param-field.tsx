@@ -4,7 +4,7 @@ import { useReactFlow } from '@xyflow/react';
 import { useCallback } from 'react';
 import AgentsParam from './param/agents-param';
 import BrowserInstanceParam from './param/browser-instance-param';
-import JsonEncryptedPropertiesParam from './param/json-encrypted-properties-param';
+import JsonEncryptedPropertiesParam from './param/encrypted-properties-param';
 import SecretsParam from './param/secrets-param';
 import SelectParam from './param/select-param';
 import StringParam from './param/string-param';
@@ -62,7 +62,7 @@ const NodeParamField = ({ nodeId, param, disabled }: NodeParamFieldProps) => {
           updateNodeParamValue={updateNodeParamValue}
         />
       );
-    case TaskParamType.JSON_ENCRYPTED_PROPERTIES:
+    case TaskParamType.ENCRYPTED_PROPERTIES:
       return (
         <JsonEncryptedPropertiesParam
           param={param}

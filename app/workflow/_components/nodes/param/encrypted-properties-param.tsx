@@ -25,7 +25,7 @@ interface ValueObject {
   };
 }
 
-const JsonEncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
+const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   const id = useId();
 
   const safeParse = (jsonString: string, fallback: ValueObject): ValueObject => {
@@ -89,7 +89,7 @@ const JsonEncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: Pa
   );
 };
 
-const JsonEncryptedPropertyParam = ({
+const EncryptedPropertyParam = ({
   propertyId,
   value,
   selectedSecretId,
@@ -159,4 +159,4 @@ const JsonEncryptedPropertyParam = ({
   );
 };
 
-export default JsonEncryptedPropertiesParam;
+export default EncryptedPropertiesParam;
