@@ -15,7 +15,7 @@ import {
 import { ParamProps } from '@/types/app-node';
 import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash';
-import { MinusIcon } from 'lucide-react';
+import { CircleXIcon } from 'lucide-react';
 import { useEffect, useId, useState } from 'react';
 
 interface ValueObject {
@@ -152,7 +152,7 @@ const JsonEncryptedPropertyParam = ({
             handleRemoveEntry(propertyId);
           }}
         >
-          <MinusIcon />
+          <CircleXIcon size={16} />
         </Button>
       </div>
     </div>
