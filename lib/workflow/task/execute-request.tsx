@@ -32,8 +32,9 @@ export const ExecuteRequestTask = {
       ],
     },
     {
-      name: 'Parameters',
+      name: 'Search parameters',
       type: TaskParamType.PARAMETERS,
+      hideHandle: true,
     },
     {
       name: 'Body',

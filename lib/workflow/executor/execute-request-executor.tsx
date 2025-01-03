@@ -20,7 +20,7 @@ export async function ExecuteRequestExecutor(
       return false;
     }
 
-    let stringifiedParameters = environment.getInput('Parameters');
+    let stringifiedParameters = environment.getInput('Search parameters');
     let parameters: Record<string, any> | null = null;
 
     if (stringifiedParameters && typeof stringifiedParameters === 'string') {
