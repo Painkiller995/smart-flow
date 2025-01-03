@@ -17,6 +17,7 @@ export const ExecuteRequestTask = {
     {
       name: 'Bearer Token',
       type: TaskParamType.CREDENTIAL,
+      hideHandle: true,
     },
     {
       name: 'Method',
