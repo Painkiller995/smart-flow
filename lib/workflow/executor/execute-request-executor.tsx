@@ -1,14 +1,14 @@
 import { symmetricDecrypt } from '@/lib/encryption';
 import prisma from '@/lib/prisma';
 import { ExecutionEnvironment } from '@/types/executor';
-import { EncryptedValueObject } from '@/types/param';
+import { EncryptedValueObject, ParameterObject } from '@/types/param';
 import { ExecuteRequestTask } from '../task/execute-request';
 
 export async function ExecuteRequestExecutor(
   environment: ExecutionEnvironment<typeof ExecuteRequestTask>
 ): Promise<boolean> {
   try {
-    const targetUrl = environment.getInput('Target URL');
+    let targetUrl = environment.getInput('Target URL');
     if (!targetUrl) {
       environment.log.error('Target URL value is not defined');
       return false;
@@ -20,9 +20,25 @@ export async function ExecuteRequestExecutor(
       return false;
     }
 
+    let stringifiedParameters = environment.getInput('Parameters');
+    let parameters: Record<string, any> | null = null;
+
+    if (stringifiedParameters && typeof stringifiedParameters === 'string') {
+      try {
+        parameters = JSON.parse(stringifiedParameters);
+      } catch (err) {
+        environment.log.error('Failed to parse the Parameters as JSON');
+        return false;
+      }
+    }
+
+    if (parameters) {
+      targetUrl = addQueryParameters(targetUrl, parameters);
+    }
+
     let stringifiedBody = environment.getInput('Body');
     let body: Record<string, any> | null = null;
-    const encryptedProperties = environment.getInput('Encrypted properties');
+    const encryptedProperties = environment.getInput('Encrypted body properties');
 
     if (stringifiedBody && typeof stringifiedBody === 'string') {
       try {
@@ -94,6 +110,7 @@ export async function ExecuteRequestExecutor(
       body = null;
     }
 
+    environment.log.info(`Making a ${requestMethod} request to ${targetUrl}`);
     const response = await fetch(targetUrl, {
       method: requestMethod,
       headers: headers,
@@ -124,3 +141,13 @@ export async function ExecuteRequestExecutor(
     return false;
   }
 }
+
+const addQueryParameters = (url: string, params: ParameterObject) => {
+  const urlObj = new URL(url);
+  Object.entries(params).forEach(([_, { parameterKey, parameterValue }]) => {
+    if (parameterKey && parameterValue) {
+      urlObj.searchParams.append(parameterKey, parameterValue);
+    }
+  });
+  return urlObj.toString();
+};
