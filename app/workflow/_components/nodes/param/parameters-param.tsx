@@ -21,19 +21,20 @@ const ParametersParam = ({ param, value, updateNodeParamValue }: ParamProps) => 
   };
 
   const initialParsedValue = safeParse(value, {});
+
   const [parsedValue, setParsedValue] = useState<ParameterObject>(initialParsedValue);
 
   const handleAddEncryptedEntry = () => {
     const newParameterId = Date.now();
     setParsedValue((prev) => ({
       ...prev,
-      [newParameterId]: { value: '' },
+      [newParameterId]: { parameterKey: '', parameterValue: '' },
     }));
   };
 
   const debouncedSave = debounce(() => {
     updateNodeParamValue(JSON.stringify(parsedValue));
-  }, 1000);
+  }, 300);
 
   useEffect(() => {
     debouncedSave();
@@ -81,7 +82,7 @@ const ParameterParam = ({
     const newValue = event.target.value;
     setParsedValue((prev) => ({
       ...prev,
-      [parameterId]: { ...prev[parameterId], value: newValue },
+      [parameterId]: { ...prev[parameterId], parameterKey: newValue },
     }));
   };
 
@@ -89,7 +90,7 @@ const ParameterParam = ({
     const newValue = event.target.value;
     setParsedValue((prev) => ({
       ...prev,
-      [parameterId]: { ...prev[parameterId], parameterId: newValue },
+      [parameterId]: { ...prev[parameterId], parameterValue: newValue },
     }));
   };
 
@@ -100,6 +101,7 @@ const ParameterParam = ({
       return updatedValue;
     });
   };
+
   return (
     <div className="flex gap-2">
       <div className="flex w-full gap-1">

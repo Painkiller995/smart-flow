@@ -49,7 +49,7 @@ const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamP
 
   const debouncedSave = debounce(() => {
     updateNodeParamValue(JSON.stringify(parsedValue));
-  }, 1000);
+  }, 300);
 
   useEffect(() => {
     debouncedSave();
@@ -66,7 +66,7 @@ const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamP
         <EncryptedPropertyParam
           key={propertyId}
           propertyId={propertyId}
-          value={value}
+          keyValue={value}
           selectedSecretId={selectedSecretId}
           secrets={query.data}
           setParsedValue={setParsedValue}
@@ -85,13 +85,13 @@ const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamP
 
 const EncryptedPropertyParam = ({
   propertyId,
-  value,
+  keyValue,
   selectedSecretId,
   secrets,
   setParsedValue,
 }: {
   propertyId: string;
-  value: string;
+  keyValue: string;
   selectedSecretId?: string;
   secrets?: Awaited<ReturnType<typeof GetSecretsForUser>>;
   setParsedValue: React.Dispatch<React.SetStateAction<EncryptedValueObject>>;
@@ -121,7 +121,7 @@ const EncryptedPropertyParam = ({
   return (
     <div className="flex gap-2">
       <div className="flex w-full gap-1">
-        <Input value={value} onChange={handleInputChange} placeholder={'Key name'} />
+        <Input value={keyValue} onChange={handleInputChange} placeholder={'Key name'} />
         <Select value={selectedSecretId} onValueChange={handleSelectChange}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select an option" />
