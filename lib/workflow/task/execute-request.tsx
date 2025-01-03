@@ -13,6 +13,7 @@ export const ExecuteRequestTask = {
       type: TaskParamType.STRING,
       require: true,
     },
+
     {
       name: 'Bearer Token',
       type: TaskParamType.CREDENTIAL,
@@ -31,11 +32,15 @@ export const ExecuteRequestTask = {
       ],
     },
     {
+      name: 'Parameters',
+      type: TaskParamType.PARAMETERS,
+    },
+    {
       name: 'Body',
       type: TaskParamType.STRING,
     },
     {
-      name: 'Encrypted properties',
+      name: 'Encrypted body properties',
       type: TaskParamType.ENCRYPTED_PROPERTIES,
       hideHandle: true,
     },

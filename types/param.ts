@@ -4,3 +4,10 @@ export type EncryptedValueObject = {
         selectedSecretId: string;
     };
 }
+
+export type ParameterObject = {
+    [key: string]: {
+        parameterKey: string;
+        parameterValue: string;
+    };
+}
