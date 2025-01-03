@@ -57,42 +57,15 @@ export async function ExecuteRequestExecutor(
     const bearerTokenId = environment.getInput('Bearer Token');
     let plainBearerToken: string | null = null;
     if (bearerTokenId) {
-      const bearerToken = await prisma.secret.findUnique({
-        where: { id: bearerTokenId },
-      });
-
-      if (!bearerToken) {
-        environment.log.error('Bearer token not found');
+      plainBearerToken = await getBearerToken(bearerTokenId);
+      if (!plainBearerToken) {
+        environment.log.error('Error while trying to decrypt the bearer token');
         return false;
       }
-      plainBearerToken = symmetricDecrypt(bearerToken.value);
     }
 
     if (encryptedProperties && body) {
-      const parsedEncryptedProperties: Record<string, EncryptedValueObject> =
-        JSON.parse(encryptedProperties);
-
-      for (const [key, keyValuePair] of Object.entries(parsedEncryptedProperties)) {
-        const { selectedSecretId, value } = keyValuePair;
-
-        if (typeof selectedSecretId === 'string' && typeof value === 'string') {
-          const secret = await prisma.secret.findUnique({
-            where: {
-              id: selectedSecretId,
-            },
-          });
-
-          if (!secret) {
-            environment.log.error(`Unable to find secret value for the key ${key}`);
-            return false;
-          }
-
-          const decryptedValue = symmetricDecrypt(secret.value);
-          body[value] = decryptedValue;
-        } else {
-          console.warn(`Skipping invalid entry for key "${key}":`, keyValuePair);
-        }
-      }
+      await decryptEncryptedProperties(encryptedProperties, body, environment);
     }
 
     const headers: Record<string, string> = {
@@ -111,6 +84,7 @@ export async function ExecuteRequestExecutor(
     }
 
     environment.log.info(`Making a ${requestMethod} request to ${targetUrl}`);
+
     const response = await fetch(targetUrl, {
       method: requestMethod,
       headers: headers,
@@ -150,4 +124,43 @@ const addQueryParameters = (url: string, params: ParameterObject) => {
     }
   });
   return urlObj.toString();
+};
+
+const decryptEncryptedProperties = async (
+  encryptedProperties: string,
+  body: Record<string, any>,
+  environment: ExecutionEnvironment<typeof ExecuteRequestTask>
+) => {
+  const parsedEncryptedProperties: Record<string, EncryptedValueObject> =
+    JSON.parse(encryptedProperties);
+
+  for (const [key, keyValuePair] of Object.entries(parsedEncryptedProperties)) {
+    const { selectedSecretId, value } = keyValuePair;
+
+    if (typeof selectedSecretId === 'string' && typeof value === 'string') {
+      const secret = await prisma.secret.findUnique({
+        where: {
+          id: selectedSecretId,
+        },
+      });
+
+      if (!secret) {
+        environment.log.error(`Unable to find secret value for the key ${key}`);
+        return false;
+      }
+
+      const decryptedValue = symmetricDecrypt(secret.value);
+      body[value] = decryptedValue;
+    } else {
+      console.warn(`Skipping invalid entry for key "${key}":`, keyValuePair);
+    }
+  }
+};
+
+const getBearerToken = async (bearerTokenId: string) => {
+  const bearerToken = await prisma.secret.findUnique({
+    where: { id: bearerTokenId },
+  });
+  if (!bearerToken) return null;
+  return symmetricDecrypt(bearerToken.value);
 };
