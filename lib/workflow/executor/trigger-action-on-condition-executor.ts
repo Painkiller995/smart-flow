@@ -33,6 +33,9 @@ export async function TriggerActionOnConditionExecutor(environment: ExecutionEnv
             return false;
         }
 
+        console.log(conditionBoolean)
+
+        environment.disablePath(conditionBoolean)
         environment.setOutput('Condition Met', conditionBoolean ? 'true' : 'false');
         environment.setOutput('Condition Not Met', !conditionBoolean ? 'true' : 'false');
 

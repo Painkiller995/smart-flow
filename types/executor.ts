@@ -21,5 +21,6 @@ export type ExecutionEnvironment<T extends WorkflowTask> = {
     setBrowser(browser: Browser): void
     getPage(): Page | undefined
     setPage(page: Page): void
+    disablePath(conditionMet: boolean): void
     log: LogCollector
-}
+} 

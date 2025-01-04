@@ -185,7 +185,7 @@ async function executeWorkflowPhase(userId: string, phase: ExecutionPhase, edges
 
     if (success) {
         // Execute the phase if the credits sufficient
-        success = await executePhase(phase, node, environment, logCollector)
+        success = await executePhase(phase, node, edges, environment, logCollector)
     }
 
     const outputs = environment.phases[node.id].outputs
@@ -227,6 +227,7 @@ async function finalizePhase(phaseId: string, success: boolean, outputs: any, cr
 async function executePhase(
     phase: ExecutionPhase,
     node: AppNode,
+    edges: Edge[],
     environment: Environment,
     logCollector: LogCollector
 ): Promise<boolean> {
@@ -238,7 +239,7 @@ async function executePhase(
         return false
     }
 
-    const executionEnvironment: ExecutionEnvironment<any> = createExecutionEnvironment(node, environment, logCollector)
+    const executionEnvironment: ExecutionEnvironment<any> = createExecutionEnvironment(node, edges, environment, logCollector)
 
     return await runFn(executionEnvironment)
 }
@@ -266,13 +267,25 @@ function setupEnvironmentForPhase(node: AppNode, edges: Edge[], environment: Env
     }
 }
 
-function createExecutionEnvironment(node: AppNode, environment: Environment, logCollector: LogCollector) {
+function createExecutionEnvironment(node: AppNode, edges: Edge[], environment: Environment, logCollector: LogCollector) {
+
     return {
         getInput: (name: string) => environment.phases[node.id]?.inputs[name],
         setOutput: (name: string, value: string) => { environment.phases[node.id].outputs[name] = value },
         getBrowser: () => environment.browser,
         setBrowser: (browser: Browser) => (environment.browser = browser),
         addDisabled: (nodeId: string) => (environment.disabledNodes.push(nodeId)),
+        disablePath: (conditionMet: boolean) => {
+            const connectedEdges = edges.filter(
+                (edge) =>
+                    edge.source === node.id &&
+                    (conditionMet
+                        ? edge.sourceHandle === 'Condition Not Met'
+                        : edge.sourceHandle === 'Condition Met')
+            );
+            console.log(connectedEdges)
+            connectedEdges.map((edge) => { environment.disabledNodes.push(edge.target) })
+        },
         getPage: () => environment.page,
         setPage: (page: Page) => (environment.page = page),
         log: logCollector
@@ -280,8 +293,8 @@ function createExecutionEnvironment(node: AppNode, environment: Environment, log
 }
 
 async function cleanupEnvironment(environment: Environment) {
-    console.log("Phases", environment.phases)
-    console.log("Disabled Nodes", environment.disabledNodes)
+    //  console.log("Phases", environment.phases)
+    // console.log("Disabled Nodes", environment.disabledNodes)
     //environment.disabledNodes = []
     if (environment.browser) {
         await environment.browser
