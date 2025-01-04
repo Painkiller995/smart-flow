@@ -32,7 +32,8 @@ export async function ExecuteWorkflow(executionId: string, nextRunAt?: Date) {
     const environment: Environment = {
         phases: {
 
-        }
+        },
+        disabledNodes: ['21b1ce7a-fb01-4ea3-a4b5-adb7585faccc']
     }
 
     await initializeWorkflowExecution(executionId, execution.workflowId, nextRunAt)
@@ -142,6 +143,25 @@ async function executeWorkflowPhase(userId: string, phase: ExecutionPhase, edges
     const startedAt = new Date()
     const node = JSON.parse(phase.node) as AppNode
 
+    if (environment.disabledNodes.includes(node.id)) {
+
+        const connectedEdges = edges.filter((edge) => edge.source === node.id)
+        connectedEdges.map((edge) => { environment.disabledNodes.push(edge.target) })
+
+        await prisma.executionPhase.update(
+            {
+                where: {
+                    id: phase.id
+                },
+                data: {
+                    status: ExecutionPhaseStatus.IGNORED,
+                }
+            }
+        )
+        return { success: true, creditsConsumed: 0 }
+
+    }
+
     setupEnvironmentForPhase(node, edges, environment)
 
     //Update status
@@ -224,6 +244,7 @@ async function executePhase(
 }
 
 function setupEnvironmentForPhase(node: AppNode, edges: Edge[], environment: Environment) {
+
     environment.phases[node.id] = { inputs: {}, outputs: {} }
     const inputs = TaskRegistry[node.data.type].inputs
     for (const input of inputs) {
@@ -235,6 +256,7 @@ function setupEnvironmentForPhase(node: AppNode, edges: Edge[], environment: Env
         }
 
         const connectedEdge = edges.find((edge) => edge.target === node.id && edge.targetHandle === input.name)
+        console.log(connectedEdge?.target)
         if (!connectedEdge) {
             console.error("Missing edge for input", input.name, "Node id:", node.id)
             continue
@@ -250,6 +272,7 @@ function createExecutionEnvironment(node: AppNode, environment: Environment, log
         setOutput: (name: string, value: string) => { environment.phases[node.id].outputs[name] = value },
         getBrowser: () => environment.browser,
         setBrowser: (browser: Browser) => (environment.browser = browser),
+        addDisabled: (nodeId: string) => (environment.disabledNodes.push(nodeId)),
         getPage: () => environment.page,
         setPage: (page: Page) => (environment.page = page),
         log: logCollector
@@ -257,6 +280,9 @@ function createExecutionEnvironment(node: AppNode, environment: Environment, log
 }
 
 async function cleanupEnvironment(environment: Environment) {
+    console.log("Phases", environment.phases)
+    console.log("Disabled Nodes", environment.disabledNodes)
+    //environment.disabledNodes = []
     if (environment.browser) {
         await environment.browser
             .close()

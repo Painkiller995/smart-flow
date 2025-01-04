@@ -4,11 +4,13 @@ import { WorkflowTask } from './workflow';
 
 export type Environment = {
     browser?: Browser
+    disabledNodes: string[]
     page?: Page
     phases: Record<string,
         {
-            inputs: Record<string, string>;
+            inputs: Record<string, string>
             outputs: Record<string, string>
+
         }>
 }
 

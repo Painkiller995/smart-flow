@@ -42,6 +42,7 @@ export enum ExecutionPhaseStatus {
     PENDING = "PENDING",
     RUNNING = "RUNNING",
     COMPLETED = "COMPLETED",
-    FAILED = "FAILED"
+    FAILED = "FAILED",
+    IGNORED = "IGNORED"
 }
 
