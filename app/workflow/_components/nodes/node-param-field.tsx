@@ -3,6 +3,7 @@ import { TaskParam, TaskParamType } from '@/types/task';
 import { useReactFlow } from '@xyflow/react';
 import { useCallback } from 'react';
 import AgentsParam from './param/agents-param';
+import BooleanParam from './param/boolean-param';
 import BrowserInstanceParam from './param/browser-instance-param';
 import EncryptedPropertiesParam from './param/encrypted-properties-param';
 import ParametersParam from './param/parameters-param';
@@ -93,6 +94,15 @@ const NodeParamField = ({ nodeId, param, disabled }: NodeParamFieldProps) => {
     case TaskParamType.BROWSER_INSTANCE:
       return (
         <BrowserInstanceParam param={param} value="" updateNodeParamValue={updateNodeParamValue} />
+      );
+    case TaskParamType.BOOLEAN:
+      return (
+        <BooleanParam
+          param={param}
+          value={value}
+          disabled={disabled}
+          updateNodeParamValue={updateNodeParamValue}
+        />
       );
     default:
       return (

@@ -9,6 +9,10 @@ export const AddPropertyToJsonTask = {
   credits: 1,
   inputs: [
     {
+      name: 'Activated',
+      type: TaskParamType.BOOLEAN,
+    },
+    {
       name: 'JSON',
       type: TaskParamType.STRING,
       require: true,

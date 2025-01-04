@@ -27,11 +27,11 @@ export const TriggerActionOnConditionTask = {
   outputs: [
     {
       name: 'Condition Met',
-      type: TaskParamType.STRING,
+      type: TaskParamType.BOOLEAN,
     },
     {
       name: 'Condition Not Met',
-      type: TaskParamType.STRING,
+      type: TaskParamType.BOOLEAN,
     },
   ] as const,
 } satisfies WorkflowTask;
