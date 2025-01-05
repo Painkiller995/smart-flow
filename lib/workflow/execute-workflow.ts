@@ -11,8 +11,9 @@ import "server-only";
 import { createLogCollector } from "../log";
 import prisma from "../prisma";
 import { ExecutorRegistry } from "./executor/registry";
+
+import { Conditions } from "@/types/evaluate";
 import { TaskRegistry } from "./task/registry";
-import { Conditions } from "./task/trigger-action-on-condition";
 
 export async function ExecuteWorkflow(executionId: string, nextRunAt?: Date) {
 

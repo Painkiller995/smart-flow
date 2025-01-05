@@ -1,7 +1,8 @@
+import { Conditions } from '@/types/evaluate';
 import { ExecutionEnvironment } from '@/types/executor';
-import { Conditions, TriggerActionOnConditionTask } from '../task/trigger-action-on-condition';
+import { EvaluateStringTask } from '../task/evaluate-string';
 
-export async function TriggerActionOnConditionExecutor(environment: ExecutionEnvironment<typeof TriggerActionOnConditionTask>): Promise<boolean> {
+export async function EvaluateStringExecutor(environment: ExecutionEnvironment<typeof EvaluateStringTask>): Promise<boolean> {
     try {
 
         const firstInput = environment.getInput('First Input');
@@ -43,4 +44,4 @@ export async function TriggerActionOnConditionExecutor(environment: ExecutionEnv
         environment.log.error(err.message);
         return false;
     }
-}   
+}

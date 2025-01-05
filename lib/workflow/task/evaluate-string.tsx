@@ -1,15 +1,11 @@
+import { Conditions } from '@/types/evaluate';
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
 import { LucideProps, SquareCheckIcon } from 'lucide-react';
 
-export enum Conditions {
-  ConditionMet = 'Path A | Condition Met',
-  ConditionNotMet = 'Path B | Condition Not Met',
-}
-
-export const TriggerActionOnConditionTask = {
-  type: TaskType.TRIGGER_ACTION_ON_CONDITION,
-  label: 'Trigger action on condition',
+export const EvaluateStringTask = {
+  type: TaskType.EVALUATE_STRING,
+  label: 'Evaluate string',
   icon: (props: LucideProps) => <SquareCheckIcon className="stroke-amber-400" {...props} />,
   credits: 1,
   inputs: [
