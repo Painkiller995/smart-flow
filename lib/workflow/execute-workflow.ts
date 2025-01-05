@@ -12,6 +12,7 @@ import { createLogCollector } from "../log";
 import prisma from "../prisma";
 import { ExecutorRegistry } from "./executor/registry";
 import { TaskRegistry } from "./task/registry";
+import { Conditions } from "./task/trigger-action-on-condition";
 
 export async function ExecuteWorkflow(executionId: string, nextRunAt?: Date) {
 
@@ -33,7 +34,7 @@ export async function ExecuteWorkflow(executionId: string, nextRunAt?: Date) {
         phases: {
 
         },
-        disabledNodes: ['21b1ce7a-fb01-4ea3-a4b5-adb7585faccc']
+        disabledNodes: []
     }
 
     await initializeWorkflowExecution(executionId, execution.workflowId, nextRunAt)
@@ -143,8 +144,11 @@ async function executeWorkflowPhase(userId: string, phase: ExecutionPhase, edges
     const startedAt = new Date()
     const node = JSON.parse(phase.node) as AppNode
 
-    if (environment.disabledNodes.includes(node.id)) {
+    if (node.data.inputs.Disabled === 'true') {
+        environment.disabledNodes.push(node.id)
+    }
 
+    if (environment.disabledNodes.includes(node.id)) {
         const connectedEdges = edges.filter((edge) => edge.source === node.id)
         connectedEdges.map((edge) => { environment.disabledNodes.push(edge.target) })
 
@@ -159,7 +163,6 @@ async function executeWorkflowPhase(userId: string, phase: ExecutionPhase, edges
             }
         )
         return { success: true, creditsConsumed: 0 }
-
     }
 
     setupEnvironmentForPhase(node, edges, environment)
@@ -239,17 +242,18 @@ async function executePhase(
         return false
     }
 
-    const executionEnvironment: ExecutionEnvironment<any> = createExecutionEnvironment(node, edges, environment, logCollector)
+    const executionEnvironment: ExecutionEnvironment<any> = createExecutionEnvironment(phase, node, edges, environment, logCollector)
 
     return await runFn(executionEnvironment)
 }
 
 function setupEnvironmentForPhase(node: AppNode, edges: Edge[], environment: Environment) {
-
     environment.phases[node.id] = { inputs: {}, outputs: {} }
     const inputs = TaskRegistry[node.data.type].inputs
     for (const input of inputs) {
+
         if (input.type === TaskParamType.BROWSER_INSTANCE) continue
+
         const inputValue = node.data.inputs[input.name]
         if (inputValue) {
             environment.phases[node.id].inputs[input.name] = inputValue
@@ -257,45 +261,40 @@ function setupEnvironmentForPhase(node: AppNode, edges: Edge[], environment: Env
         }
 
         const connectedEdge = edges.find((edge) => edge.target === node.id && edge.targetHandle === input.name)
-        console.log(connectedEdge?.target)
         if (!connectedEdge) {
             console.error("Missing edge for input", input.name, "Node id:", node.id)
             continue
         }
+
         const outputValue = environment.phases[connectedEdge.source].outputs[connectedEdge.sourceHandle!]
         environment.phases[node.id].inputs[input.name] = outputValue
     }
 }
 
-function createExecutionEnvironment(node: AppNode, edges: Edge[], environment: Environment, logCollector: LogCollector) {
-
+function createExecutionEnvironment(phase: ExecutionPhase, node: AppNode, edges: Edge[], environment: Environment, logCollector: LogCollector) {
     return {
         getInput: (name: string) => environment.phases[node.id]?.inputs[name],
         setOutput: (name: string, value: string) => { environment.phases[node.id].outputs[name] = value },
         getBrowser: () => environment.browser,
         setBrowser: (browser: Browser) => (environment.browser = browser),
-        addDisabled: (nodeId: string) => (environment.disabledNodes.push(nodeId)),
-        disablePath: (conditionMet: boolean) => {
+        getPage: () => environment.page,
+        setPage: (page: Page) => (environment.page = page),
+        disableNode: (isConditionMet: boolean) => {
             const connectedEdges = edges.filter(
                 (edge) =>
                     edge.source === node.id &&
-                    (conditionMet
-                        ? edge.sourceHandle === 'Condition Not Met'
-                        : edge.sourceHandle === 'Condition Met')
+                    (isConditionMet
+                        ? edge.sourceHandle === Conditions.ConditionNotMet
+                        : edge.sourceHandle === Conditions.ConditionMet)
             );
-            console.log(connectedEdges)
             connectedEdges.map((edge) => { environment.disabledNodes.push(edge.target) })
         },
-        getPage: () => environment.page,
-        setPage: (page: Page) => (environment.page = page),
         log: logCollector
     }
 }
 
 async function cleanupEnvironment(environment: Environment) {
-    //  console.log("Phases", environment.phases)
-    // console.log("Disabled Nodes", environment.disabledNodes)
-    //environment.disabledNodes = []
+    environment.disabledNodes = []
     if (environment.browser) {
         await environment.browser
             .close()

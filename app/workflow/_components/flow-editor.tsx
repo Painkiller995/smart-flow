@@ -20,7 +20,6 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import React, { useCallback, useEffect } from 'react';
-import { toast } from 'sonner';
 import DeletableEdge from './edges/deletable-edge';
 import NodeComponent from './nodes/node-component';
 
@@ -86,17 +85,11 @@ const FlowEditor = ({ workflow }: EditorProps) => {
 
   const onConnect = useCallback(
     (connection: Connection) => {
-      //////////////////////
-      // Need more work later
       const node = getNode(connection.target);
       if (!node) return;
+
       const inputs = node.data.inputs as Record<string, unknown>;
-      const existedValue = inputs[connection.targetHandle!];
-      if (existedValue) {
-        toast.warning('Please remove the preset input before establishing a connection.');
-        return;
-      }
-      //////////////////////
+      inputs[connection.targetHandle!] = null;
 
       setEdges((eds) => addEdge({ ...connection, animated: true }, eds));
       if (!connection.targetHandle) return;

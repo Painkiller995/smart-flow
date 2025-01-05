@@ -2,6 +2,11 @@ import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
 import { LucideProps, SquareCheckIcon } from 'lucide-react';
 
+export enum Conditions {
+  ConditionMet = 'Path A | Condition Met',
+  ConditionNotMet = 'Path B | Condition Not Met',
+}
+
 export const TriggerActionOnConditionTask = {
   type: TaskType.TRIGGER_ACTION_ON_CONDITION,
   label: 'Trigger action on condition',
@@ -26,11 +31,11 @@ export const TriggerActionOnConditionTask = {
   ] as const,
   outputs: [
     {
-      name: 'Condition Met',
+      name: Conditions.ConditionMet,
       type: TaskParamType.BOOLEAN,
     },
     {
-      name: 'Condition Not Met',
+      name: Conditions.ConditionNotMet,
       type: TaskParamType.BOOLEAN,
     },
   ] as const,

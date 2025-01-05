@@ -82,6 +82,15 @@ const NodeParamField = ({ nodeId, param, disabled }: NodeParamFieldProps) => {
           updateNodeParamValue={updateNodeParamValue}
         />
       );
+    case TaskParamType.BOOLEAN:
+      return (
+        <BooleanParam
+          param={param}
+          value={value}
+          disabled={disabled}
+          updateNodeParamValue={updateNodeParamValue}
+        />
+      );
     case TaskParamType.AGENT:
       return (
         <AgentsParam
@@ -94,15 +103,6 @@ const NodeParamField = ({ nodeId, param, disabled }: NodeParamFieldProps) => {
     case TaskParamType.BROWSER_INSTANCE:
       return (
         <BrowserInstanceParam param={param} value="" updateNodeParamValue={updateNodeParamValue} />
-      );
-    case TaskParamType.BOOLEAN:
-      return (
-        <BooleanParam
-          param={param}
-          value={value}
-          disabled={disabled}
-          updateNodeParamValue={updateNodeParamValue}
-        />
       );
     default:
       return (

@@ -8,4 +8,5 @@ export const colorForHandle: Record<TaskParamType, string> = {
   AGENT: '!bg-rose-400',
   PARAMETERS: '!bg-pink-400',
   ENCRYPTED_PROPERTIES: '!bg-rose-400',
+  BOOLEAN: '!bg-green-400',
 };

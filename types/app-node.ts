@@ -3,7 +3,6 @@ import { TaskParam, TaskType } from "./task"
 
 export interface AppNodeData {
     isEntryPoint?: boolean
-    disabled?: boolean
     type: TaskType
     inputs: Record<string, string>
     [key: string]: any

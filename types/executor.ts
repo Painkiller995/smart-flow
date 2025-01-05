@@ -8,9 +8,8 @@ export type Environment = {
     page?: Page
     phases: Record<string,
         {
-            inputs: Record<string, string>
+            inputs: Record<string, string>;
             outputs: Record<string, string>
-
         }>
 }
 
@@ -21,6 +20,6 @@ export type ExecutionEnvironment<T extends WorkflowTask> = {
     setBrowser(browser: Browser): void
     getPage(): Page | undefined
     setPage(page: Page): void
-    disablePath(conditionMet: boolean): void
+    disableNode(isEdgeConditionMet: boolean): void
     log: LogCollector
-} 
+}

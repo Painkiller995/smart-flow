@@ -1,5 +1,5 @@
 import { ExecutionEnvironment } from '@/types/executor';
-import { TriggerActionOnConditionTask } from '../task/trigger-action-on-condition';
+import { Conditions, TriggerActionOnConditionTask } from '../task/trigger-action-on-condition';
 
 export async function TriggerActionOnConditionExecutor(environment: ExecutionEnvironment<typeof TriggerActionOnConditionTask>): Promise<boolean> {
     try {
@@ -33,12 +33,11 @@ export async function TriggerActionOnConditionExecutor(environment: ExecutionEnv
             return false;
         }
 
-        console.log(conditionBoolean)
+        environment.disableNode(conditionBoolean)
+        environment.setOutput(Conditions.ConditionMet, conditionBoolean ? 'true' : 'false')
+        environment.setOutput(Conditions.ConditionNotMet, !conditionBoolean ? 'true' : 'false')
 
-        environment.disablePath(conditionBoolean)
-        environment.setOutput('Condition Met', conditionBoolean ? 'true' : 'false');
-        environment.setOutput('Condition Not Met', !conditionBoolean ? 'true' : 'false');
-
+        environment.log.info(`Condition ${conditionBoolean ? 'met, executing path A' : 'not met, executing path B'}.`);
         return true;
     } catch (err: any) {
         environment.log.error(err.message);

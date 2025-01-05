@@ -5,11 +5,11 @@ import { ParamProps } from '@/types/app-node';
 import { useEffect, useId, useState } from 'react';
 
 const BooleanParam = ({ param, value, disabled, updateNodeParamValue }: ParamProps) => {
-  const [internalValue, setInternalValue] = useState(value || 'true');
+  const [internalValue, setInternalValue] = useState(value || 'false');
   const id = useId();
 
   useEffect(() => {
-    setInternalValue(value || 'true');
+    setInternalValue(value || 'false');
   }, [value]);
 
   const handleToggle = () => {
