@@ -13,6 +13,10 @@ export const PageToHtmlTask = {
       type: TaskParamType.BROWSER_INSTANCE,
       require: true,
     },
+    {
+      name: 'Disabled',
+      type: TaskParamType.BOOLEAN,
+    },
   ] as const,
   outputs: [
     {

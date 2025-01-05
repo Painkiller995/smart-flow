@@ -46,6 +46,10 @@ export const ExecuteRequestTask = {
       type: TaskParamType.ENCRYPTED_PROPERTIES,
       hideHandle: true,
     },
+    {
+      name: 'Disabled',
+      type: TaskParamType.BOOLEAN,
+    },
   ] as const,
   outputs: [
     {

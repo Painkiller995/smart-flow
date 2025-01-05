@@ -15,6 +15,10 @@ export const LaunchBrowserTask = {
       require: true,
       hideHandle: true,
     },
+    {
+      name: 'Disabled',
+      type: TaskParamType.BOOLEAN,
+    },
   ] as const,
   outputs: [
     {

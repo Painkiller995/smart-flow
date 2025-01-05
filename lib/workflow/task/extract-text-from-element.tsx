@@ -19,6 +19,10 @@ export const ExtractTextFromElementTask = {
       type: TaskParamType.STRING,
       require: true,
     },
+    {
+      name: 'Disabled',
+      type: TaskParamType.BOOLEAN,
+    },
   ] as const,
   outputs: [
     {

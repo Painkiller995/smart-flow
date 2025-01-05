@@ -18,6 +18,10 @@ export const DeliverViaWebhookTask = {
       type: TaskParamType.STRING,
       require: true,
     },
+    {
+      name: 'Disabled',
+      type: TaskParamType.BOOLEAN,
+    },
   ] as const,
   outputs: [] as const,
 } satisfies WorkflowTask;

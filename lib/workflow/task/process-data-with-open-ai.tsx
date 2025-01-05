@@ -29,6 +29,10 @@ export const ProcessDataWithOpenAiTask = {
       require: true,
       variant: 'textarea',
     },
+    {
+      name: 'Disabled',
+      type: TaskParamType.BOOLEAN,
+    },
   ] as const,
   outputs: [
     {

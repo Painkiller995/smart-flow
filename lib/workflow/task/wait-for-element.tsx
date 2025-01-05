@@ -28,6 +28,10 @@ export const WaitForElementTask = {
         { label: 'Hidden', value: 'hidden' },
       ],
     },
+    {
+      name: 'Disabled',
+      type: TaskParamType.BOOLEAN,
+    },
   ] as const,
   outputs: [
     {
