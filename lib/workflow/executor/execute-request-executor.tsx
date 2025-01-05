@@ -97,7 +97,10 @@ export async function ExecuteRequestExecutor(
     }
 
     const contentType = response.headers.get('Content-Type') || '';
-    if (contentType.includes('application/json')) {
+    if (
+      contentType.includes('application/json') ||
+      contentType.includes('application/graphql-response+json')
+    ) {
       const responseBody = await response.json();
       environment.log.info(`Response Body: ${JSON.stringify(responseBody, null, 4)}`);
       environment.setOutput('Response', JSON.stringify(responseBody, null, 4));

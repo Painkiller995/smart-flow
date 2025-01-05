@@ -6,7 +6,7 @@ export const ExecuteRequestTask = {
   type: TaskType.EXECUTE_REQUEST,
   label: 'Execute request',
   icon: (props: LucideProps) => <EthernetPortIcon className="stroke-rose-400" {...props} />,
-  credits: 2,
+  credits: 3,
   inputs: [
     {
       name: 'Target URL',
