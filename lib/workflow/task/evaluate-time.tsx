@@ -1,12 +1,12 @@
 import { Conditions } from '@/types/evaluate';
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
-import { LucideProps, TextCursorIcon } from 'lucide-react';
+import { LucideProps, TimerIcon } from 'lucide-react';
 
-export const EvaluateStringTask = {
-  type: TaskType.EVALUATE_STRING,
-  label: 'Evaluate string',
-  icon: (props: LucideProps) => <TextCursorIcon className="stroke-amber-400" {...props} />,
+export const EvaluateTimeTask = {
+  type: TaskType.EVALUATE_TIME,
+  label: 'Evaluate time',
+  icon: (props: LucideProps) => <TimerIcon className="stroke-amber-400" {...props} />,
   credits: 1,
   inputs: [
     {

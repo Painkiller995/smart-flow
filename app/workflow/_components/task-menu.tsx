@@ -59,6 +59,7 @@ const TaskMenu = () => {
           <AccordionTrigger className="font-bold">Utility</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.EVALUATE_STRING} />
+            <TaskMenuButton taskType={TaskType.EVALUATE_TIME} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

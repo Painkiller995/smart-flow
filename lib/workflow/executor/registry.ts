@@ -5,6 +5,7 @@ import { AddPropertyToJsonExecutor } from "./add-property-to-json-executor";
 import { ClickElementExecutor } from "./click-element-executor";
 import { DeliverViaWebhookExecutor } from "./deliver-via-webhook-executor";
 import { EvaluateStringExecutor } from "./evaluate-string-executor";
+import { EvaluateTimeExecutor } from "./evaluate-time-executor";
 import { ExecuteRequestExecutor } from "./execute-request-executor";
 import { ExtractTextFromElementExecutor } from "./extract-text-from-element";
 import { FillInputExecutor } from "./fill-input-executor";
@@ -39,5 +40,6 @@ export const ExecutorRegistry: RegistryType = {
     MERGE_TWO_JSON: MergeTwoJsonExecutor,
     EXECUTE_REQUEST: ExecuteRequestExecutor,
     DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
-    EVALUATE_STRING: EvaluateStringExecutor
+    EVALUATE_STRING: EvaluateStringExecutor,
+    EVALUATE_TIME: EvaluateTimeExecutor
 }
