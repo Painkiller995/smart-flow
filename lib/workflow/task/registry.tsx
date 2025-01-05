@@ -8,6 +8,7 @@ import { EvaluateTimeTask } from './evaluate-time';
 import { ExecuteRequestTask } from './execute-request';
 import { ExtractTextFromElementTask } from './extract-text-from-element';
 import { FillInputTask } from './fill-input';
+import { JsonStorageAreaTask } from './json-storage-area';
 import { LaunchBrowserTask } from './launch-browser';
 import { MergeTwoJsonTask } from './merge-two-json';
 import { NavigateUrlTask } from './navigate-url';
@@ -31,6 +32,7 @@ export const TaskRegistry: Registry = {
   SCROLL_TO_ELEMENT: ScrollToElementTask,
   NAVIGATE_URL: NavigateUrlTask,
   PROCESS_DATA_WITH_OPEN_AI: ProcessDataWithOpenAiTask,
+  JSON_STORAGE_AREA: JsonStorageAreaTask,
   READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonTask,
   ADD_PROPERTY_TO_JSON: AddPropertyToJsonTask,
   MERGE_TWO_JSON: MergeTwoJsonTask,

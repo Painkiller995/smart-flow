@@ -30,6 +30,7 @@ const TaskMenu = () => {
         <AccordionItem value="json-data">
           <AccordionTrigger className="font-bold">JSON</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.JSON_STORAGE_AREA} />
             <TaskMenuButton taskType={TaskType.ADD_PROPERTY_TO_JSON} />
             <TaskMenuButton taskType={TaskType.READ_PROPERTY_FROM_JSON} />
             <TaskMenuButton taskType={TaskType.MERGE_TWO_JSON} />
