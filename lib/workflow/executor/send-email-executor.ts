@@ -1,3 +1,4 @@
+import { symmetricDecrypt } from '@/lib/encryption';
 import prisma from '@/lib/prisma';
 import sendEmail from '@/lib/send-mail';
 import { ExecutionEnvironment } from '@/types/executor';
@@ -23,15 +24,21 @@ export async function SendEmailExecutor(environment: ExecutionEnvironment<typeof
                 id: senderPasswordID
             }
         })
-
         if (!senderPassword) {
+            environment.log.error("Sender email password is missing.");
+            return false
+        }
+
+
+        const plainSenderPassword = symmetricDecrypt(senderPassword.value)
+        if (!plainSenderPassword) {
             environment.log.error("Sender email password is missing.");
             return false
         }
 
         const result = await sendEmail({
             email: senderEmail,
-            password: senderPassword.value,
+            password: plainSenderPassword,
             recipient: recipientEmail,
             subject: emailSubject,
             text: emailText,
