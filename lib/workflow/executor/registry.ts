@@ -9,6 +9,7 @@ import { EvaluateTimeExecutor } from "./evaluate-time-executor";
 import { ExecuteRequestExecutor } from "./execute-request-executor";
 import { ExtractTextFromElementExecutor } from "./extract-text-from-element";
 import { FillInputExecutor } from "./fill-input-executor";
+import { JsonStorageAreaExecutor } from "./json-storage-area-executor";
 import { LaunchBrowserExecutor } from "./launch-browser-executor";
 import { MergeTwoJsonExecutor } from "./merge-two-json-executor";
 import { NavigateUrlExecutor } from "./navigate-url-executor";
@@ -35,6 +36,7 @@ export const ExecutorRegistry: RegistryType = {
     SCROLL_TO_ELEMENT: ScrollToElementExecutor,
     NAVIGATE_URL: NavigateUrlExecutor,
     PROCESS_DATA_WITH_OPEN_AI: ProcessDataWithOpenAiExecutor,
+    JSON_STORAGE_AREA: JsonStorageAreaExecutor,
     READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonExecutor,
     ADD_PROPERTY_TO_JSON: AddPropertyToJsonExecutor,
     MERGE_TWO_JSON: MergeTwoJsonExecutor,
