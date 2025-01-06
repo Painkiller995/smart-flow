@@ -12,7 +12,7 @@ export async function JsonStorageAreaExecutor(
       return false;
     }
 
-    environment.setOutput('JSON', JSON.stringify(JsonData));
+    environment.setOutput('JSON', JsonData);
     return true;
   } catch (err: any) {
     environment.log.error(err.message);
