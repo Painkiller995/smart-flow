@@ -16,6 +16,8 @@ import { PageToHtmlTask } from './page-to-html';
 import { ProcessDataWithOpenAiTask } from './process-data-with-open-ai';
 import { ReadPropertyFromJsonTask } from './read-property-from-json';
 import { ScrollToElementTask } from './scroll-to-element';
+import { SendEmailTask } from './send-email';
+import { StoreDataTask } from './store-data';
 import { WaitForElementTask } from './wait-for-element';
 
 type Registry = {
@@ -40,4 +42,6 @@ export const TaskRegistry: Registry = {
   DELIVER_VIA_WEBHOOK: DeliverViaWebhookTask,
   EVALUATE_STRING: EvaluateStringTask,
   EVALUATE_TIME: EvaluateTimeTask,
+  SEND_EMAIL: SendEmailTask,
+  STORE_DATA: StoreDataTask,
 };

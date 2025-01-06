@@ -25,6 +25,7 @@ const TaskMenu = () => {
           <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.PROCESS_DATA_WITH_OPEN_AI} />
+            <TaskMenuButton taskType={TaskType.STORE_DATA} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="json-data">
@@ -34,6 +35,21 @@ const TaskMenu = () => {
             <TaskMenuButton taskType={TaskType.ADD_PROPERTY_TO_JSON} />
             <TaskMenuButton taskType={TaskType.READ_PROPERTY_FROM_JSON} />
             <TaskMenuButton taskType={TaskType.MERGE_TWO_JSON} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="integrations">
+          <AccordionTrigger className="font-bold">Integrations</AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.EXECUTE_REQUEST} />
+            <TaskMenuButton taskType={TaskType.DELIVER_VIA_WEBHOOK} />
+            <TaskMenuButton taskType={TaskType.SEND_EMAIL} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="utility">
+          <AccordionTrigger className="font-bold">Utility</AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.EVALUATE_STRING} />
+            <TaskMenuButton taskType={TaskType.EVALUATE_TIME} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="browser">
@@ -47,20 +63,6 @@ const TaskMenu = () => {
             <TaskMenuButton taskType={TaskType.CLICK_ELEMENT} />
             <TaskMenuButton taskType={TaskType.SCROLL_TO_ELEMENT} />
             <TaskMenuButton taskType={TaskType.NAVIGATE_URL} />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="integrations">
-          <AccordionTrigger className="font-bold">Integrations</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-1">
-            <TaskMenuButton taskType={TaskType.EXECUTE_REQUEST} />
-            <TaskMenuButton taskType={TaskType.DELIVER_VIA_WEBHOOK} />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="utility">
-          <AccordionTrigger className="font-bold">Utility</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-1">
-            <TaskMenuButton taskType={TaskType.EVALUATE_STRING} />
-            <TaskMenuButton taskType={TaskType.EVALUATE_TIME} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

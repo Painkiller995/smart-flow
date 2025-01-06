@@ -16,6 +16,8 @@ export enum TaskType {
     DELIVER_VIA_WEBHOOK = "DELIVER_VIA_WEBHOOK",
     EVALUATE_STRING = "EVALUATE_STRING",
     EVALUATE_TIME = "EVALUATE_TIME",
+    SEND_EMAIL = "SEND_EMAIL",
+    STORE_DATA = "STORE_DATA",
 }
 
 export enum TaskParamType {
