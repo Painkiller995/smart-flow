@@ -1,13 +1,8 @@
-import { BadgeInfoIcon, BotIcon, ChartAreaIcon, CoinsIcon, HomeIcon, Layers2Icon, ShieldCheckIcon } from "lucide-react";
+import { BadgeInfoIcon, BotIcon, ChartAreaIcon, CoinsIcon, Layers2Icon, ShieldCheckIcon } from "lucide-react";
 
 export const signInRoute = '/sign-in'
 
 export const routes = [
-    {
-        href: "",
-        label: "Home",
-        icon: HomeIcon,
-    },
     {
         href: "workflows",
         label: "Workflows",
