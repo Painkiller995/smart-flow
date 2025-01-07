@@ -1,7 +1,9 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { ImagesSlider } from '@/components/ui/images-slider';
 import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Hero() {
   const words = [
@@ -45,17 +47,18 @@ export default function Hero() {
         }}
         className="z-50 flex flex-col items-center justify-center"
       >
-        <motion.p className="bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text py-4 text-center text-xl font-bold text-transparent md:text-6xl">
-          The hero section slideshow <br /> nobody asked for
-        </motion.p>
         <TypewriterEffectSmooth words={words} />
         <div className="flex flex-col space-x-0 space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-          <button className="h-10 w-40 rounded-xl border border-transparent bg-black text-sm text-white dark:border-white">
-            Join now
-          </button>
-          <button className="h-10 w-40 rounded-xl border border-black bg-white text-sm text-black">
-            Signup
-          </button>
+          <Link href={'/sign-in'}>
+            <Button className="h-10 w-40 rounded-xl border border-transparent border-white bg-black text-sm text-white">
+              Sign in
+            </Button>
+          </Link>
+          <Link href={'/sign-up'}>
+            <Button className="h-10 w-40 rounded-xl border border-transparent border-white bg-white text-sm text-black">
+              Signup
+            </Button>
+          </Link>
         </div>
       </motion.div>
     </ImagesSlider>

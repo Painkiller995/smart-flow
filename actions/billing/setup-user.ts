@@ -26,5 +26,5 @@ export async function SetupUser() {
         })
     }
 
-    redirect("/")
+    redirect("/workflows")
 }
