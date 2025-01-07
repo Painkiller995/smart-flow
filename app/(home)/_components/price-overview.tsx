@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface PriceOverviewProps {
@@ -7,6 +8,18 @@ interface PriceOverviewProps {
     title: string;
     subTitle: string;
     features: string[];
+    buttonTitle: string;
+    buttonVariant:
+      | 'link'
+      | 'default'
+      | 'destructive'
+      | 'outline'
+      | 'secondary'
+      | 'ghost'
+      | 'sidebarItem'
+      | 'sidebarActiveItem'
+      | null
+      | undefined;
   }>;
 }
 
@@ -14,7 +27,7 @@ const PriceOverview = ({ pricingDetails }: PriceOverviewProps) => {
   if (!pricingDetails) return null;
 
   return (
-    <div className="mx-auto grid max-w-[83rem] grid-cols-1 items-center gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div className="mx-auto grid max-w-[83rem] grid-cols-1 items-center gap-4 md:grid-cols-2 xl:grid-cols-2">
       {pricingDetails.map((pricingDetail) => (
         <Card key={pricingDetail.title}>
           <CardHeader>
@@ -42,7 +55,7 @@ const PriceOverview = ({ pricingDetails }: PriceOverviewProps) => {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    className="h-6 w-5 flex-none text-emerald-600"
+                    className="h-6 w-5 flex-none text-blue-600"
                     aria-hidden="true"
                   >
                     <path
@@ -55,6 +68,9 @@ const PriceOverview = ({ pricingDetails }: PriceOverviewProps) => {
                 </li>
               ))}
             </ul>
+            <Button variant={pricingDetail.buttonVariant} className="mt-8 w-full">
+              {pricingDetail.buttonTitle}
+            </Button>
           </CardContent>
         </Card>
       ))}
