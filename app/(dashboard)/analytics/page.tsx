@@ -11,14 +11,14 @@ import ExecutionStatusChart from './_components/execution-status-chart';
 import PeriodSelector from './_components/period-selector';
 import StatsCard from './_components/stats-card';
 
-interface HomePageProps {
+interface AnalyticsPageProps {
   searchParams: Promise<{
     month?: string;
     year?: string;
   }>;
 }
 
-const HomePage = async ({ searchParams }: HomePageProps) => {
+const AnalyticsPage = async ({ searchParams }: AnalyticsPageProps) => {
   const currentDate = new Date();
 
   const { month, year } = await searchParams;
@@ -93,4 +93,4 @@ async function CreditsUsageInPeriod({ selectedPeriod }: { selectedPeriod: Period
   );
 }
 
-export default HomePage;
+export default AnalyticsPage;
