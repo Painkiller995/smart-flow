@@ -2,7 +2,7 @@
 
 import { AnimatedTooltip } from '@/components/ui/animated-tooltip';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
 import Link from 'next/link';
 
@@ -18,16 +18,13 @@ interface AboutMeProps {
 const AboutMe = ({ people }: AboutMeProps) => {
   return (
     <Card className="w-full pt-2">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">Projects:</CardTitle>
+      <CardHeader className="flex flex-row items-center gap-7">
+        <AnimatedTooltip items={people} />
+        <h1 className="text-3xl font-bold">Hi There!</h1>
       </CardHeader>
       <CardContent>
         <div className="flex w-full">
           <div className="flex flex-col space-y-5">
-            <div className="flex flex-row items-center gap-7">
-              <AnimatedTooltip items={people} />
-              <h1 className="text-3xl font-bold">Hi There!</h1>
-            </div>
             <p className="text-lg text-muted-foreground">
               I hope you enjoy exploring this project and find the implementation that meets your
               needs. Your feedback is highly appreciated, as it helps me enhance my skills and
