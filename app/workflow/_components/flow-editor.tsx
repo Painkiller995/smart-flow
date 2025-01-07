@@ -28,7 +28,7 @@ interface EditorProps {
 }
 
 const nodeTypes = {
-  AutoFLowNode: NodeComponent,
+  SmartFlowNode: NodeComponent,
 };
 
 const edgeTypes = {

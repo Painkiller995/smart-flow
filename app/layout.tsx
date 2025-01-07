@@ -1,25 +1,24 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { AppProviders } from "@/components/providers/app-providers";
-import { signInRoute } from "@/config/routes";
-import { Toaster } from "@/components/ui/sonner";
+import { AppProviders } from '@/components/providers/app-providers';
+import { signInRoute } from '@/config/routes';
+import { ClerkProvider } from '@clerk/nextjs';
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import './globals.css';
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+  src: './fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900',
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+  src: './fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900',
 });
 
 export const metadata: Metadata = {
-  title: "AutoFlow",
-  description: "AutoFlow des here",
+  title: 'SmartFlow',
+  description: 'SmartFlow des here',
 };
 
 export default function RootLayout({
@@ -32,15 +31,12 @@ export default function RootLayout({
       afterSignOutUrl={signInRoute}
       appearance={{
         elements: {
-          formButtonPrimary:
-            "bg-primary hover:bg-primary/90 text-sm !shadow-none",
+          formButtonPrimary: 'bg-primary hover:bg-primary/90 text-sm !shadow-none',
         },
       }}
     >
       <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <AppProviders>{children}</AppProviders>
         </body>
       </html>
