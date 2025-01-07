@@ -1,6 +1,7 @@
 'use client';
 
 import Logo from '@/components/logo';
+import { ThemeModeToggle } from '@/components/theme-mode-toggle';
 import { Separator } from '@/components/ui/separator';
 
 function Layout({
@@ -10,11 +11,12 @@ function Layout({
 }>) {
   return (
     <div className="flex h-screen w-full flex-col">
-      {children}
-      <Separator />
-      <footer className="flex items-center justify-between p-2">
+      <div className="flex items-center justify-between p-2">
         <Logo iconSize={16} fontSize="text-xl" />
-      </footer>
+        <ThemeModeToggle />
+      </div>
+      <Separator />
+      {children}
     </div>
   );
 }
