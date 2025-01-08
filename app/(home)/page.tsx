@@ -8,10 +8,16 @@ interface HomePageProps {}
 
 const HomePage = ({}: HomePageProps) => {
   const title: HeroProps['title'] = [
-    { text: 'AI' },
-    { text: 'Powered' },
-    { text: 'Automated' },
-    { text: 'Workflows', className: 'text-blue-500 dark:text-blue-500' },
+    {
+      text: 'AI',
+      className: 'text-2xl font-bold sm:text-3xl md:text-5xl',
+    },
+    { text: 'Powered', className: 'text-2xl font-bold sm:text-3xl md:text-5xl' },
+    { text: 'Automated', className: 'text-2xl font-bold sm:text-3xl md:text-5xl' },
+    {
+      text: 'Workflows',
+      className: 'text-2xl font-bold sm:text-3xl md:text-5xl text-blue-500 dark:text-blue-500',
+    },
   ];
 
   const images = [
