@@ -20,6 +20,7 @@ export type PriceOverviewProps = {
       | 'sidebarActiveItem'
       | null
       | undefined;
+    onClick: () => void;
   }>;
 };
 
@@ -29,7 +30,7 @@ const PriceOverview = ({ pricingDetails }: PriceOverviewProps) => {
   return (
     <div className="mx-auto grid max-w-[83rem] grid-cols-1 items-center gap-4 md:grid-cols-2 xl:grid-cols-2">
       {pricingDetails.map((pricingDetail) => (
-        <Card key={pricingDetail.title}>
+        <Card className="h-full" key={pricingDetail.title}>
           <CardHeader>
             <CardTitle className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
               {pricingDetail.title}
@@ -68,7 +69,11 @@ const PriceOverview = ({ pricingDetails }: PriceOverviewProps) => {
                 </li>
               ))}
             </ul>
-            <Button variant={pricingDetail.buttonVariant} className="mt-8 w-full">
+            <Button
+              onClick={pricingDetail.onClick}
+              variant={pricingDetail.buttonVariant}
+              className="mt-8 w-full"
+            >
               {pricingDetail.buttonTitle}
             </Button>
           </CardContent>

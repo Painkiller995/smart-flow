@@ -1,36 +1,52 @@
+'use client';
+
 import Hero from './_components/hero';
 import PriceOverview, { PriceOverviewProps } from './_components/price-overview';
 import { Usage } from './_components/usage';
 
 interface HomePageProps {}
 
-const HomePage = async ({}: HomePageProps) => {
+const HomePage = ({}: HomePageProps) => {
   const pricingDetails: PriceOverviewProps['pricingDetails'] = [
     {
-      title: 'Free',
-      subTitle: 'All the components that are freely available on the website are free to use.',
+      title: 'Credit-Based',
+      subTitle:
+        'Pay as you go. Just sign in and purchase the package that fits your needs and usage capacity.',
       features: [
-        'A growing library of awesome components',
-        'React / Next.js / Tailwind CSS code',
-        'Serves a wide variety of audience.',
-        'MIT Licence. Personal or commercial projects.',
-        'Contact over chat for support',
+        'Ideal for personal use or small teams.',
+        'Get access to the latest workflow tasks as they become available.',
+        'Affordable pricing designed to fit individual and small-scale needs.',
+        'Instant access upon purchase with no waiting time.',
+        'Track your usage and remaining credits through a user-friendly dashboard.',
       ],
-      buttonTitle: 'Contact Me',
+      buttonTitle: 'Sign in',
       buttonVariant: 'default',
+      onClick: () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      },
     },
     {
-      title: 'Free2',
-      subTitle: 'All the components that are freely available on the website are free to use.',
+      title: 'Enterprise',
+      subTitle:
+        'Based in Norway? Partner with me to sign a license agreement that grants you access to the full source code. Host the project on your local server or preferred cloud provider to reduce costs and maintain full control.',
       features: [
-        'A growing library of awesome components',
-        'React / Next.js / Tailwind CSS code',
-        'Serves a wide variety of audience.',
-        'MIT Licence. Personal or commercial projects.',
-        'Contact over chat for support',
+        'Significantly reduce hosting costs by managing it in-house.',
+        'Request custom tasks to integrate your systems with SmartFlow seamlessly.',
+        'Ensure high-level security with data stored exclusively on your own servers.',
+        'Comprehensive documentation to help you add and manage custom tasks.',
+        'Collaborate directly with me to tailor the project to your specific needs.',
       ],
       buttonTitle: 'Contact Me',
       buttonVariant: 'outline',
+      onClick: () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      },
     },
   ];
   return (
