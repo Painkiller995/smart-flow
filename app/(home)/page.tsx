@@ -61,10 +61,8 @@ const HomePage = ({}: HomePageProps) => {
       buttonTitle: 'Contact Me',
       buttonVariant: 'outline',
       onClick: () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
+        window.location.href =
+          'mailto:fahddaher995@gmail.com?subject=Enterprise License Agreement Inquiry';
       },
     },
   ];
