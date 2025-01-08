@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import Logo from "@/components/logo";
-import { Separator } from "@/components/ui/separator";
+import Logo from '@/components/logo';
+import { ThemeModeToggle } from '@/components/theme-mode-toggle';
+import { Separator } from '@/components/ui/separator';
 
 function Layout({
   children,
@@ -9,11 +10,12 @@ function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col w-full h-screen">
+    <div className="flex h-screen w-full flex-col">
       {children}
       <Separator />
       <footer className="flex items-center justify-between p-2">
         <Logo iconSize={16} fontSize="text-xl" />
+        <ThemeModeToggle />
       </footer>
     </div>
   );

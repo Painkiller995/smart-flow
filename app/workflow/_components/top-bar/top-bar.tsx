@@ -2,7 +2,7 @@
 
 import TooltipWrapper from '@/components/tooltip-wrapper';
 import { Button } from '@/components/ui/button';
-import { ChevronLeftIcon } from 'lucide-react';
+import { BotIcon, ChevronLeftIcon, WorkflowIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import ExecuteButton from './execute-button';
@@ -29,7 +29,7 @@ const TopBar = ({
 
   return (
     <header className="sticky top-0 z-10 flex h-[60px] w-full border-separate justify-between border-b-2 bg-background p-2">
-      <div className="flex flex-1 gap-1">
+      <div className="flex flex-1 gap-2">
         <TooltipWrapper content="Back">
           <Button
             variant="ghost"
@@ -47,6 +47,28 @@ const TopBar = ({
             <p className="truncate text-ellipsis text-xs text-muted-foreground">{subtitle}</p>
           )}
         </div>
+        <TooltipWrapper content="Workflows">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => {
+              router.push('/workflows');
+            }}
+          >
+            <WorkflowIcon size={20} />
+          </Button>
+        </TooltipWrapper>
+        <TooltipWrapper content="Agents">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => {
+              router.push('/ai-agents');
+            }}
+          >
+            <BotIcon size={20} />
+          </Button>
+        </TooltipWrapper>
       </div>
       <NavigationTabs workflowId={workflowId} />
       <div className="flex flex-1 justify-end gap-1">
