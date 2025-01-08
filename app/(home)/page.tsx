@@ -99,7 +99,7 @@ const HomePage = ({}: HomePageProps) => {
       <Hero title={title} images={images} />
       <div className="pb-40 md:px-4 md:pt-20 lg:px-8">
         <div className="mx-auto max-w-2xl text-center lg:max-w-4xl">
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
+          <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
             Discover Limitless Possibilities
           </h1>
         </div>
