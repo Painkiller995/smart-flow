@@ -39,8 +39,8 @@ interface WorkflowCardProps {
 }
 
 const statusColors = {
-  [WorkflowStatus.DRAFT]: 'bg-yellow-400 text-yellow-600',
-  [WorkflowStatus.PUBLISHED]: 'bg-primary',
+  [WorkflowStatus.DRAFT]: 'bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 text-teal-800',
+  [WorkflowStatus.PUBLISHED]: 'bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white',
 };
 
 const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
