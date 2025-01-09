@@ -13,7 +13,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CreditsPack, PackId } from '@/types/billing';
 import { useMutation } from '@tanstack/react-query';
-import { CoinsIcon, CreditCard } from 'lucide-react';
+import { CreditCard, GemIcon } from 'lucide-react';
 import { useState } from 'react';
 
 const CreditsPurchase = () => {
@@ -33,7 +33,7 @@ const CreditsPurchase = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-2xl font-bold">
-          <CoinsIcon className="h-6 w-6 text-primary" />
+          <GemIcon className="h-6 w-6 text-primary" />
           Purchase Credits
         </CardTitle>
         <CardDescription>Select the number of credits you want to purchase</CardDescription>

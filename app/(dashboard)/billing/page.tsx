@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
-import { ArrowLeftRightIcon, CoinsIcon } from 'lucide-react';
+import { ArrowLeftRightIcon, GemIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import CreditsPurchase from './_components/credits-purchase';
 import CreditsUsageChart from './_components/credits-usage-chart';
@@ -48,7 +48,7 @@ async function BalanceCard() {
               <ReactCountupWrapper value={userBalance} />
             </p>
           </div>
-          <CoinsIcon size={140} className="absolute bottom-0 right-0 text-primary opacity-20" />
+          <GemIcon size={140} className="absolute bottom-0 right-0 text-primary opacity-20" />
         </div>
       </CardContent>
       <CardFooter className="flex justify-between text-sm text-muted-foreground">

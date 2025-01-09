@@ -4,7 +4,7 @@ import { GetStatsCardsValues } from '@/actions/analytics/get-stats-cards-values'
 import { GetWorkflowExecutionStats } from '@/actions/analytics/get-workflow-execution-stats';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
-import { CirclePlayIcon, CoinsIcon, WaypointsIcon } from 'lucide-react';
+import { CirclePlayIcon, GemIcon, WaypointsIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import CreditsUsageChart from '../billing/_components/credits-usage-chart';
 import ExecutionStatusChart from './_components/execution-status-chart';
@@ -62,7 +62,7 @@ async function StatsCards({ selectedPeriod }: { selectedPeriod: Period }) {
     <div className="min-h-[120px]: grid gap-3 lg:grid-cols-3 lg:gap-8">
       <StatsCard title="Workflow executions" value={data.workflowExecution} icon={CirclePlayIcon} />
       <StatsCard title="Phase executions" value={data.phaseExecutions} icon={WaypointsIcon} />
-      <StatsCard title="Credits consumed" value={data.creditsConsumed} icon={CoinsIcon} />
+      <StatsCard title="Credits consumed" value={data.creditsConsumed} icon={GemIcon} />
     </div>
   );
 }

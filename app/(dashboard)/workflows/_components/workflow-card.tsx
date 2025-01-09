@@ -18,9 +18,9 @@ import {
 import { cn } from '@/lib/utils';
 import { WorkflowStatus } from '@/types/workflow';
 import {
-  CoinsIcon,
   CornerDownRight,
   FileTextIcon,
+  GemIcon,
   MoreVerticalIcon,
   MoveRightIcon,
   PlayIcon,
@@ -169,7 +169,7 @@ function ScheduleSection({
       <TooltipWrapper content="Credit consumption for full run">
         <div className="gap3 flex items-center">
           <Badge variant="outline" className="space-x-2 rounded-sm text-muted-foreground">
-            <CoinsIcon className="h-4 w-4" />
+            <GemIcon className="h-4 w-4" />
             <span>{creditCost}</span>
           </Badge>
         </div>

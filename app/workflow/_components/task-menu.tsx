@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { TaskRegistry } from '@/lib/workflow/task/registry';
 import { TaskType } from '@/types/task';
-import { CoinsIcon } from 'lucide-react';
+import { GemIcon } from 'lucide-react';
 import React from 'react';
 
 const TaskMenu = () => {
@@ -94,7 +94,7 @@ function TaskMenuButton({ taskType }: { taskType: TaskType }) {
         {task.label}
       </div>
       <Badge className="flex items-center gap-2 text-muted-foreground" variant="outline">
-        <CoinsIcon size={16} />
+        <GemIcon size={16} />
         {task.credits}
       </Badge>
     </Button>

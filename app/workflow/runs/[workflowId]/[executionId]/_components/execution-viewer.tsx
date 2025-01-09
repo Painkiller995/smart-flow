@@ -28,7 +28,7 @@ import {
   CalendarIcon,
   CircleDashedIcon,
   ClockIcon,
-  CoinsIcon,
+  GemIcon,
   Loader2Icon,
   LucideIcon,
   WorkflowIcon,
@@ -109,7 +109,7 @@ const ExecutionViewer = ({ initialData }: ExecutionViewerProps) => {
           />
           <ExecutionLabel
             label="Credits consumed"
-            icon={CoinsIcon}
+            icon={GemIcon}
             value={<ReactCountupWrapper value={creditsConsumed} />}
           />
         </div>
@@ -162,7 +162,7 @@ const ExecutionViewer = ({ initialData }: ExecutionViewerProps) => {
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="space-x-4">
                 <div className="flex items-center gap-1">
-                  <CoinsIcon size={18} className="stroke-muted-foreground" />
+                  <GemIcon size={18} className="stroke-muted-foreground" />
                   <span>Credits</span>
                 </div>
                 <span>{phaseDetails.data.creditsConsumed}</span>

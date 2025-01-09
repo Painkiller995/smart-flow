@@ -9,7 +9,7 @@ import { TaskRegistry } from '@/lib/workflow/task/registry';
 import { AppNode } from '@/types/app-node';
 import { TaskType } from '@/types/task';
 import { useReactFlow } from '@xyflow/react';
-import { CoinsIcon, CopyIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
+import { CopyIcon, GemIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -76,7 +76,7 @@ const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }
       </div>
       <div className="flex items-center gap-1">
         <Badge className="flex items-center gap-2 text-xs">
-          <CoinsIcon size={16}></CoinsIcon>
+          <GemIcon size={16}></GemIcon>
           {task.credits}
         </Badge>
         <TooltipWrapper content="Entry Point">

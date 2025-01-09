@@ -14,7 +14,7 @@ import { DatesToDurationString } from '@/lib/helper/dates';
 import { WorkflowExecutionStatus } from '@/types/workflow';
 import { useQuery } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
-import { CoinsIcon } from 'lucide-react';
+import { GemIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import ExecutionStatusIndicator from './execution-status-indicator';
 
@@ -83,7 +83,7 @@ function ExecutionsTable({
                 <TableCell>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">
-                      <CoinsIcon size={16} className="text-primary" />
+                      <GemIcon size={16} className="text-primary" />
                       <span className="font-semibold capitalize">{execution.creditsConsumed}</span>
                     </div>
                     <div className="mx-5 text-xs text-muted-foreground">Credits</div>
