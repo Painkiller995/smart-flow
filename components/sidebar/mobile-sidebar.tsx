@@ -47,7 +47,14 @@ const MobileSidebar = () => {
                   })}
                   onClick={() => setIsOpen((prev) => !prev)}
                 >
-                  <route.icon size={20} /> {route.label}
+                  <route.icon
+                    style={{
+                      height: '20px',
+                      width: '20px',
+                    }}
+                    size={20}
+                  />{' '}
+                  {route.label}
                 </Link>
               ))}
             </div>

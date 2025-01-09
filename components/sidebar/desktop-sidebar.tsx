@@ -20,7 +20,7 @@ const DesktopSidebar = () => {
       <div className="p-2">
         <UserAvailableBadge />
       </div>
-      <div className="flex flex-col gap-1 p-2">
+      <div className="flex flex-col justify-start gap-2 p-2">
         {routes.map((route) => (
           <Link
             key={route.href}
@@ -32,7 +32,14 @@ const DesktopSidebar = () => {
                   : 'sidebarItem',
             })}
           >
-            <route.icon size={20} /> {route.label}
+            <route.icon
+              style={{
+                height: '25px',
+                width: '25px',
+              }}
+              size={25}
+            />
+            {route.label}
           </Link>
         ))}
       </div>
