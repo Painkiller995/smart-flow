@@ -12,7 +12,7 @@ function Layout({
   return (
     <div className="flex h-screen w-full flex-col">
       <div className="flex items-center justify-between p-2">
-        <Logo iconSize={16} fontSize="text-xl" />
+        <Logo iconSize={25} fontSize="text-xl" />
         <ThemeModeToggle />
       </div>
       <Separator />
