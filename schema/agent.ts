@@ -15,6 +15,7 @@ export const createAgentSchema = z.object({
         .min(1, { message: "Model name must have at least 1 character." })
         .max(50, { message: "Model name must not exceed 50 characters." }),
     temperature: z
+        .coerce
         .number()
         .min(1)
         .default(1),
