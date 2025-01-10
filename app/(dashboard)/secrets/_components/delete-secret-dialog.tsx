@@ -47,10 +47,12 @@ const DeleteSecretDialog = ({ secretName }: DeleteSecretDialogProps) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription className="space-x-1 space-y-1">
-            Deleting this item is irreversible.
+          <AlertDialogDescription>
+            Deleting this item is a permanent action and cannot be undone.
             <br />
-            To confirm, please type <strong>{secretName}</strong> in the field below.
+            To proceed, please type{' '}
+            <span className="inline font-bold text-red-500">{secretName}</span> in the field below
+            to confirm.
             <Input
               value={confirmText}
               onChange={(e) => {
