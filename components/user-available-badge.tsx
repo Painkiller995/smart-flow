@@ -1,4 +1,4 @@
-import { GetAvailableCredits } from '@/actions/billing/get-available-credits';
+import { GetAvailableCredits } from '@/actions/credits/get-available-credits';
 import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { GemIcon, Loader2Icon } from 'lucide-react';
@@ -15,7 +15,7 @@ const UserAvailableBadge = () => {
 
   return (
     <Link
-      href={'/billing'}
+      href={'/credits'}
       className={cn('w-full items-center space-x-2', buttonVariants({ variant: 'outline' }))}
     >
       <GemIcon size={20} className="text-primary" />

@@ -1,6 +1,6 @@
 import { GetCreditsUsageInPeriod } from '@/actions/analytics/get-credits-usage-in-period';
-import { GetAvailableCredits } from '@/actions/billing/get-available-credits';
-import { GetUserPurchaseHistory } from '@/actions/billing/get-user-purchase-history';
+import { GetAvailableCredits } from '@/actions/credits/get-available-credits';
+import { GetUserPurchaseHistory } from '@/actions/credits/get-user-purchase-history';
 import ReactCountupWrapper from '@/components/react-countup-wrapper';
 import {
   Card,
@@ -21,7 +21,7 @@ import InvoiceButton from './_components/invoice-button';
 const BillingPage = () => {
   return (
     <div className="mx-auto space-y-8 p-4">
-      <h1 className="text-3xl font-bold">Billing</h1>
+      <h1 className="text-3xl font-bold">credits</h1>
       <Suspense fallback={<Skeleton className="h-[166px] w-full" />}>
         <BalanceCard />
       </Suspense>

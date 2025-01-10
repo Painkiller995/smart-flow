@@ -1,6 +1,6 @@
 'use client';
 
-import { DownloadInvoice } from '@/actions/billing/download-invoice';
+import { DownloadInvoice } from '@/actions/credits/download-invoice';
 import { Button } from '@/components/ui/button';
 import { useMutation } from '@tanstack/react-query';
 import { Loader2Icon } from 'lucide-react';

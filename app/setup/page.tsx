@@ -1,4 +1,4 @@
-import { SetupUser } from '@/actions/billing/setup-user';
+import { SetupUser } from '@/actions/credits/setup-user';
 
 const SetupPage = async () => {
   return await SetupUser();

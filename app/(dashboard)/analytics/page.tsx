@@ -6,7 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
 import { CirclePlayIcon, GemIcon, WaypointsIcon } from 'lucide-react';
 import { Suspense } from 'react';
-import CreditsUsageChart from '../billing/_components/credits-usage-chart';
+import CreditsUsageChart from '../credits/_components/credits-usage-chart';
 import ExecutionStatusChart from './_components/execution-status-chart';
 import PeriodSelector from './_components/period-selector';
 import StatsCard from './_components/stats-card';

@@ -24,8 +24,8 @@ export const routes = [
         icon: ChartAreaIcon,
     },
     {
-        href: "billing",
-        label: "Billing",
+        href: "credits",
+        label: "Credits",
         icon: GemIcon
     },
     {
@@ -33,4 +33,4 @@ export const routes = [
         label: "About",
         icon: BadgeInfoIcon
     }
-] 
+]

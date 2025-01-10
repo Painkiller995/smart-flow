@@ -2,7 +2,7 @@
 
 import { getAppUrl } from "@/lib/helper/app-url"
 import { stripe } from "@/lib/stripe/stripe"
-import { getCreditsPack, PackId } from "@/types/billing"
+import { getCreditsPack, PackId } from "@/types/credits"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 
@@ -27,8 +27,8 @@ export async function PurchaseCredits(packId: PackId) {
         invoice_creation: {
             enabled: true
         },
-        success_url: getAppUrl('billing'),
-        cancel_url: getAppUrl('billing'),
+        success_url: getAppUrl('credits'),
+        cancel_url: getAppUrl('credits'),
         metadata: {
             userId,
             packId

@@ -1,4 +1,4 @@
-import { getCreditsPack, PackId } from "@/types/billing";
+import { getCreditsPack, PackId } from "@/types/credits";
 import "server-only";
 import Stripe from "stripe";
 import prisma from "../prisma";

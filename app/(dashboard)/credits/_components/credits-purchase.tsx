@@ -1,5 +1,5 @@
 'use client';
-import { PurchaseCredits } from '@/actions/billing/purchase-credits';
+import { PurchaseCredits } from '@/actions/credits/purchase-credits';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { CreditsPack, PackId } from '@/types/billing';
+import { CreditsPack, PackId } from '@/types/credits';
 import { useMutation } from '@tanstack/react-query';
 import { CreditCard, GemIcon } from 'lucide-react';
 import { useState } from 'react';
