@@ -14,6 +14,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }) => {
+  const hideCreditIcon = process.env.NEXT_PUBLIC_DISABLE_CREDIT_UI_COMPONENTS === 'true';
+
   const [isEntryPoint, setIsEntryPoint] = useState<boolean>(false);
 
   const task = TaskRegistry[taskType];
@@ -75,10 +77,12 @@ const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }
         <p className="text-xs font-bold uppercase text-muted-foreground">{task.label}</p>
       </div>
       <div className="flex items-center gap-1">
-        <Badge className="flex items-center gap-2 text-xs">
-          <GemIcon size={16}></GemIcon>
-          {task.credits}
-        </Badge>
+        {!hideCreditIcon && (
+          <Badge className="flex items-center gap-2 text-xs">
+            <GemIcon size={16}></GemIcon>
+            {task.credits}
+          </Badge>
+        )}
         <TooltipWrapper content="Entry Point">
           <div className="flex items-center space-x-2">
             <Switch id={nodeId} checked={isEntryPoint} onClick={toggleEntryPoint} />
