@@ -73,6 +73,8 @@ const TaskMenu = () => {
 export default TaskMenu;
 
 function TaskMenuButton({ taskType }: { taskType: TaskType }) {
+  const hideCreditIcon = process.env.NEXT_PUBLIC_DISABLE_CREDIT_UI_COMPONENTS === 'true';
+
   const task = TaskRegistry[taskType];
 
   const onDragStart = (event: React.DragEvent, type: TaskType) => {
@@ -93,10 +95,12 @@ function TaskMenuButton({ taskType }: { taskType: TaskType }) {
         <task.icon size={20} />
         {task.label}
       </div>
-      <Badge className="flex items-center gap-2 text-muted-foreground" variant="outline">
-        <GemIcon size={16} />
-        {task.credits}
-      </Badge>
+      {!hideCreditIcon && (
+        <Badge className="flex items-center gap-2 text-muted-foreground" variant="outline">
+          <GemIcon size={16} />
+          {task.credits}
+        </Badge>
+      )}
     </Button>
   );
 }
