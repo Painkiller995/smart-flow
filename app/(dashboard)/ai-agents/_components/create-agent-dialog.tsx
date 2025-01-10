@@ -150,7 +150,16 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
                       <p className="text-xs text-primary">(required)</p>
                     </FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input
+                        {...field}
+                        type="number"
+                        className="[&::-webkit-inner-spin-button]:appearance-none"
+                        onKeyDown={(e) => {
+                          if (e.key === '-' || e.key === 'e') {
+                            e.preventDefault();
+                          }
+                        }}
+                      />
                     </FormControl>
                     <FormDescription>Provide description</FormDescription>
                     <FormMessage />
