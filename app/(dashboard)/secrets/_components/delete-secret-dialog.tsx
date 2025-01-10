@@ -54,6 +54,7 @@ const DeleteSecretDialog = ({ secretName }: DeleteSecretDialogProps) => {
             <span className="inline font-bold text-red-500">{secretName}</span> in the field below
             to confirm.
             <Input
+              className="mt-2"
               value={confirmText}
               onChange={(e) => {
                 setConfirmText(e.target.value);
