@@ -1,21 +1,30 @@
 export enum TaskType {
+    // **Browser-related tasks**
     LAUNCH_BROWSER = "LAUNCH_BROWSER",
+    NAVIGATE_URL = "NAVIGATE_URL",
     PAGE_TO_HTML = "PAGE_TO_HTML",
     EXTRACT_TEXT_FROM_ELEMENT = "EXTRACT_TEXT_FROM_ELEMENT",
     FILL_INPUT = "FILL_INPUT",
     CLICK_ELEMENT = "CLICK_ELEMENT",
     WAIT_FOR_ELEMENT = "WAIT_FOR_ELEMENT",
     SCROLL_TO_ELEMENT = "SCROLL_TO_ELEMENT",
-    NAVIGATE_URL = "NAVIGATE_URL",
-    PROCESS_DATA_WITH_OPEN_AI = "PROCESS_DATA_WITH_OPEN_AI",
+
+    // **JSON manipulation tasks**
     JSON_STORAGE_AREA = "JSON_STORAGE_AREA",
     READ_PROPERTY_FROM_JSON = "READ_PROPERTY_FROM_JSON",
     ADD_PROPERTY_TO_JSON = "ADD_PROPERTY_TO_JSON",
     MERGE_TWO_JSON = "MERGE_TWO_JSON",
+
+    // **Data processing tasks**
+    PROCESS_DATA_WITH_OPEN_AI = "PROCESS_DATA_WITH_OPEN_AI", // Process data using OpenAI
+    EVALUATE_STRING = "EVALUATE_STRING", // Evaluate or process a string
+    EVALUATE_TIME = "EVALUATE_TIME", // Evaluate or calculate time-related information
+
+    // **Request and webhook tasks**
     EXECUTE_REQUEST = "EXECUTE_REQUEST",
     DELIVER_VIA_WEBHOOK = "DELIVER_VIA_WEBHOOK",
-    EVALUATE_STRING = "EVALUATE_STRING",
-    EVALUATE_TIME = "EVALUATE_TIME",
+
+    // **Miscellaneous tasks**
     SEND_EMAIL = "SEND_EMAIL",
     STORE_DATA = "STORE_DATA",
 }
