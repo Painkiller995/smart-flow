@@ -52,19 +52,6 @@ const TaskMenu = () => {
             <TaskMenuButton taskType={TaskType.EVALUATE_TIME} />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="browser">
-          <AccordionTrigger className="font-bold">Browser (Beta)</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-1">
-            <TaskMenuButton taskType={TaskType.LAUNCH_BROWSER} />
-            <TaskMenuButton taskType={TaskType.PAGE_TO_HTML} />
-            <TaskMenuButton taskType={TaskType.EXTRACT_TEXT_FROM_ELEMENT} />
-            <TaskMenuButton taskType={TaskType.FILL_INPUT} />
-            <TaskMenuButton taskType={TaskType.WAIT_FOR_ELEMENT} />
-            <TaskMenuButton taskType={TaskType.CLICK_ELEMENT} />
-            <TaskMenuButton taskType={TaskType.SCROLL_TO_ELEMENT} />
-            <TaskMenuButton taskType={TaskType.NAVIGATE_URL} />
-          </AccordionContent>
-        </AccordionItem>
       </Accordion>
     </aside>
   );

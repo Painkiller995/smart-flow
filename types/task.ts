@@ -16,9 +16,9 @@ export enum TaskType {
     MERGE_TWO_JSON = "MERGE_TWO_JSON",
 
     // **Data processing tasks**
-    PROCESS_DATA_WITH_OPEN_AI = "PROCESS_DATA_WITH_OPEN_AI", // Process data using OpenAI
-    EVALUATE_STRING = "EVALUATE_STRING", // Evaluate or process a string
-    EVALUATE_TIME = "EVALUATE_TIME", // Evaluate or calculate time-related information
+    PROCESS_DATA_WITH_OPEN_AI = "PROCESS_DATA_WITH_OPEN_AI",
+    EVALUATE_STRING = "EVALUATE_STRING",
+    EVALUATE_TIME = "EVALUATE_TIME",
 
     // **Request and webhook tasks**
     EXECUTE_REQUEST = "EXECUTE_REQUEST",
