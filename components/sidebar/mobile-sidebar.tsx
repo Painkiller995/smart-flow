@@ -2,6 +2,7 @@
 
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { routes } from '@/config/routes';
+import { cn } from '@/lib/utils';
 import { MenuIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -10,14 +11,17 @@ import Logo from '../logo';
 import { Button, buttonVariants } from '../ui/button';
 import UserAvailableBadge from '../user-available-badge';
 
-const MobileSidebar = () => {
+interface MobileSidebarProps {
+  allowDesktop?: boolean;
+}
+const MobileSidebar = ({ allowDesktop }: MobileSidebarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const activeRoute =
     routes.find((route) => route.href.length > 0 && pathname.includes(route.href)) || routes[0];
 
   return (
-    <div className="block border-separate bg-background md:hidden">
+    <div className={cn('block border-separate bg-background', allowDesktop ? '' : 'md:hidden')}>
       <nav className="container flex items-center justify-between px-0">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>

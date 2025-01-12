@@ -31,7 +31,7 @@ const TopBar = ({
   return (
     <header className="sticky top-0 z-10 flex h-[60px] w-full border-separate justify-between border-b-2 bg-background p-2">
       <div className="flex flex-1 gap-2">
-        <MobileSidebar />
+        <MobileSidebar allowDesktop />
         <TooltipWrapper content="Back">
           <Button
             variant="ghost"

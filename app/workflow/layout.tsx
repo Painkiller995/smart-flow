@@ -1,6 +1,5 @@
 'use client';
 
-import DesktopSidebar from '@/components/sidebar/desktop-sidebar';
 import { Separator } from '@/components/ui/separator';
 
 function Layout({
@@ -10,7 +9,6 @@ function Layout({
 }>) {
   return (
     <div className="flex h-screen">
-      <DesktopSidebar />
       <div className="flex h-screen w-full flex-col">
         {children}
         <Separator />
