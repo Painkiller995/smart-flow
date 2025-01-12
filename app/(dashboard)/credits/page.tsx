@@ -21,7 +21,7 @@ import InvoiceButton from './_components/invoice-button';
 const BillingPage = () => {
   return (
     <div className="mx-auto space-y-8 p-4">
-      <h1 className="text-3xl font-bold">credits</h1>
+      <h1 className="text-3xl font-bold">Credits</h1>
       <Suspense fallback={<Skeleton className="h-[166px] w-full" />}>
         <BalanceCard />
       </Suspense>

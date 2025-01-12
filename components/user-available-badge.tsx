@@ -6,7 +6,11 @@ import Link from 'next/link';
 import ReactCountupWrapper from './react-countup-wrapper';
 import { buttonVariants } from './ui/button';
 
-const UserAvailableBadge = () => {
+interface UserAvailableBadgeProps {
+  hideIcon?: boolean;
+}
+
+const UserAvailableBadge = ({ hideIcon }: UserAvailableBadgeProps) => {
   const query = useQuery({
     queryKey: ['user-available-credits'],
     queryFn: GetAvailableCredits,
@@ -18,7 +22,7 @@ const UserAvailableBadge = () => {
       href={'/credits'}
       className={cn('w-full items-center space-x-2', buttonVariants({ variant: 'outline' }))}
     >
-      <GemIcon size={20} className="text-primary" />
+      {!hideIcon && <GemIcon size={20} className="text-primary" />}
       <span className="font-semibold capitalize">
         {query.isLoading && <Loader2Icon className="h-4 w-4 animate-spin" />}
         {!query.isLoading && query.data && <ReactCountupWrapper value={query.data} />}
