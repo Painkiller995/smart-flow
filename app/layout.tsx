@@ -9,7 +9,7 @@ const font = DM_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'SmartFlow',
-  description: 'SmartFlow des here',
+  description: 'Automate workflows and streamline processes with SmartFlow.',
 };
 
 export default function RootLayout({
