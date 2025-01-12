@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 import { BotIcon, FilePlusIcon, Loader2, PencilIcon } from 'lucide-react';
 import { useCallback, useState } from 'react';
@@ -80,25 +80,24 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
           {triggerText ?? 'Create agent'}
         </Button>
       </DialogTrigger>
-      <DialogContent className="px-2">
+      <DialogContent className="max-h-full overflow-auto px-2">
         <CustomDialogHeader title={triggerText ?? 'Create agent'} icon={BotIcon} />
         <div className="p-6">
           <Form {...form}>
-            <form className="w-full space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
+            <form className="w-full space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center gap-1">
-                      Name:<p className="text-xs text-primary">(required)</p>
+                      Agent Name:<p className="text-xs text-primary">(required)</p>
                     </FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      Choose a descriptive and unique name, <br /> This name will be used to
-                      identify the agent
+                      Pick a unique name to identify the agent in the system.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -116,7 +115,9 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
                     <FormControl>
                       <Textarea className="resize-none" {...field} />
                     </FormControl>
-                    <FormDescription>Provide description</FormDescription>
+                    <FormDescription>
+                      Provide a description of the agent's role or functionality.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -132,10 +133,7 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Choose a descriptive and unique name, <br /> This name will be used to
-                      identify the agent
-                    </FormDescription>
+                    <FormDescription>Define the model the agent will use.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -161,7 +159,11 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
                         }}
                       />
                     </FormControl>
-                    <FormDescription>Provide description</FormDescription>
+                    <FormDescription>
+                      Set a temperature value for the agent&apos;s behavior. A higher value makes
+                      the agent&apos;s actions more creative, while a lower value makes it more
+                      deterministic
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -173,7 +175,6 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
             </form>
           </Form>
         </div>
-        <DialogDescription>Write something here</DialogDescription>
       </DialogContent>
     </Dialog>
   );
