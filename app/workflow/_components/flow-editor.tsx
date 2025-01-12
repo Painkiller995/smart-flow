@@ -150,7 +150,7 @@ const FlowEditor = ({ workflow }: EditorProps) => {
         isValidConnection={isValidConnection}
       >
         <Controls position="top-left" fitViewOptions={fitViewOptions} />
-        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+        <Background variant={BackgroundVariant.Cross} gap={12} size={1} />
       </ReactFlow>
     </main>
   );
