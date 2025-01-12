@@ -14,10 +14,7 @@ const Logo = ({ fontSize = 'text-2xl', iconSize = 35 }: LogoProps) => {
         <LogoIcon width={iconSize.toString() || '35'} height={iconSize.toString() || '35'} />
       </div>
       <div>
-        <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
-          Smart
-        </span>
-        <span className="text-stone-700 dark:text-stone-300">Flow</span>
+        <span className="text-stone-700 dark:text-stone-300">SmartFlow</span>
       </div>
     </Link>
   );
