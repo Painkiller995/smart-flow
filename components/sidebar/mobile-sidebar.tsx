@@ -46,8 +46,8 @@ const MobileSidebar = ({ allowDesktop }: MobileSidebarProps) => {
                   className={buttonVariants({
                     variant:
                       activeRoute && activeRoute.href === route.href
-                        ? 'sidebarActiveItem'
-                        : 'sidebarItem',
+                        ? 'sidebarMobileActiveItem'
+                        : 'sidebarMobileItem',
                   })}
                   onClick={() => setIsOpen((prev) => !prev)}
                 >

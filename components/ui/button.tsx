@@ -19,6 +19,10 @@ const buttonVariants = cva(
           'gap-2 !justify-center hover:bg-accent hover:bg-primary/80 hover:text-primary-foreground',
         sidebarActiveItem:
           'gap-2 !justify-center bg-primary text-primary-foreground hover:bg-primary/90',
+        sidebarMobileItem:
+          'gap-2 !justify-start hover:bg-accent hover:bg-primary/80 hover:text-primary-foreground',
+        sidebarMobileActiveItem:
+          'gap-2 !justify-start bg-primary text-primary-foreground hover:bg-primary/90',
       },
       size: {
         default: 'h-10 px-4 py-2',
