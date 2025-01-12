@@ -19,34 +19,35 @@ const DesktopSidebar = () => {
         <Logo hideText iconSize={25} />
       </div>
 
-      <TooltipWrapper content="Available credits" side="right">
-        <div className="p-2">
-          <UserAvailableBadge hideIcon />
+      <div className="flex h-5/6 flex-col justify-between">
+        <div className="flex flex-col justify-start gap-2 p-2">
+          {routes.map((route) => (
+            <TooltipWrapper key={route.href} content={route.label} side="right">
+              <Link
+                href={`/${route.href}`}
+                className={buttonVariants({
+                  variant:
+                    activeRoute && activeRoute.href === route.href
+                      ? 'sidebarActiveItem'
+                      : 'sidebarItem',
+                })}
+              >
+                <route.icon
+                  style={{
+                    height: '25px',
+                    width: '25px',
+                  }}
+                  size={25}
+                />
+              </Link>
+            </TooltipWrapper>
+          ))}
         </div>
-      </TooltipWrapper>
-
-      <div className="flex flex-col justify-start gap-2 p-2">
-        {routes.map((route) => (
-          <TooltipWrapper key={route.href} content={route.label} side="right">
-            <Link
-              href={`/${route.href}`}
-              className={buttonVariants({
-                variant:
-                  activeRoute && activeRoute.href === route.href
-                    ? 'sidebarActiveItem'
-                    : 'sidebarItem',
-              })}
-            >
-              <route.icon
-                style={{
-                  height: '25px',
-                  width: '25px',
-                }}
-                size={25}
-              />
-            </Link>
-          </TooltipWrapper>
-        ))}
+        <TooltipWrapper content="Available credits" side="right">
+          <div className="p-2">
+            <UserAvailableBadge hideIcon />
+          </div>
+        </TooltipWrapper>
       </div>
     </div>
   );
