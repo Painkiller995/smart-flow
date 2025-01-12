@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import Logo from '../logo';
 import TooltipWrapper from '../tooltip-wrapper';
 import { buttonVariants } from '../ui/button';
-import UserAvailableBadge from '../user-available-badge';
 
 const DesktopSidebar = () => {
   const pathname = usePathname();
@@ -14,7 +13,7 @@ const DesktopSidebar = () => {
     routes.find((route) => route.href.length > 0 && pathname.includes(route.href)) || routes[0];
 
   return (
-    <div className="relative hidden h-screen border-separate overflow-hidden border-r-2 bg-primary/5 text-muted-foreground dark:bg-secondary/30 dark:text-foreground md:block">
+    <div className="relative hidden h-screen max-w-[80px] border-separate overflow-hidden border-r-2 bg-primary/5 text-muted-foreground dark:bg-secondary/30 dark:text-foreground md:block">
       <div className="flex border-separate flex-col items-center justify-between gap-2 border-b-[1px] p-4">
         <Logo hideText iconSize={25} />
       </div>
@@ -43,11 +42,6 @@ const DesktopSidebar = () => {
             </TooltipWrapper>
           ))}
         </div>
-        <TooltipWrapper content="Available credits" side="right">
-          <div className="p-2">
-            <UserAvailableBadge hideIcon />
-          </div>
-        </TooltipWrapper>
       </div>
     </div>
   );

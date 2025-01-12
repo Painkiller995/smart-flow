@@ -10,7 +10,7 @@ interface UserAvailableBadgeProps {
   hideIcon?: boolean;
 }
 
-const UserAvailableBadge = ({ hideIcon }: UserAvailableBadgeProps) => {
+const UserAvailableBadge = ({ hideIcon, hideText }: UserAvailableBadgeProps) => {
   const query = useQuery({
     queryKey: ['user-available-credits'],
     queryFn: GetAvailableCredits,
