@@ -1,9 +1,10 @@
 "use server"
 
-import prisma from "@/lib/prisma"
-import { createAgentSchema, createAgentSchemaType } from "@/schema/agent"
 import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache"
+
+import prisma from "@/lib/prisma"
+import { createAgentSchema, createAgentSchemaType } from "@/schema/agent"
 
 export async function CreateOrUpdateAgent(form: createAgentSchemaType) {
 

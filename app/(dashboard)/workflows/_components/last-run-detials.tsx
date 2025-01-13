@@ -1,11 +1,12 @@
-import ExecutionStatusIndicator from '@/app/workflow/runs/[workflowId]/[executionId]/_components/execution-status-indicator';
-import ExecutionStatusLabel from '@/app/workflow/runs/[workflowId]/[executionId]/_components/execution-status-label';
-import { WorkflowExecutionStatus, WorkflowStatus } from '@/types/workflow';
 import { Workflow } from '@prisma/client';
 import { format, formatDistanceToNow } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 import { ChevronRightIcon, ClockIcon } from 'lucide-react';
 import Link from 'next/link';
+
+import ExecutionStatusIndicator from '@/app/workflow/runs/[workflowId]/[executionId]/_components/execution-status-indicator';
+import ExecutionStatusLabel from '@/app/workflow/runs/[workflowId]/[executionId]/_components/execution-status-label';
+import { WorkflowExecutionStatus, WorkflowStatus } from '@/types/workflow';
 
 const LastRunDetails = ({ workflow }: { workflow: Workflow }) => {
   const isDraft = workflow.status === WorkflowStatus.DRAFT;

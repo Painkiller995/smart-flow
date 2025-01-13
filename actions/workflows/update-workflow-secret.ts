@@ -5,19 +5,20 @@ import { revalidatePath } from "next/cache"
 
 import prisma from "@/lib/prisma"
 
-
-export async function DeleteWorkflow(id: string) {
-
+export async function UpdateWorkflowSecret({ id, secretId }: { id: string, secretId: string }) {
     const { userId } = await auth()
 
     if (!userId) {
         throw new Error("unauthenticated")
     }
 
-    await prisma.workflow.delete({
+    await prisma.workflow.update({
         where: {
-            id, userId
-
+            id,
+            userId
+        },
+        data: {
+            secretId
         }
     })
 

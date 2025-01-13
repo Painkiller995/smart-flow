@@ -1,10 +1,11 @@
+import { formatDistanceToNow } from 'date-fns';
+import { LockKeyholeIcon, ShieldIcon, ShieldOffIcon } from 'lucide-react';
+import { Suspense } from 'react';
+
 import { GetSecretsForUser } from '@/actions/secrets/get-secrets-for-user';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { formatDistanceToNow } from 'date-fns';
-import { LockKeyholeIcon, ShieldIcon, ShieldOffIcon } from 'lucide-react';
-import { Suspense } from 'react';
 import CreateSecretDialog from './_components/create-secret-dialog';
 import DeleteSecretDialog from './_components/delete-secret-dialog';
 

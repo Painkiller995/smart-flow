@@ -1,10 +1,11 @@
 "use server"
 
+import { auth } from "@clerk/nextjs/server"
+import { revalidatePath } from "next/cache"
+
 import { symmetricEncrypt } from "@/lib/encryption"
 import prisma from "@/lib/prisma"
 import { createSecretSchema, createSecretSchemaType } from "@/schema/secret"
-import { auth } from "@clerk/nextjs/server"
-import { revalidatePath } from "next/cache"
 
 export async function CreateSecret(form: createSecretSchemaType) {
 

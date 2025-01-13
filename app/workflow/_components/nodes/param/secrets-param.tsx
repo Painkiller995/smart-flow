@@ -1,5 +1,8 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+import { useId } from 'react';
+
 import { GetSecretsForUser } from '@/actions/secrets/get-secrets-for-user';
 import { Label } from '@/components/ui/label';
 import {
@@ -12,8 +15,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { ParamProps } from '@/types/app-node';
-import { useQuery } from '@tanstack/react-query';
-import { useId } from 'react';
 
 const SecretsParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   const id = useId();

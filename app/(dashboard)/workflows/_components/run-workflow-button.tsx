@@ -1,10 +1,11 @@
 'use client';
 
-import { RunWorkflow } from '@/actions/workflows/run-workflow';
-import { Button } from '@/components/ui/button';
 import { useMutation } from '@tanstack/react-query';
 import { PlayIcon } from 'lucide-react';
 import { toast } from 'sonner';
+
+import { RunWorkflow } from '@/actions/workflows/run-workflow';
+import { Button } from '@/components/ui/button';
 
 interface RunWorkflowButtonProps {
   workflowId: string;

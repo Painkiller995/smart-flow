@@ -1,5 +1,8 @@
 "use server"
 
+import { auth } from "@clerk/nextjs/server"
+import { redirect } from "next/navigation"
+
 import prisma from "@/lib/prisma"
 import { ExecuteWorkflow } from "@/lib/workflow/execute-workflow"
 import { FlowToExecutionPlan } from "@/lib/workflow/execution-plan"
@@ -11,8 +14,6 @@ import {
     WorkflowExecutionTrigger,
     WorkflowStatus
 } from "@/types/workflow"
-import { auth } from "@clerk/nextjs/server"
-import { redirect } from "next/navigation"
 
 export async function RunWorkflow(form: { workflowId: string, flowDefinition?: string }) {
 

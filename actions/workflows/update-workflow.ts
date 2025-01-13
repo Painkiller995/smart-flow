@@ -1,9 +1,10 @@
 "use server"
 
-import prisma from "@/lib/prisma"
-import { WorkflowStatus } from "@/types/workflow"
 import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache"
+
+import prisma from "@/lib/prisma"
+import { WorkflowStatus } from "@/types/workflow"
 
 
 export async function UpdateWorkflow({ id, definition }: { id: string, definition: string }) {
@@ -28,7 +29,6 @@ export async function UpdateWorkflow({ id, definition }: { id: string, definitio
     await prisma.workflow.update({
         data: {
             definition
-
         },
         where: { id, userId }
     })

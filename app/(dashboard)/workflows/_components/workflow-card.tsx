@@ -1,22 +1,6 @@
 'use client';
 
 import { Workflow } from '@prisma/client';
-import { useState } from 'react';
-
-import TooltipWrapper from '@/components/tooltip-wrapper';
-import { Badge } from '@/components/ui/badge';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
-import { WorkflowStatus } from '@/types/workflow';
 import {
   CornerDownRight,
   FileTextIcon,
@@ -28,11 +12,29 @@ import {
   TrashIcon,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
+
+import TooltipWrapper from '@/components/tooltip-wrapper';
+import { Badge } from '@/components/ui/badge';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext } from '@/components/ui/carousel';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
+import { WorkflowStatus } from '@/types/workflow';
 import DeleteWorkflowDialog from './delete-workflow-dialog';
 import DuplicateWorkflowDialog from './duplicate-workflow-dialog';
 import LastRunDetails from './last-run-detials';
 import RunWorkflowButton from './run-workflow-button';
 import SchedulerDialog from './scheduler-dialog';
+import TriggerDialog from './trigger-dialog';
 
 interface WorkflowCardProps {
   workflow: Workflow;
@@ -78,12 +80,33 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
               )}
               <DuplicateWorkflowDialog workflowId={workflow.id} />
             </h3>
-            <ScheduleSection
-              workflowId={workflow.id}
-              isDraft={isDraft}
-              creditCost={workflow.creditsCost}
-              cron={workflow.cron}
-            />
+            <Carousel
+              className="flex w-full max-w-xs items-center justify-center"
+              opts={{
+                align: 'start',
+                loop: true,
+              }}
+            >
+              <CarouselContent>
+                <CarouselItem>
+                  <ScheduleSection
+                    workflowId={workflow.id}
+                    isDraft={isDraft}
+                    creditCost={workflow.creditsCost}
+                    cron={workflow.cron}
+                  />
+                </CarouselItem>
+                <CarouselItem>
+                  <WebhookTriggerSection
+                    workflowId={workflow.id}
+                    secretId={workflow.secretId}
+                    isDraft={isDraft}
+                    creditCost={workflow.creditsCost}
+                  />
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselNext />
+            </Carousel>
           </div>
         </div>
         <div className="flex items-center space-x-2">
@@ -162,9 +185,39 @@ function ScheduleSection({
   if (isDraft) return null;
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 pt-2">
       <CornerDownRight className="h-4 w-4 text-muted-foreground" />
       <SchedulerDialog key={`${cron}-${workflowId}`} workflowId={workflowId} cron={cron} />
+      <MoveRightIcon className="h-4 w-4 text-muted-foreground" />
+      <TooltipWrapper content="Credit consumption for full run">
+        <div className="gap3 flex items-center">
+          <Badge variant="outline" className="space-x-2 rounded-sm text-muted-foreground">
+            <GemIcon className="h-4 w-4" />
+            <span>{creditCost}</span>
+          </Badge>
+        </div>
+      </TooltipWrapper>
+    </div>
+  );
+}
+
+function WebhookTriggerSection({
+  workflowId,
+  secretId,
+  isDraft,
+  creditCost,
+}: {
+  workflowId: string;
+  secretId?: string;
+  isDraft: boolean;
+  creditCost: number;
+}) {
+  if (isDraft) return null;
+
+  return (
+    <div className="flex items-center gap-2 pt-2">
+      <CornerDownRight className="h-4 w-4 text-muted-foreground" />
+      <TriggerDialog key={workflowId} workflowId={workflowId} secretId={secretId} />
       <MoveRightIcon className="h-4 w-4 text-muted-foreground" />
       <TooltipWrapper content="Credit consumption for full run">
         <div className="gap3 flex items-center">

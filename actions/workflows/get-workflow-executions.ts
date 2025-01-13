@@ -1,7 +1,8 @@
 "use server"
 
-import prisma from "@/lib/prisma"
 import { auth } from "@clerk/nextjs/server"
+
+import prisma from "@/lib/prisma"
 
 export async function GetWorkflowExecutions(workflowId: string) {
     const { userId } = await auth()
@@ -16,4 +17,4 @@ export async function GetWorkflowExecutions(workflowId: string) {
             createdAt: "desc"
         }
     })
-}    
+}

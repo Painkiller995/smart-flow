@@ -1,20 +1,21 @@
-"use client";
+'use client';
 
-import { DeleteWorkflow } from "@/actions/workflows/delete-workflow";
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+import { toast } from 'sonner';
+
+import { DeleteWorkflow } from '@/actions/workflows/delete-workflow';
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogDescription,
-} from "@/components/ui/alert-dialog";
-import { Input } from "@/components/ui/input";
-import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
-import { toast } from "sonner";
+} from '@/components/ui/alert-dialog';
+import { Input } from '@/components/ui/input';
 
 interface DeleteWorkflowDialogProps {
   open: boolean;
@@ -29,15 +30,15 @@ const DeleteWorkflowDialog = ({
   workflowId,
   workflowName,
 }: DeleteWorkflowDialogProps) => {
-  const [confirmText, setConfirmText] = useState("");
+  const [confirmText, setConfirmText] = useState('');
 
   const deleteMutation = useMutation({
     mutationFn: DeleteWorkflow,
     onSuccess: () => {
-      toast.success("Workflow deleted", { id: workflowId });
+      toast.success('Workflow deleted', { id: workflowId });
     },
     onError: () => {
-      toast.error("Failed to delete the workflow", { id: workflowId });
+      toast.error('Failed to delete the workflow', { id: workflowId });
     },
   });
 
@@ -49,8 +50,7 @@ const DeleteWorkflowDialog = ({
           <AlertDialogDescription className="space-x-1 space-y-1">
             Deleting this item is irreversible.
             <br />
-            To confirm, please type <strong>{workflowName}</strong> in the field
-            below.
+            To confirm, please type <strong>{workflowName}</strong> in the field below.
             <Input
               value={confirmText}
               onChange={(e) => {
@@ -62,7 +62,7 @@ const DeleteWorkflowDialog = ({
         <AlertDialogFooter>
           <AlertDialogCancel
             onClick={() => {
-              setConfirmText("");
+              setConfirmText('');
             }}
           >
             Cancel
@@ -70,9 +70,9 @@ const DeleteWorkflowDialog = ({
           <AlertDialogAction
             disabled={workflowName !== confirmText || deleteMutation.isPending}
             onClick={() => {
-              toast.loading("Deleting workflow...", { id: workflowId });
+              toast.loading('Deleting workflow...', { id: workflowId });
               deleteMutation.mutate(workflowId);
-              setConfirmText("");
+              setConfirmText('');
             }}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >

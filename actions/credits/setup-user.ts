@@ -1,8 +1,9 @@
 "use server"
 
-import prisma from "@/lib/prisma"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
+
+import prisma from "@/lib/prisma"
 
 export async function SetupUser() {
     const { userId } = await auth()
