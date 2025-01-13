@@ -1,22 +1,13 @@
+
+import { symmetricDecrypt } from "@/lib/encryption"
 import prisma from "@/lib/prisma"
+import { isValidSecret } from "@/lib/security-utils"
 import { ExecuteWorkflow } from "@/lib/workflow/execute-workflow"
 import { TaskRegistry } from "@/lib/workflow/task/registry"
 import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, WorkflowExecutionTrigger } from "@/types/workflow"
-import parser from "cron-parser"
-import { timingSafeEqual } from "crypto"
 
-function isValidSecret(secret: string) {
-    const API_SECRET = process.env.API_SECRET
-    if (!API_SECRET) { return false }
-
-    try {
-        return timingSafeEqual(Buffer.from(secret), Buffer.from(API_SECRET))
-    } catch {
-        return false
-    }
-
-}
-
+// Using the rate limiter is very important here because the secret is stored in the database
+// and every time you call this endpoint, a call to the database is initiated.
 
 export async function GET(request: Request) {
 
@@ -26,25 +17,37 @@ export async function GET(request: Request) {
         return Response.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-
-
-    const secret = authHeader.split(" ")[1]
-
-    if (!isValidSecret(secret)) {
-        return Response.json({ error: "Unauthorized" }, { status: 401 })
-    }
+    const secret = authHeader.split(" ")[1];
 
     const { searchParams } = new URL(request.url)
+
     const workflowId = searchParams.get("workflowId") as string
 
     if (!workflowId) {
         return Response.json({ error: "Bad request" }, { status: 400 })
     }
 
-    const workflow = await prisma.workflow.findUnique({ where: { id: workflowId } })
+    const workflow = await prisma.workflow.findUnique({
+        where: { id: workflowId },
+        include: {
+            secret: true,
+        },
+    });
 
-    if (!workflow) {
+    if (!workflow || !workflow.secret) {
         return Response.json({ error: "Bad request" }, { status: 400 })
+    }
+
+    let plainSecretValue: string;
+
+    try {
+        plainSecretValue = symmetricDecrypt(workflow.secret.value!);
+    } catch (error) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+    }
+
+    if (!isValidSecret(secret, plainSecretValue)) {
+        return Response.json({ error: "Unauthorized" }, { status: 401 })
     }
 
     const executionPlan = JSON.parse(workflow.executionPlan!) as WorkflowExecutionPlan
@@ -54,9 +57,6 @@ export async function GET(request: Request) {
     }
 
     try {
-        const cron = parser.parseExpression(workflow.cron!, { utc: true })
-        const nextRunAt = cron.next().toDate()
-
 
         const execution = await prisma.workflowExecution.create({
             data: {
@@ -65,7 +65,7 @@ export async function GET(request: Request) {
                 definition: workflow.definition,
                 status: WorkflowExecutionStatus.PENDING,
                 startedAt: new Date(),
-                trigger: WorkflowExecutionTrigger.CRON,
+                trigger: WorkflowExecutionTrigger.WEBHOOK,
                 phases: {
                     create: executionPlan.flatMap(phase => {
                         return phase.nodes.flatMap((node) => {
@@ -83,7 +83,7 @@ export async function GET(request: Request) {
         })
 
 
-        await ExecuteWorkflow(execution.id, nextRunAt)
+        await ExecuteWorkflow(execution.id)
         return new Response(null, { status: 200 })
 
     } catch (error) {
