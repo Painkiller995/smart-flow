@@ -1,6 +1,8 @@
-import { getCreditsPack, PackId } from "@/types/credits";
 import "server-only";
+
 import Stripe from "stripe";
+
+import { getCreditsPack, PackId } from "@/types/credits";
 import prisma from "../prisma";
 
 export async function HandleCheckoutSessionCompleted(event: Stripe.Checkout.Session) {

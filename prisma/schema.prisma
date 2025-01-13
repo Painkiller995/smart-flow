@@ -29,8 +29,12 @@ model Workflow {
   updatedAt     DateTime            @updatedAt
   execution     WorkflowExecution[]
 
+  secretId String?
+  secret   Secret? @relation(fields: [secretId], references: [id])
+
   // User cannot have tow workflows with the same name
   @@unique([name, userId])
+  @@unique([secretId])
 }
 
 model WorkflowExecution {
@@ -89,7 +93,8 @@ model Secret {
   name   String
   value  String
 
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  Workflow  Workflow?
 
   @@unique([userId, name])
 }

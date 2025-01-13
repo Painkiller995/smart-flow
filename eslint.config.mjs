@@ -8,6 +8,26 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: ['next', 'prettier'],
+    rules: {
+      'import/order': [
+        'error',
+        {
+          groups: [
+            // Define custom groups for import order
+            ['builtin', 'external'],
+            ['internal', 'sibling', 'parent', 'index'],
+          ],
+          pathGroups: [
+            {
+              pattern: 'server-only', // Custom rule for server-only import
+              group: 'builtin', // Treat server-only as a builtin
+              position: 'before', // Ensure it comes first
+            },
+          ],
+          'newlines-between': 'always',
+        },
+      ],
+    },
   }),
 ];
 

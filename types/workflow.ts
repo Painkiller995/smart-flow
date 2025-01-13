@@ -34,7 +34,8 @@ export enum WorkflowExecutionStatus {
 
 export enum WorkflowExecutionTrigger {
     MANUAL = "MANUAL",
-    CRON = 'CRON'
+    CRON = 'CRON',
+    WEBHOOK = "WEBHOOK",
 }
 
 export enum ExecutionPhaseStatus {
