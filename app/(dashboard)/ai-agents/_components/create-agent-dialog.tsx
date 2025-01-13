@@ -116,7 +116,7 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
                       <Textarea className="resize-none" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Provide a description of the agent's role or functionality.
+                      Provide a description of the agent&apos;s role or functionality.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
