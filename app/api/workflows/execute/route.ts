@@ -20,7 +20,7 @@ export async function GET(request: Request) {
     const secret = authHeader.split(" ")[1]
 
     if (!isValidSecret(secret, process.env.API_SECRET!)) {
-        return Response.json({ success: false, error: "Unauthorized", auth: authHeader }, { status: 401 })
+        return Response.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
     const { searchParams } = new URL(request.url)
