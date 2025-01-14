@@ -146,7 +146,7 @@ const TriggerDialog = (props: { workflowId: string; secretId?: string }) => {
                   toast.error('Please select secret first...', { id: 'webhook-trigger' });
                   return;
                 }
-                toast.loading('Saving...', { id: 'webhook-trigger' });
+                toast.info('Saving...', { id: 'webhook-trigger' });
                 updateSecretMutation.mutate({
                   id: props.workflowId,
                   secretId: selectedSecretId,
