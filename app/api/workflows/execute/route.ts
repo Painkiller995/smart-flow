@@ -1,12 +1,21 @@
 import parser from "cron-parser"
+import { timingSafeEqual } from "crypto"
 
 import prisma from "@/lib/prisma"
-import { isValidSecret } from "@/lib/security-utils"
 import { ExecuteWorkflow } from "@/lib/workflow/execute-workflow"
 import { TaskRegistry } from "@/lib/workflow/task/registry"
 import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, WorkflowExecutionTrigger } from "@/types/workflow"
 
+function isValidSecret(secret: string) {
+    const API_SECRET = process.env.API_SECRET
+    if (!API_SECRET) { return false }
 
+    try {
+        return timingSafeEqual(Buffer.from(secret), Buffer.from(API_SECRET))
+    } catch {
+        return false
+    }
+}
 
 
 export async function GET(request: Request) {
@@ -19,7 +28,7 @@ export async function GET(request: Request) {
 
     const secret = authHeader.split(" ")[1]
 
-    if (!isValidSecret(secret, process.env.API_SECRET!)) {
+    if (!isValidSecret(secret)) {
         return Response.json({ error: "Unauthorized" }, { status: 401 })
     }
 
