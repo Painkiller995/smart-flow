@@ -84,7 +84,7 @@ export async function GET(request: Request) {
 
 
         await ExecuteWorkflow(execution.id)
-        return new Response(null, { status: 200 })
+        return Response.json({ success: true }, { status: 200 })
 
     } catch (error) {
         return Response.json({ error: "Internal server error" }, { status: 500 })
