@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
     const headersList = await headers()
 
-    const authHeader = headersList.get("x_authorization")
+    const authHeader = headersList.get("authorization")
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return Response.json({ success: false, error: "Unauthorized, unable to find the header" }, { status: 401 })
