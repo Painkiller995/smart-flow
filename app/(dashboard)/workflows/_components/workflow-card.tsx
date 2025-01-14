@@ -18,7 +18,7 @@ import TooltipWrapper from '@/components/tooltip-wrapper';
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -105,7 +105,6 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
                   />
                 </CarouselItem>
               </CarouselContent>
-              <CarouselNext />
             </Carousel>
           </div>
         </div>
