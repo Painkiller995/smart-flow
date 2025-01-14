@@ -43,11 +43,11 @@ export async function GET(request: Request) {
     try {
         plainSecretValue = symmetricDecrypt(workflow.secret.value!);
     } catch (error) {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+        return new Response(JSON.stringify({ error: "Decryption failed. The provided secret is invalid or malformed." }), { status: 401 });
     }
 
     if (!isValidSecret(secret, plainSecretValue)) {
-        return Response.json({ error: "Unauthorized" }, { status: 401 })
+        return Response.json({ error: "Validation failed. The secret does not match the expected value." }, { status: 401 })
     }
 
     const executionPlan = JSON.parse(workflow.executionPlan!) as WorkflowExecutionPlan
