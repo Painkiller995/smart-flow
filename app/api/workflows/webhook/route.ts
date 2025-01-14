@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     const workflowId = searchParams.get("workflowId") as string
 
     if (!workflowId) {
-        return Response.json({ error: "Bad request" }, { status: 400 })
+        return Response.json({ success: false, error: "Bad request" }, { status: 400 })
     }
 
     const workflow = await prisma.workflow.findUnique({
@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     });
 
     if (!workflow || !workflow.secret) {
-        return Response.json({ error: "Bad request" }, { status: 400 })
+        return Response.json({ success: false, error: "Bad request" }, { status: 400 })
     }
 
     let plainSecretValue: string;
@@ -46,17 +46,17 @@ export async function GET(request: Request) {
     try {
         plainSecretValue = symmetricDecrypt(workflow.secret.value!);
     } catch (error) {
-        return new Response(JSON.stringify({ error: "Decryption failed. The provided secret is invalid or malformed." }), { status: 401 });
+        return Response.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
     if (!isValidSecret(secret, plainSecretValue)) {
-        return Response.json({ error: "Validation failed. The secret does not match the expected value." }, { status: 401 })
+        return Response.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
     const executionPlan = JSON.parse(workflow.executionPlan!) as WorkflowExecutionPlan
 
     if (!executionPlan) {
-        return Response.json({ error: "Bad request" }, { status: 400 })
+        return Response.json({ success: false, error: "Bad request" }, { status: 400 })
     }
 
     try {
@@ -90,7 +90,7 @@ export async function GET(request: Request) {
         return Response.json({ success: true }, { status: 200 })
 
     } catch (error) {
-        return Response.json({ error: "Internal server error" }, { status: 500 })
+        return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
     }
 
 }

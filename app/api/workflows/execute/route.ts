@@ -13,32 +13,32 @@ export async function GET(request: Request) {
     const authHeader = headersList.get("authorization")
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return Response.json({ error: "Unauthorized" }, { status: 401 })
+        return Response.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
     const secret = authHeader.split(" ")[1]
 
     if (!isValidSecret(secret, process.env.API_SECRET!)) {
-        return Response.json({ error: "Unauthorized" }, { status: 401 })
+        return Response.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
     const { searchParams } = new URL(request.url)
     const workflowId = searchParams.get("workflowId") as string
 
     if (!workflowId) {
-        return Response.json({ error: "Bad request" }, { status: 400 })
+        return Response.json({ success: false, error: "Bad request" }, { status: 400 })
     }
 
     const workflow = await prisma.workflow.findUnique({ where: { id: workflowId } })
 
     if (!workflow) {
-        return Response.json({ error: "Bad request" }, { status: 400 })
+        return Response.json({ success: false, error: "Bad request" }, { status: 400 })
     }
 
     const executionPlan = JSON.parse(workflow.executionPlan!) as WorkflowExecutionPlan
 
     if (!executionPlan) {
-        return Response.json({ error: "Bad request" }, { status: 400 })
+        return Response.json({ success: false, error: "Bad request" }, { status: 400 })
     }
 
     try {
@@ -72,10 +72,10 @@ export async function GET(request: Request) {
 
 
         await ExecuteWorkflow(execution.id, nextRunAt)
-        return new Response(null, { status: 200 })
+        return Response.json({ success: true }, { status: 200 })
 
     } catch (error) {
-        return Response.json({ error: "Internal server error" }, { status: 500 })
+        return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
     }
 
 }
