@@ -1,4 +1,5 @@
 import parser from "cron-parser"
+import { headers } from "next/headers"
 
 import prisma from "@/lib/prisma"
 import { isValidSecret } from "@/lib/security-utils"
@@ -8,18 +9,17 @@ import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, W
 
 export async function GET(request: Request) {
 
-    console.log(request.headers)
+    const headersList = await headers()
+    const authHeader = await headersList.get("authorization")
 
-    const authHeader = request.headers.get('authorization')
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return Response.json({ success: false, message: 'Missing or invalid authorization header' }, { status: 401 })
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return Response.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const token = authHeader.split(' ')[1]
+    const secret = authHeader.split(" ")[1]
 
-    if (!isValidSecret(token, process.env.API_SECRET!)) {
-        return Response.json({ success: false, message: 'Invalid token' }, { status: 403 })
+    if (!isValidSecret(secret, process.env.API_SECRET!)) {
+        return Response.json({ error: "Unauthorized" }, { status: 401 })
     }
 
     const { searchParams } = new URL(request.url)
@@ -79,4 +79,3 @@ export async function GET(request: Request) {
     }
 
 }
-

@@ -1,4 +1,6 @@
 
+import { headers } from "next/headers"
+
 import { symmetricDecrypt } from "@/lib/encryption"
 import prisma from "@/lib/prisma"
 import { isValidSecret } from "@/lib/security-utils"
@@ -11,7 +13,8 @@ import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, W
 
 export async function GET(request: Request) {
 
-    const authHeader = request.headers.get("authorization")
+    const headersList = await headers()
+    const authHeader = await headersList.get("authorization")
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return Response.json({ error: "Unauthorized" }, { status: 401 })
@@ -91,4 +94,3 @@ export async function GET(request: Request) {
     }
 
 }
-
