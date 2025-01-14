@@ -8,6 +8,8 @@ import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, W
 
 export async function GET(request: Request) {
 
+    console.log(request.headers)
+
     const authHeader = request.headers.get('authorization')
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
