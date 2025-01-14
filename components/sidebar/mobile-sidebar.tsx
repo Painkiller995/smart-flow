@@ -1,12 +1,13 @@
 'use client';
 
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { routes } from '@/config/routes';
-import { cn } from '@/lib/utils';
 import { MenuIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+
+import { cn } from '@/lib/utils';
+import { routes } from '@/config/routes';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import Logo from '../logo';
 import { Button, buttonVariants } from '../ui/button';
 import UserAvailableBadge from '../user-available-badge';

@@ -1,5 +1,8 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+import { useId } from 'react';
+
 import { GetAgentsForUser } from '@/actions/agents/get-agents-for-user';
 import { Label } from '@/components/ui/label';
 import {
@@ -12,8 +15,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { ParamProps } from '@/types/app-node';
-import { useQuery } from '@tanstack/react-query';
-import { useId } from 'react';
 
 const AgentsParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   const id = useId();

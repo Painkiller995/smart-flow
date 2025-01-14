@@ -1,5 +1,8 @@
 'use client';
 
+import { ChartColumnStackedIcon } from 'lucide-react';
+import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
+
 import { GetCreditsUsageInPeriod } from '@/actions/analytics/get-credits-usage-in-period';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -9,8 +12,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { ChartColumnStackedIcon } from 'lucide-react';
-import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 
 type ChartData = Awaited<ReturnType<typeof GetCreditsUsageInPeriod>>;
 

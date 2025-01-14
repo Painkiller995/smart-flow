@@ -1,7 +1,8 @@
 'use client';
 
-import { AppNodeMissingInputs } from '@/types/app-node';
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
+
+import { AppNodeMissingInputs } from '@/types/app-node';
 
 type FlowValidationContextType = {
   invalidInputs: AppNodeMissingInputs[];

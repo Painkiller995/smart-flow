@@ -1,6 +1,7 @@
+import { EthernetPortIcon, LucideProps } from 'lucide-react';
+
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
-import { EthernetPortIcon, LucideProps } from 'lucide-react';
 
 export const ExecuteRequestTask = {
   type: TaskType.EXECUTE_REQUEST,

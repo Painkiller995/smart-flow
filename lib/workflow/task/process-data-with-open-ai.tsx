@@ -1,6 +1,7 @@
+import { BrainCircuitIcon, LucideProps } from 'lucide-react';
+
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
-import { BrainCircuitIcon, LucideProps } from 'lucide-react';
 
 export const ProcessDataWithOpenAiTask = {
   type: TaskType.PROCESS_DATA_WITH_OPEN_AI,

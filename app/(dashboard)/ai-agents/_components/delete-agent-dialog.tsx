@@ -1,5 +1,10 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
+import { XIcon } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
+
 import { DeleteAgent } from '@/actions/agents/delete-agent';
 import {
   AlertDialog,
@@ -14,10 +19,6 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useMutation } from '@tanstack/react-query';
-import { XIcon } from 'lucide-react';
-import { useState } from 'react';
-import { toast } from 'sonner';
 
 interface DeleteAgentDialogProps {
   agentName: string;

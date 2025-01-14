@@ -1,8 +1,9 @@
-import { GetAvailableCredits } from '@/actions/credits/get-available-credits';
-import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { GemIcon, Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
+
+import { cn } from '@/lib/utils';
+import { GetAvailableCredits } from '@/actions/credits/get-available-credits';
 import ReactCountupWrapper from './react-countup-wrapper';
 import { buttonVariants } from './ui/button';
 

@@ -1,5 +1,6 @@
-import { GetWorkflowExecutions } from '@/actions/workflows/get-workflow-executions';
 import { InboxIcon } from 'lucide-react';
+
+import { GetWorkflowExecutions } from '@/actions/workflows/get-workflow-executions';
 import ExecutionsTable from './execution-table';
 
 async function ExecutionsTableWrapper({ workflowId }: { workflowId: string }) {

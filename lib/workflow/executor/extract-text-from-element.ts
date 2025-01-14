@@ -1,5 +1,6 @@
-import { ExecutionEnvironment } from '@/types/executor';
 import * as cheerio from "cheerio";
+
+import { ExecutionEnvironment } from '@/types/executor';
 import { ExtractTextFromElementTask } from '../task/extract-text-from-element';
 
 export async function ExtractTextFromElementExecutor(environment: ExecutionEnvironment<typeof ExtractTextFromElementTask>): Promise<boolean> {

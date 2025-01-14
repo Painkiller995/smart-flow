@@ -1,9 +1,4 @@
 'use client';
-
-import { CreateFlowNode } from '@/lib/workflow/create-flow-node';
-import { TaskRegistry } from '@/lib/workflow/task/registry';
-import { AppNode } from '@/types/app-node';
-import { TaskType } from '@/types/task';
 import { Workflow } from '@prisma/client';
 import {
   addEdge,
@@ -20,6 +15,11 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import React, { useCallback, useEffect } from 'react';
+
+import { CreateFlowNode } from '@/lib/workflow/create-flow-node';
+import { TaskRegistry } from '@/lib/workflow/task/registry';
+import { AppNode } from '@/types/app-node';
+import { TaskType } from '@/types/task';
 import DeletableEdge from './edges/deletable-edge';
 import NodeComponent from './nodes/node-component';
 

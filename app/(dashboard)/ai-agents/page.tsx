@@ -1,10 +1,11 @@
+import { formatDistanceToNow } from 'date-fns';
+import { BotIcon, BrainIcon } from 'lucide-react';
+import { Suspense } from 'react';
+
 import { GetAgentsForUser } from '@/actions/agents/get-agents-for-user';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { formatDistanceToNow } from 'date-fns';
-import { BotIcon, BrainIcon } from 'lucide-react';
-import { Suspense } from 'react';
 import CreateAgentDialog from './_components/create-agent-dialog';
 import DeleteAgentDialog from './_components/delete-agent-dialog';
 

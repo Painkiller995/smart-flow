@@ -1,9 +1,10 @@
 'use client';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 import { ImagesSlider } from '@/components/ui/images-slider';
 import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 export type HeroProps = {
   title: {

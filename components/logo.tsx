@@ -1,8 +1,9 @@
 'use client';
 
+import Link from 'next/link';
+
 import LogoIcon from '@/app/assets/logo';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 interface LogoProps {
   fontSize?: string;
   iconSize?: number;

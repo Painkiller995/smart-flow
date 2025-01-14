@@ -1,7 +1,8 @@
+import { LucideProps, TimerIcon } from 'lucide-react';
+
 import { Conditions } from '@/types/evaluate';
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
-import { LucideProps, TimerIcon } from 'lucide-react';
 
 export const EvaluateTimeTask = {
   type: TaskType.EVALUATE_TIME,

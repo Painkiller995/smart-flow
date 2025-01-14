@@ -1,6 +1,7 @@
+import { LucideIcon } from 'lucide-react';
+
 import ReactCountupWrapper from '@/components/react-countup-wrapper';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { LucideIcon } from 'lucide-react';
 
 interface StatsCardProps {
   title: string;

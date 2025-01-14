@@ -1,7 +1,8 @@
-import { FlowValidationContextProvider } from '@/components/context/flow-validation-context';
-import { WorkflowStatus } from '@/types/workflow';
 import { Workflow } from '@prisma/client';
 import { ReactFlowProvider } from '@xyflow/react';
+
+import { FlowValidationContextProvider } from '@/components/context/flow-validation-context';
+import { WorkflowStatus } from '@/types/workflow';
 import FlowEditor from './flow-editor';
 import TaskMenu from './task-menu';
 import TopBar from './top-bar/top-bar';

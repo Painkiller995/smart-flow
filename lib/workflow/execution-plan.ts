@@ -1,6 +1,7 @@
+import { Edge } from "@xyflow/react";
+
 import { AppNode, AppNodeMissingInputs } from "@/types/app-node";
 import { WorkflowExecutionPlan, WorkflowExecutionPlanPhase } from "@/types/workflow";
-import { Edge } from "@xyflow/react";
 import { TaskRegistry } from "./task/registry";
 
 export enum FlowToExecutionPlanValidationError {

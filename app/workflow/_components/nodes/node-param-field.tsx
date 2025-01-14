@@ -1,7 +1,8 @@
-import { AppNode } from '@/types/app-node';
-import { TaskParam, TaskParamType } from '@/types/task';
 import { useReactFlow } from '@xyflow/react';
 import { useCallback } from 'react';
+
+import { AppNode } from '@/types/app-node';
+import { TaskParam, TaskParamType } from '@/types/task';
 import AgentsParam from './param/agents-param';
 import BooleanParam from './param/boolean-param';
 import BrowserInstanceParam from './param/browser-instance-param';

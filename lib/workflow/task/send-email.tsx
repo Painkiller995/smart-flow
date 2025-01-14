@@ -1,6 +1,7 @@
+import { LucideProps, MailIcon } from 'lucide-react';
+
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
-import { LucideProps, MailIcon } from 'lucide-react';
 
 export const SendEmailTask = {
   type: TaskType.SEND_EMAIL,

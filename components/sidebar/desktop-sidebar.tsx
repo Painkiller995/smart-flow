@@ -1,8 +1,9 @@
 'use client';
 
-import { routes } from '@/config/routes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+import { routes } from '@/config/routes';
 import Logo from '../logo';
 import TooltipWrapper from '../tooltip-wrapper';
 import { buttonVariants } from '../ui/button';

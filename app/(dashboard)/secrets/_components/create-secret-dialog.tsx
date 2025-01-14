@@ -1,12 +1,14 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
-
 import { Loader2, ShieldEllipsis } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { CreateSecret } from '@/actions/secrets/create-secret';
 import {
   Form,
@@ -20,9 +22,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { createSecretSchema, createSecretSchemaType } from '@/schema/secret';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'sonner';
 import CustomDialogHeader from '../../workflows/_components/custom-dialog-header';
 
 interface CreateSecretDialogProps {

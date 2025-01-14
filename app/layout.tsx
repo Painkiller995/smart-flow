@@ -1,8 +1,9 @@
-import { AppProviders } from '@/components/providers/app-providers';
-import { signInRoute } from '@/config/routes';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { DM_Sans } from 'next/font/google';
+
+import { signInRoute } from '@/config/routes';
+import { AppProviders } from '@/components/providers/app-providers';
 import './globals.css';
 
 const font = DM_Sans({ subsets: ['latin'] });

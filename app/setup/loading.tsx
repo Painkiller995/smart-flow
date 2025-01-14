@@ -1,6 +1,7 @@
+import { Loader2Icon } from 'lucide-react';
+
 import Logo from '@/components/logo';
 import { Separator } from '@/components/ui/separator';
-import { Loader2Icon } from 'lucide-react';
 
 const LoadingPage = async () => {
   return (

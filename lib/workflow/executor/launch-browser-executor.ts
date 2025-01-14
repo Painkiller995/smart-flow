@@ -1,5 +1,6 @@
-import { ExecutionEnvironment } from '@/types/executor';
 import puppeteer from 'puppeteer';
+
+import { ExecutionEnvironment } from '@/types/executor';
 import { LaunchBrowserTask } from '../task/launch-browser';
 
 export async function LaunchBrowserExecutor(environment: ExecutionEnvironment<typeof LaunchBrowserTask>): Promise<boolean> {

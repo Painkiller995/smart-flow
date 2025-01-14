@@ -1,5 +1,8 @@
 'use client';
 
+import { GemIcon } from 'lucide-react';
+import React from 'react';
+
 import {
   Accordion,
   AccordionContent,
@@ -10,8 +13,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { TaskRegistry } from '@/lib/workflow/task/registry';
 import { TaskType } from '@/types/task';
-import { GemIcon } from 'lucide-react';
-import React from 'react';
 
 const TaskMenu = () => {
   return (

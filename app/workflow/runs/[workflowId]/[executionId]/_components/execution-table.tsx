@@ -1,5 +1,10 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+import { formatDistanceToNow } from 'date-fns';
+import { GemIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
 import { GetWorkflowExecutions } from '@/actions/workflows/get-workflow-executions';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -12,10 +17,6 @@ import {
 } from '@/components/ui/table';
 import { DatesToDurationString } from '@/lib/helper/dates';
 import { WorkflowExecutionStatus } from '@/types/workflow';
-import { useQuery } from '@tanstack/react-query';
-import { formatDistanceToNow } from 'date-fns';
-import { GemIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import ExecutionStatusIndicator from './execution-status-indicator';
 
 type InitialDataType = Awaited<ReturnType<typeof GetWorkflowExecutions>>;

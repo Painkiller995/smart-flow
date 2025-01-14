@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import {
   Select,
   SelectContent,
@@ -10,7 +12,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Period } from '@/types/analytics';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 const MONTH_NAMES = [
   'January',

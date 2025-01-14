@@ -1,8 +1,9 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { AnimatedTestimonials } from '@/components/ui/animated-testimonials';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useEffect, useState } from 'react';
 
 interface ProjectsProps {
   projects: {

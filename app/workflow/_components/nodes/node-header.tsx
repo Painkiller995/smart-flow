@@ -1,5 +1,10 @@
 'use client';
 
+import { useReactFlow } from '@xyflow/react';
+import { CopyIcon, GemIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
+
 import TooltipWrapper from '@/components/tooltip-wrapper';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -8,10 +13,6 @@ import { CreateFlowNode } from '@/lib/workflow/create-flow-node';
 import { TaskRegistry } from '@/lib/workflow/task/registry';
 import { AppNode } from '@/types/app-node';
 import { TaskType } from '@/types/task';
-import { useReactFlow } from '@xyflow/react';
-import { CopyIcon, GemIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
-import { toast } from 'sonner';
 
 const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }) => {
   const hideCreditIcon = process.env.NEXT_PUBLIC_DISABLE_CREDIT_UI_COMPONENTS === 'true';

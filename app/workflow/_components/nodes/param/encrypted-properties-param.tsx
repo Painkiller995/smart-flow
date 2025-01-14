@@ -1,5 +1,10 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+import { debounce } from 'lodash';
+import { CircleXIcon } from 'lucide-react';
+import { useEffect, useId, useState } from 'react';
+
 import { GetSecretsForUser } from '@/actions/secrets/get-secrets-for-user';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,10 +19,6 @@ import {
 } from '@/components/ui/select';
 import { ParamProps } from '@/types/app-node';
 import { EncryptedValueObject } from '@/types/param';
-import { useQuery } from '@tanstack/react-query';
-import { debounce } from 'lodash';
-import { CircleXIcon } from 'lucide-react';
-import { useEffect, useId, useState } from 'react';
 
 const EncryptedPropertiesParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   const id = useId();

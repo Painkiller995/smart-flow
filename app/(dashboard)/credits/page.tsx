@@ -1,3 +1,6 @@
+import { ArrowLeftRightIcon, GemIcon } from 'lucide-react';
+import { Suspense } from 'react';
+
 import { GetCreditsUsageInPeriod } from '@/actions/analytics/get-credits-usage-in-period';
 import { GetAvailableCredits } from '@/actions/credits/get-available-credits';
 import { GetUserPurchaseHistory } from '@/actions/credits/get-user-purchase-history';
@@ -12,8 +15,6 @@ import {
 } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
-import { ArrowLeftRightIcon, GemIcon } from 'lucide-react';
-import { Suspense } from 'react';
 import CreditsPurchase from './_components/credits-purchase';
 import CreditsUsageChart from './_components/credits-usage-chart';
 import InvoiceButton from './_components/invoice-button';

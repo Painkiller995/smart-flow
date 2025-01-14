@@ -1,9 +1,9 @@
-import { GetWorkflowExecutionWithPhases } from '@/actions/workflows/get-workflow-execution-with-phases';
-import TopBar from '@/app/workflow/_components/top-bar/top-bar';
 import { auth } from '@clerk/nextjs/server';
-
 import { Loader2Icon } from 'lucide-react';
 import { Suspense } from 'react';
+
+import TopBar from '@/app/workflow/_components/top-bar/top-bar';
+import { GetWorkflowExecutionWithPhases } from '@/actions/workflows/get-workflow-execution-with-phases';
 import ExecutionViewer from './_components/execution-viewer';
 
 interface ExecutionViewerPagePops {

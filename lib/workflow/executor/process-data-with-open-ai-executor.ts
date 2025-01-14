@@ -1,7 +1,8 @@
+import OpenAI from 'openai';
+
 import { symmetricDecrypt } from '@/lib/encryption';
 import prisma from '@/lib/prisma';
 import { ExecutionEnvironment } from '@/types/executor';
-import OpenAI from 'openai';
 import { ProcessDataWithOpenAiTask } from '../task/process-data-with-open-ai';
 
 export async function ProcessDataWithOpenAiExecutor(environment: ExecutionEnvironment<typeof ProcessDataWithOpenAiTask>): Promise<boolean> {

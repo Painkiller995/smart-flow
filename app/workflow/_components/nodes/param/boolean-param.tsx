@@ -1,8 +1,9 @@
 'use client';
+import { useEffect, useId, useState } from 'react';
+
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { ParamProps } from '@/types/app-node';
-import { useEffect, useId, useState } from 'react';
 
 const BooleanParam = ({ param, value, disabled, updateNodeParamValue }: ParamProps) => {
   const [internalValue, setInternalValue] = useState(value || 'false');

@@ -1,8 +1,9 @@
+import { Handle, Position, useEdges } from '@xyflow/react';
+import { ReactNode } from 'react';
+
 import useFlowValidation from '@/components/hooks/use-flow-validation';
 import { cn } from '@/lib/utils';
 import { TaskParam } from '@/types/task';
-import { Handle, Position, useEdges } from '@xyflow/react';
-import { ReactNode } from 'react';
 import { colorForHandle } from './common';
 import NodeParamField from './node-param-field';
 

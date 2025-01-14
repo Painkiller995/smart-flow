@@ -1,9 +1,9 @@
+import { NodeProps } from '@xyflow/react';
+import { memo } from 'react';
+
 import { TaskRegistry } from '@/lib/workflow/task/registry';
 import { AppNodeData } from '@/types/app-node';
-import { NodeProps } from '@xyflow/react';
-
 import { Badge } from '@/components/ui/badge';
-import { memo } from 'react';
 import NodeCard from './node-card';
 import NodeHeader from './node-header';
 import NodeInputs, { NodeInput } from './node-inputs';

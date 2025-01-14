@@ -1,6 +1,7 @@
+import { BracesIcon, LucideProps } from 'lucide-react';
+
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
-import { BracesIcon, LucideProps } from 'lucide-react';
 
 export const MergeTwoJsonTask = {
   type: TaskType.MERGE_TWO_JSON,

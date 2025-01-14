@@ -1,9 +1,10 @@
 'use client';
 
-import useFlowValidation from '@/components/hooks/use-flow-validation';
-import { cn } from '@/lib/utils';
 import { useReactFlow } from '@xyflow/react';
 import { ReactNode } from 'react';
+
+import useFlowValidation from '@/components/hooks/use-flow-validation';
+import { cn } from '@/lib/utils';
 
 interface NodeCardProps {
   nodeId: string;

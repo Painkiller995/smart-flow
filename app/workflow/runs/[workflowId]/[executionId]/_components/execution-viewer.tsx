@@ -1,5 +1,19 @@
 'use client';
 
+import { ExecutionLog } from '@prisma/client';
+import { useQuery } from '@tanstack/react-query';
+import { formatDistanceToNow } from 'date-fns';
+import {
+  CalendarIcon,
+  CircleDashedIcon,
+  ClockIcon,
+  GemIcon,
+  Loader2Icon,
+  LucideIcon,
+  WorkflowIcon,
+} from 'lucide-react';
+import { ReactNode, useEffect, useState } from 'react';
+
 import { GetWorkflowExecutionWithPhases } from '@/actions/workflows/get-workflow-execution-with-phases';
 import { GetWorkflowPhaseDetails } from '@/actions/workflows/get-workflow-phase-details';
 import ReactCountupWrapper from '@/components/react-countup-wrapper';
@@ -21,19 +35,6 @@ import { GetPhasesTotalCost } from '@/lib/helper/phases';
 import { cn } from '@/lib/utils';
 import { LogLevel } from '@/types/log';
 import { ExecutionPhaseStatus, WorkflowExecutionStatus } from '@/types/workflow';
-import { ExecutionLog } from '@prisma/client';
-import { useQuery } from '@tanstack/react-query';
-import { formatDistanceToNow } from 'date-fns';
-import {
-  CalendarIcon,
-  CircleDashedIcon,
-  ClockIcon,
-  GemIcon,
-  Loader2Icon,
-  LucideIcon,
-  WorkflowIcon,
-} from 'lucide-react';
-import { ReactNode, useEffect, useState } from 'react';
 import PhaseStatusBadge from './phase-status-badge';
 import WorkflowStatusBadge from './workflow-status-badge';
 

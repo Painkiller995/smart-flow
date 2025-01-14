@@ -1,5 +1,6 @@
-import { ExecutionPhaseStatus } from '@/types/workflow';
 import { CircleCheckIcon, CircleDashedIcon, CircleXIcon, Loader2Icon } from 'lucide-react';
+
+import { ExecutionPhaseStatus } from '@/types/workflow';
 
 interface PhaseStatusBadgeProps {
   status: ExecutionPhaseStatus;

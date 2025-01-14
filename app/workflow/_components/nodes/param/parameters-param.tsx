@@ -1,13 +1,14 @@
 'use client';
 
+import { debounce } from 'lodash';
+import { CircleXIcon } from 'lucide-react';
+import { useEffect, useId, useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ParamProps } from '@/types/app-node';
 import { ParameterObject } from '@/types/param';
-import { debounce } from 'lodash';
-import { CircleXIcon } from 'lucide-react';
-import { useEffect, useId, useState } from 'react';
 
 const ParametersParam = ({ param, value, updateNodeParamValue }: ParamProps) => {
   const id = useId();

@@ -1,10 +1,11 @@
 'use client';
 
+import { IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
+import Link from 'next/link';
+
 import { AnimatedTooltip } from '@/components/ui/animated-tooltip';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
-import Link from 'next/link';
 
 interface AboutMeProps {
   people: {

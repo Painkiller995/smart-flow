@@ -1,7 +1,8 @@
+import { LucideProps, TextCursorIcon } from 'lucide-react';
+
 import { Conditions } from '@/types/evaluate';
 import { TaskParamType, TaskType } from '@/types/task';
 import { WorkflowTask } from '@/types/workflow';
-import { LucideProps, TextCursorIcon } from 'lucide-react';
 
 export const EvaluateStringTask = {
   type: TaskType.EVALUATE_STRING,

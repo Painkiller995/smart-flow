@@ -1,11 +1,12 @@
+import { CirclePlayIcon, GemIcon, WaypointsIcon } from 'lucide-react';
+import { Suspense } from 'react';
+
 import { GetCreditsUsageInPeriod } from '@/actions/analytics/get-credits-usage-in-period';
 import { GetPeriods } from '@/actions/analytics/get-periods';
 import { GetStatsCardsValues } from '@/actions/analytics/get-stats-cards-values';
 import { GetWorkflowExecutionStats } from '@/actions/analytics/get-workflow-execution-stats';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Period } from '@/types/analytics';
-import { CirclePlayIcon, GemIcon, WaypointsIcon } from 'lucide-react';
-import { Suspense } from 'react';
 import CreditsUsageChart from '../credits/_components/credits-usage-chart';
 import ExecutionStatusChart from './_components/execution-status-chart';
 import PeriodSelector from './_components/period-selector';

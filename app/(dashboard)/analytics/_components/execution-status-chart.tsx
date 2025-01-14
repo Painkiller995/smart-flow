@@ -1,5 +1,8 @@
 'use client';
 
+import { Layers2 } from 'lucide-react';
+import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
+
 import { GetWorkflowExecutionStats } from '@/actions/analytics/get-workflow-execution-stats';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -9,8 +12,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { Layers2 } from 'lucide-react';
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 
 type ChartData = Awaited<ReturnType<typeof GetWorkflowExecutionStats>>;
 
