@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { WebhookIcon } from 'lucide-react';
+import { TriangleAlertIcon, WebhookIcon } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -74,7 +74,7 @@ const TriggerDialog = (props: { workflowId: string; secretId?: string }) => {
           )}
           {!secretName && (
             <div className="flex items-center gap-1">
-              <WebhookIcon className="h-3 w-3" /> Set Webhook Secret
+              <TriangleAlertIcon className="h-3 w-3" /> Set Webhook Secret
             </div>
           )}
         </Button>
