@@ -14,7 +14,7 @@ import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, W
 export async function GET(request: Request) {
 
     const headersList = await headers()
-    const authHeader = headersList.get("authorization")
+    const authHeader = headersList.get("Authorization")
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return Response.json({ error: "Unauthorized" }, { status: 401 })

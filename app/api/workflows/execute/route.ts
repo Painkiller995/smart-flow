@@ -11,11 +11,13 @@ export async function GET(request: Request) {
 
     const headersList = await headers()
 
+    const authHeader = headersList.get("Authorization")
 
-    const authHeader = headersList.get("x-auth-token")
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return Response.json({ success: false, error: "Authentication required" }, { status: 401 })
+        return Response.json({ success: false, error: "Unauthorized, unable to find the header" }, { status: 401 })
     }
+
+
 
     const secret = authHeader.split(" ")[1]
 
