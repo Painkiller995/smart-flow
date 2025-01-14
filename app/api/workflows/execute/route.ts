@@ -1,16 +1,24 @@
 import parser from "cron-parser"
 
 import prisma from "@/lib/prisma"
+import { isValidSecret } from "@/lib/security-utils"
 import { ExecuteWorkflow } from "@/lib/workflow/execute-workflow"
 import { TaskRegistry } from "@/lib/workflow/task/registry"
 import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, WorkflowExecutionTrigger } from "@/types/workflow"
 
-
-
-
 export async function GET(request: Request) {
 
+    const authHeader = request.headers.get('authorization')
 
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return Response.json({ success: false, message: 'Missing or invalid authorization header' }, { status: 401 })
+    }
+
+    const token = authHeader.split(' ')[1]
+
+    if (!isValidSecret(token, process.env.API_SECRET!)) {
+        return Response.json({ success: false, message: 'Invalid token' }, { status: 403 })
+    }
 
     const { searchParams } = new URL(request.url)
     const workflowId = searchParams.get("workflowId") as string
