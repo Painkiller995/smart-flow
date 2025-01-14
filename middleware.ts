@@ -11,9 +11,10 @@ export default clerkMiddleware(async (auth, request) => {
     }
 
     const authHeader = headersList.get("authorization")
+    console.log(authHeader)
     if (authHeader) { request.headers.set("authorization", authHeader) }
 
-})
+}, { debug: true })
 
 export const config = {
     matcher: [
