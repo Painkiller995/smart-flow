@@ -1,20 +1,12 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
-import { headers } from 'next/headers'
 
 const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)', '/api/workflows/(.*)*', '/api/webhooks/stripe'])
 
 export default clerkMiddleware(async (auth, request) => {
-    const headersList = await headers()
-
     if (!isPublicRoute(request)) {
         await auth.protect()
     }
-
-    const authHeader = headersList.get("authorization")
-    console.log(authHeader)
-    if (authHeader) { request.headers.set("authorization", authHeader) }
-
-}, { debug: true })
+})
 
 export const config = {
     matcher: [
