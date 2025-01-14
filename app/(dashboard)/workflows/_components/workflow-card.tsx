@@ -99,7 +99,7 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
                 <CarouselItem>
                   <WebhookTriggerSection
                     workflowId={workflow.id}
-                    secretId={workflow.secretId}
+                    secretId={workflow.secretId || undefined}
                     isDraft={isDraft}
                     creditCost={workflow.creditsCost}
                   />
