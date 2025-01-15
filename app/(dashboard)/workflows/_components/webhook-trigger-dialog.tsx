@@ -29,7 +29,7 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import CustomDialogHeader from './custom-dialog-header';
 
-const TriggerDialog = (props: { workflowId: string; secretId?: string }) => {
+const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) => {
   const [selectedSecretId, setSelectedSecretId] = useState(props.secretId);
   const query = useQuery({
     queryKey: ['secrets-for-user'],
@@ -40,20 +40,20 @@ const TriggerDialog = (props: { workflowId: string; secretId?: string }) => {
   const updateSecretMutation = useMutation({
     mutationFn: UpdateWorkflowSecret,
     onSuccess: () => {
-      toast.success('Webhook secret updated successfully', { id: 'webhook-secret' });
+      toast.success('Webhook secret updated successfully', { id: 'webhook-trigger' });
     },
     onError: () => {
-      toast.error('Something went wrong', { id: 'webhook-secret' });
+      toast.error('Something went wrong', { id: 'webhook-trigger' });
     },
   });
 
   const removeSecretMutation = useMutation({
     mutationFn: RemoveWorkflowSecret,
     onSuccess: () => {
-      toast.success('Schedule removed successfully', { id: 'webhook-secret' });
+      toast.success('Webhook secret removed successfully', { id: 'webhook-trigger' });
     },
     onError: () => {
-      toast.error('Something went wrong', { id: 'webhook-secret' });
+      toast.error('Something went wrong', { id: 'webhook-trigger' });
     },
   });
 
@@ -146,7 +146,7 @@ const TriggerDialog = (props: { workflowId: string; secretId?: string }) => {
                   toast.error('Please select secret first...', { id: 'webhook-trigger' });
                   return;
                 }
-                toast.info('Saving...', { id: 'webhook-trigger' });
+                toast.loading('Saving...', { id: 'webhook-trigger' });
                 updateSecretMutation.mutate({
                   id: props.workflowId,
                   secretId: selectedSecretId,
@@ -162,4 +162,4 @@ const TriggerDialog = (props: { workflowId: string; secretId?: string }) => {
   );
 };
 
-export default TriggerDialog;
+export default WebhookTriggerDialog;
