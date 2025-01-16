@@ -91,31 +91,42 @@ const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) 
       <DialogContent className="px-0">
         <CustomDialogHeader title="Manage Webhook Secret" icon={WebhookIcon} />
         <div className="space-y-5 p-6">
-          <p className="text-sm text-muted-foreground">
-            To secure your webhook trigger, provide the webhook secret. Keep it private and only
-            share it with trusted services.
-          </p>
-
-          <Select
-            defaultValue={selectedSecretId}
-            onValueChange={(value) => setSelectedSecretId(value)}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select an option" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Secrets</SelectLabel>
-                {query.data?.map((secret) => {
-                  return (
-                    <SelectItem key={secret.id} value={secret.id}>
-                      {secret.name}
-                    </SelectItem>
-                  );
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          {query.data?.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              Navigate to the secrets page to generate and add a new secret token. This token will
+              serve as a secure credential for authenticating your webhook requests. Ensure you
+              store the token securely and use it in the{' '}
+              <strong className="text-bold">Authorization</strong> header to protect your workflow
+              from unauthorized access.
+            </p>
+          ) : (
+            <>
+              <p className="text-sm text-muted-foreground">
+                To secure your webhook trigger, provide the webhook secret. Keep it private and only
+                share it with trusted services.
+              </p>
+              <Select
+                defaultValue={selectedSecretId}
+                onValueChange={(value) => setSelectedSecretId(value)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select an option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Secrets</SelectLabel>
+                    {query.data?.map((secret) => {
+                      return (
+                        <SelectItem key={secret.id} value={secret.id}>
+                          {secret.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </>
+          )}
 
           {props.secretId && (
             <DialogClose asChild>
