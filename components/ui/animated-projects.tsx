@@ -5,27 +5,27 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
-type Testimonial = {
-  quote: string;
-  name: string;
-  designation: string;
+type Project = {
+  description: string;
+  projectName: string;
+  status: string;
   src: string;
 };
-export const AnimatedTestimonials = ({
-  testimonials,
+export const AnimatedProjects = ({
+  projects,
   autoplay = false,
 }: {
-  testimonials: Testimonial[];
+  projects: Project[];
   autoplay?: boolean;
 }) => {
   const [active, setActive] = useState(0);
 
   const handleNext = useCallback(() => {
-    setActive((prev) => (prev + 1) % testimonials.length);
-  }, [testimonials.length]);
+    setActive((prev) => (prev + 1) % projects.length);
+  }, [projects.length]);
 
   const handlePrev = () => {
-    setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActive((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
   const isActive = (index: number) => {
@@ -48,9 +48,9 @@ export const AnimatedTestimonials = ({
         <div>
           <div className="relative h-80 w-full">
             <AnimatePresence>
-              {testimonials.map((testimonial, index) => (
+              {projects.map((project, index) => (
                 <motion.div
-                  key={testimonial.src}
+                  key={project.src}
                   initial={{
                     opacity: 0,
                     scale: 0.9,
@@ -62,7 +62,7 @@ export const AnimatedTestimonials = ({
                     scale: isActive(index) ? 1 : 0.95,
                     z: isActive(index) ? 0 : -100,
                     rotate: isActive(index) ? 0 : randomRotateY(),
-                    zIndex: isActive(index) ? 999 : testimonials.length + 2 - index,
+                    zIndex: isActive(index) ? 999 : projects.length + 2 - index,
                     y: isActive(index) ? [0, -80, 0] : 0,
                   }}
                   exit={{
@@ -78,8 +78,8 @@ export const AnimatedTestimonials = ({
                   className="absolute inset-0 origin-bottom"
                 >
                   <Image
-                    src={testimonial.src}
-                    alt={testimonial.name}
+                    src={project.src}
+                    alt={project.projectName}
                     width={500}
                     height={500}
                     draggable={false}
@@ -111,13 +111,11 @@ export const AnimatedTestimonials = ({
             }}
           >
             <h3 className="text-2xl font-bold text-black dark:text-white">
-              {testimonials[active].name}
+              {projects[active].projectName}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-neutral-500">
-              {testimonials[active].designation}
-            </p>
+            <p className="text-sm text-gray-500 dark:text-neutral-500">{projects[active].status}</p>
             <motion.p className="mt-8 text-lg text-gray-500 dark:text-neutral-300">
-              {testimonials[active].quote.split(' ').map((word, index) => (
+              {projects[active].description.split(' ').map((word, index) => (
                 <motion.span
                   key={index}
                   initial={{
