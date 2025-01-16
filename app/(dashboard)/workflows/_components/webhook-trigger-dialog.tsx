@@ -2,12 +2,13 @@
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { TriangleAlertIcon, WebhookIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { GetSecretsForUser } from '@/actions/secrets/get-secrets-for-user';
 import { RemoveWorkflowSecret } from '@/actions/workflows/remove-workflow-secret';
 import { UpdateWorkflowSecret } from '@/actions/workflows/update-workflow-secret';
+import { ReadonlyInputWithCopy } from '@/components/readonly-input-with-copy';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -30,7 +31,9 @@ import { cn } from '@/lib/utils';
 import CustomDialogHeader from './custom-dialog-header';
 
 const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) => {
+  const [webhookLink, setWebhookLink] = useState<string>('');
   const [selectedSecretId, setSelectedSecretId] = useState(props.secretId);
+
   const query = useQuery({
     queryKey: ['secrets-for-user'],
     queryFn: GetSecretsForUser,
@@ -43,7 +46,7 @@ const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) 
       toast.success('Webhook secret updated successfully', { id: 'webhook-trigger' });
     },
     onError: () => {
-      toast.error('Something went wrong', { id: 'webhook-trigger' });
+      toast.error('An error occurred while updating the secret', { id: 'webhook-trigger' });
     },
   });
 
@@ -53,11 +56,17 @@ const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) 
       toast.success('Webhook secret removed successfully', { id: 'webhook-trigger' });
     },
     onError: () => {
-      toast.error('Something went wrong', { id: 'webhook-trigger' });
+      toast.error('An error occurred while removing the secret', { id: 'webhook-trigger' });
     },
   });
 
-  const secretName = query.data?.find((secret) => secret.id === props.secretId)?.name;
+  const currentSecretName = query.data?.find((secret) => secret.id === props.secretId)?.name;
+
+  useEffect(() => {
+    const hostname = process.env.NEXT_PUBLIC_APP_URL || '';
+    const link = `${hostname}/api/workflows/webhook?workflowId=${props.workflowId}`;
+    setWebhookLink(link);
+  }, [props.workflowId]);
 
   return (
     <Dialog>
@@ -65,14 +74,14 @@ const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) 
         <Button
           variant="link"
           size="sm"
-          className={cn('h-auto p-0 text-sm text-orange-500', secretName && 'text-primary')}
+          className={cn('h-auto p-0 text-sm text-orange-500', currentSecretName && 'text-primary')}
         >
-          {secretName && (
+          {currentSecretName && (
             <div className="flex items-center gap-1">
-              <WebhookIcon /> {secretName}
+              <WebhookIcon /> {currentSecretName}
             </div>
           )}
-          {!secretName && (
+          {!currentSecretName && (
             <div className="flex items-center gap-1">
               <TriangleAlertIcon className="h-3 w-3" /> Set Webhook Secret
             </div>
@@ -81,10 +90,10 @@ const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) 
       </DialogTrigger>
       <DialogContent className="px-0">
         <CustomDialogHeader title="Manage Webhook Secret" icon={WebhookIcon} />
-        <div className="space-y-4 p-6">
+        <div className="space-y-5 p-6">
           <p className="text-sm text-muted-foreground">
-            Provide the webhook secret to secure your webhook trigger. Ensure it is kept private and
-            only shared with trusted services.
+            To secure your webhook trigger, provide the webhook secret. Keep it private and only
+            share it with trusted services.
           </p>
 
           <Select
@@ -125,9 +134,24 @@ const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) 
                 >
                   Remove current secret
                 </Button>
-                <Separator className="my-4" />
               </div>
             </DialogClose>
+          )}
+          {selectedSecretId && (
+            <>
+              <Separator className="my-4" />
+              <div className="flex w-full flex-col space-y-1">
+                <p className="text-sm text-muted-foreground">
+                  Use the webhook URL below to securely trigger the workflow.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  To authenticate your request, include the <strong> Authorization</strong> header
+                  with your Bearer token. Ensure the token is kept confidential and shared only with
+                  trusted parties.
+                </p>
+                <ReadonlyInputWithCopy className="pt-2" value={webhookLink} />
+              </div>
+            </>
           )}
         </div>
 
