@@ -94,7 +94,9 @@ const SchedulerDialog = (props: { workflowId: string; cron: string | null }) => 
         <CustomDialogHeader title="Schedule workflow execution" icon={CalendarIcon} />
         <div className="space-y-4 p-6">
           <p className="text-sm text-muted-foreground">
-            Specify a cron expression to schedule periodic workflow execution. All times are in UTC
+            Define a cron expression to schedule the periodic execution of your workflow. All times
+            are based on UTC. Ensure that your cron expression is correctly formatted to reflect the
+            intended frequency and timing for optimal workflow execution.
           </p>
           <Input
             placeholder="E.g. * * * * *"
