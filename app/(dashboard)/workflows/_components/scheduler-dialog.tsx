@@ -98,6 +98,10 @@ const SchedulerDialog = (props: { workflowId: string; cron: string | null }) => 
             are based on UTC. Ensure that your cron expression is correctly formatted to reflect the
             intended frequency and timing for optimal workflow execution.
           </p>
+          <p className="text-sm text-muted-foreground">
+            The minimum allowed interval is one minute. Any value less than one minute will be
+            treated as a one-minute interval.
+          </p>
           <Input
             placeholder="E.g. * * * * *"
             value={cron}
@@ -134,6 +138,7 @@ const SchedulerDialog = (props: { workflowId: string; cron: string | null }) => 
             </DialogClose>
           )}
         </div>
+
         <DialogFooter className="gap-2 px-6">
           <DialogClose asChild>
             <Button className="w-full" variant="secondary">
