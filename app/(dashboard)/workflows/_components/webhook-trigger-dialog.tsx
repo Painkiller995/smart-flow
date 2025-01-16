@@ -175,7 +175,11 @@ const WebhookTriggerDialog = (props: { workflowId: string; secretId?: string }) 
           <DialogClose asChild>
             <Button
               className="w-full"
-              disabled={updateSecretMutation.isPending || removeSecretMutation.isPending}
+              disabled={
+                updateSecretMutation.isPending ||
+                removeSecretMutation.isPending ||
+                !selectedSecretId
+              }
               onClick={() => {
                 if (!selectedSecretId) {
                   toast.error('Please select secret first...', { id: 'webhook-trigger' });
