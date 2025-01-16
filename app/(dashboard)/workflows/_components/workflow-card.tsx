@@ -34,7 +34,7 @@ import DuplicateWorkflowDialog from './duplicate-workflow-dialog';
 import LastRunDetails from './last-run-detials';
 import RunWorkflowButton from './run-workflow-button';
 import SchedulerDialog from './scheduler-dialog';
-import TriggerDialog from './trigger-dialog';
+import WebhookTriggerDialog from './webhook-trigger-dialog';
 
 interface WorkflowCardProps {
   workflow: Workflow;
@@ -89,19 +89,19 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
             >
               <CarouselContent>
                 <CarouselItem>
-                  <ScheduleSection
-                    workflowId={workflow.id}
-                    isDraft={isDraft}
-                    creditCost={workflow.creditsCost}
-                    cron={workflow.cron}
-                  />
-                </CarouselItem>
-                <CarouselItem>
                   <WebhookTriggerSection
                     workflowId={workflow.id}
                     secretId={workflow.secretId || undefined}
                     isDraft={isDraft}
                     creditCost={workflow.creditsCost}
+                  />
+                </CarouselItem>
+                <CarouselItem>
+                  <ScheduleSection
+                    workflowId={workflow.id}
+                    isDraft={isDraft}
+                    creditCost={workflow.creditsCost}
+                    cron={workflow.cron}
                   />
                 </CarouselItem>
               </CarouselContent>
@@ -216,7 +216,7 @@ function WebhookTriggerSection({
   return (
     <div className="flex items-center gap-2 pt-2">
       <CornerDownRight className="h-4 w-4 text-muted-foreground" />
-      <TriggerDialog key={workflowId} workflowId={workflowId} secretId={secretId} />
+      <WebhookTriggerDialog key={workflowId} workflowId={workflowId} secretId={secretId} />
       <MoveRightIcon className="h-4 w-4 text-muted-foreground" />
       <TooltipWrapper content="Credit consumption for full run">
         <div className="gap3 flex items-center">

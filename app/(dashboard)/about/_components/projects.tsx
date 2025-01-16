@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-import { AnimatedTestimonials } from '@/components/ui/animated-testimonials';
+import { AnimatedProjects } from '@/components/ui/animated-projects';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface ProjectsProps {
   projects: {
-    quote: string;
-    name: string;
-    designation: string;
+    description: string;
+    projectName: string;
+    status: string;
     src: string;
   }[];
 }
@@ -29,7 +29,7 @@ const Projects = ({ projects }: ProjectsProps) => {
         <CardTitle className="text-2xl font-bold">Projects:</CardTitle>
       </CardHeader>
       <CardContent>
-        <AnimatedTestimonials testimonials={projects} />
+        <AnimatedProjects projects={projects} />
       </CardContent>
     </Card>
   );
