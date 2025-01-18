@@ -85,7 +85,7 @@ function TaskMenuButton({ taskType }: { taskType: TaskType }) {
         onDragStart(event, taskType);
       }}
     >
-      <div className="flex gap-2">
+      <div className="flex items-center gap-2">
         <task.icon size={20} />
         {task.label}
       </div>
