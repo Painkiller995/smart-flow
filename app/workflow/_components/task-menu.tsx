@@ -20,13 +20,19 @@ const TaskMenu = () => {
       <Accordion
         type="multiple"
         className="w-full"
-        defaultValue={['data-handling', 'json-data', 'integrations', 'utility']}
+        defaultValue={['data-handling', 'data', 'json-data', 'integrations', 'utility']}
       >
         <AccordionItem value="data-handling">
           <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.PROCESS_DATA_WITH_OPEN_AI} />
             <TaskMenuButton taskType={TaskType.STORE_DATA} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="data">
+          <AccordionTrigger className="font-bold">Data</AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.WEBHOOK_PAYLOAD} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="json-data">

@@ -1,8 +1,10 @@
 import { Browser, Page } from 'puppeteer';
+
 import { LogCollector } from './log';
 import { WorkflowTask } from './workflow';
 
 export type Environment = {
+    payload?: Record<string, any>;
     browser?: Browser
     disabledNodes: string[]
     page?: Page

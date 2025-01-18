@@ -9,6 +9,9 @@ export enum TaskType {
     WAIT_FOR_ELEMENT = "WAIT_FOR_ELEMENT",
     SCROLL_TO_ELEMENT = "SCROLL_TO_ELEMENT",
 
+    // **Data tasks**
+    WEBHOOK_PAYLOAD = "WEBHOOK_PAYLOAD",
+
     // **JSON manipulation tasks**
     JSON_STORAGE_AREA = "JSON_STORAGE_AREA",
     READ_PROPERTY_FROM_JSON = "READ_PROPERTY_FROM_JSON",
@@ -23,6 +26,7 @@ export enum TaskType {
     // **Request and webhook tasks**
     EXECUTE_REQUEST = "EXECUTE_REQUEST",
     DELIVER_VIA_WEBHOOK = "DELIVER_VIA_WEBHOOK",
+
 
     // **Miscellaneous tasks**
     SEND_EMAIL = "SEND_EMAIL",
