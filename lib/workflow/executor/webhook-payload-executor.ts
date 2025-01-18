@@ -9,9 +9,10 @@ export async function WebhookPayloadExecutor(environment: ExecutionEnvironment<t
         if (!payload) {
             environment.log.info("Payload is missing. Initializing with an empty JSON object.");
             payload = {};
+        } else {
+            environment.log.info("Payload retrieved successfully.");
         }
 
-        environment.log.info("Payload retrieved successfully.");
         const formattedPayload = JSON.stringify(payload);
         environment.setOutput("Webhook payload", formattedPayload);
 
