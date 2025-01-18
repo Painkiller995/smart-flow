@@ -19,6 +19,7 @@ import { ScrollToElementTask } from './scroll-to-element';
 import { SendEmailTask } from './send-email';
 import { StoreDataTask } from './store-data';
 import { WaitForElementTask } from './wait-for-element';
+import { WebhookPayloadTask } from './webhook-payload';
 
 type Registry = {
   [K in TaskType]: WorkflowTask & { type: K };
@@ -44,4 +45,5 @@ export const TaskRegistry: Registry = {
   EVALUATE_TIME: EvaluateTimeTask,
   SEND_EMAIL: SendEmailTask,
   STORE_DATA: StoreDataTask,
+  WEBHOOK_PAYLOAD: WebhookPayloadTask,
 };

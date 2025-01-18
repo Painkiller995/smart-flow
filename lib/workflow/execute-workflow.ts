@@ -16,7 +16,7 @@ import prisma from "../prisma";
 import { ExecutorRegistry } from "./executor/registry";
 import { TaskRegistry } from "./task/registry";
 
-export async function ExecuteWorkflow(executionId: string, nextRunAt?: Date) {
+export async function ExecuteWorkflow(executionId: string, nextRunAt?: Date, payload?: Record<string, any>) {
 
     const execution = await prisma.workflowExecution.findUnique({
         where: { id: executionId },
@@ -33,9 +33,8 @@ export async function ExecuteWorkflow(executionId: string, nextRunAt?: Date) {
     const edges = JSON.parse(execution.definition).edges as Edge[]
 
     const environment: Environment = {
-        phases: {
-
-        },
+        payload: payload,
+        phases: {},
         disabledNodes: []
     }
 
@@ -277,6 +276,7 @@ function createExecutionEnvironment(phase: ExecutionPhase, node: AppNode, edges:
     return {
         getInput: (name: string) => environment.phases[node.id]?.inputs[name],
         setOutput: (name: string, value: string) => { environment.phases[node.id].outputs[name] = value },
+        getPayload: () => environment.payload,
         getBrowser: () => environment.browser,
         setBrowser: (browser: Browser) => (environment.browser = browser),
         getPage: () => environment.page,

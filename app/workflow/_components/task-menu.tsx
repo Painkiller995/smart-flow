@@ -20,8 +20,14 @@ const TaskMenu = () => {
       <Accordion
         type="multiple"
         className="w-full"
-        defaultValue={['data-handling', 'json-data', 'integrations', 'utility']}
+        defaultValue={['data', 'data-handling', 'json-data', 'integrations', 'utility']}
       >
+        <AccordionItem value="data">
+          <AccordionTrigger className="font-bold">Data</AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuButton taskType={TaskType.WEBHOOK_PAYLOAD} />
+          </AccordionContent>
+        </AccordionItem>
         <AccordionItem value="data-handling">
           <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
@@ -79,7 +85,7 @@ function TaskMenuButton({ taskType }: { taskType: TaskType }) {
         onDragStart(event, taskType);
       }}
     >
-      <div className="flex gap-2">
+      <div className="flex items-center gap-2">
         <task.icon size={20} />
         {task.label}
       </div>

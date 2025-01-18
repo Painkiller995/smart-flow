@@ -20,6 +20,7 @@ import { ScrollToElementExecutor } from "./scroll-to-element-executor";
 import { SendEmailExecutor } from "./send-email-executor";
 import { StoreDataExecutor } from "./store-data-executor";
 import { WaitForElementExecutor } from "./wait-for-element-executor";
+import { WebhookPayloadExecutor } from "./webhook-payload-executor";
 
 
 type ExecutorFn<T extends WorkflowTask> = (environment: ExecutionEnvironment<T>) => Promise<boolean>
@@ -48,4 +49,5 @@ export const ExecutorRegistry: RegistryType = {
     EVALUATE_TIME: EvaluateTimeExecutor,
     SEND_EMAIL: SendEmailExecutor,
     STORE_DATA: StoreDataExecutor,
+    WEBHOOK_PAYLOAD: WebhookPayloadExecutor
 }
