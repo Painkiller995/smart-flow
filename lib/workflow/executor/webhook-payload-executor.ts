@@ -11,6 +11,7 @@ export async function WebhookPayloadExecutor(environment: ExecutionEnvironment<t
             payload = {};
         }
 
+        environment.log.info("Payload retrieved successfully.");
         const formattedPayload = JSON.stringify(payload);
         environment.setOutput("Webhook payload", formattedPayload);
 
