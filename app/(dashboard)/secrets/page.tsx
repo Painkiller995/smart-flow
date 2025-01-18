@@ -15,7 +15,9 @@ const SecretsPage = () => {
       <div className="flex justify-between">
         <div className="flex flex-col">
           <h1 className="text-3xl font-bold">Secrets</h1>
-          <p className="text-muted-foreground">Manage your secrets</p>
+          <p className="text-muted-foreground">
+            Manage your secrets securely. All secrets are stored as encrypted values.
+          </p>
         </div>
         <CreateSecretDialog />
       </div>
