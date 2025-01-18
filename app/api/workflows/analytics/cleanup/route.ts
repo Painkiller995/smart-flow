@@ -30,5 +30,5 @@ export async function GET(request: Request) {
         },
     });
 
-    return Response.json({ workflowExecutionDeleted: workflowExecutions.count }, { status: 200 })
-}  
+    return Response.json({ success: true, workflowExecutionDeleted: workflowExecutions.count }, { status: 200 })
+}
