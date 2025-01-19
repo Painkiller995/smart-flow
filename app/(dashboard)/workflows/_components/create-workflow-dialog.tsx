@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 
 import { CreateWorkflow } from '@/actions/workflows/create-workflow';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -64,8 +64,8 @@ const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
       </DialogTrigger>
       <DialogContent className="px-2">
         <CustomDialogHeader
-          title="Create workflow"
-          subTitle="Start building your workflow"
+          title="Create New Workflow"
+          subTitle="Begin designing and automating your workflow"
           icon={Layers2Icon}
         />
         <div className="p-6">
@@ -77,12 +77,14 @@ const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center gap-1">
-                      Name:<p className="text-xs text-primary">(required)</p>
+                      Workflow Name:<p className="text-xs text-primary">(required)</p>
                     </FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
-                    <FormDescription>Choose a descriptive and unique name</FormDescription>
+                    <FormDescription>
+                      Please choose a distinct and descriptive name for the workflow.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -99,19 +101,20 @@ const CreateWorkflowDialog = ({ triggerText }: CreateWorkflowDialogProps) => {
                     <FormControl>
                       <Textarea className="resize-none" {...field} />
                     </FormControl>
-                    <FormDescription>Provide description</FormDescription>
+                    <FormDescription>
+                      Provide a brief description outlining the purpose of the workflow.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <Button type="submit" className="w-full" disabled={isPending}>
-                {!isPending && 'Proceed'}
+                {!isPending && 'Create Workflow'}
                 {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </form>
           </Form>
         </div>
-        <DialogDescription>Write something here</DialogDescription>
       </DialogContent>
     </Dialog>
   );
