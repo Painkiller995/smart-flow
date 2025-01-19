@@ -47,13 +47,13 @@ const DuplicateWorkflowDialog = ({ workflowId }: DuplicateWorkflowDialogProps) =
       toast.success('Workflow duplicated', { id: 'duplicate-workflow' });
     },
     onError: () => {
-      toast.error('Failed to duplicate the workflow', { id: 'duplicate-workflow' });
+      // toast.error('Failed to duplicate the workflow', { id: 'duplicate-workflow' });
     },
   });
 
   const onSubmit = useCallback(
     (values: duplicateWorkflowSchemaType) => {
-      toast.loading('Duplicating workflow...', { id: 'duplicate-workflow' });
+      toast.info('Duplicating workflow...', { id: 'duplicate-workflow' });
       mutate(values);
     },
     [mutate]
