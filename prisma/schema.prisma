@@ -93,8 +93,9 @@ model Secret {
   name   String
   value  String
 
-  createdAt DateTime  @default(now())
-  Workflow  Workflow?
+  createdAt DateTime @default(now())
+
+  Workflow Workflow?
 
   @@unique([userId, name])
 }

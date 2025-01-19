@@ -13,20 +13,28 @@ import {
 
 const BreadcrumbHeader = () => {
   const pathname = usePathname();
-  const paths = pathname === '/' ? [''] : pathname.split('/');
+  const paths = pathname.split('/').filter(Boolean);
+
   return (
     <div className="flex items-center">
       <Breadcrumb>
         <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink className="capitalize" href="/">
+              Home
+            </BreadcrumbLink>
+          </BreadcrumbItem>
           {paths.map((path, index) => {
+            const href = '/' + paths.slice(0, index + 1).join('/');
+            const isLast = index === paths.length - 1;
             return (
               <React.Fragment key={index}>
+                <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink className="capitalize" href={path}>
-                    {path === '' ? 'home' : path}
+                  <BreadcrumbLink className={`capitalize ${isLast ? 'font-bold' : ''}`} href={href}>
+                    {path}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                {index !== path.length - 1 && <BreadcrumbSeparator />}
               </React.Fragment>
             );
           })}

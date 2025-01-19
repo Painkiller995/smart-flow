@@ -1,15 +1,15 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { Loader2, ShieldEllipsis } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { CreateSecret } from '@/actions/secrets/create-secret';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -81,8 +81,8 @@ const CreateSecretDialog = ({ triggerText }: CreateSecretDialogProps) => {
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      Choose a descriptive and unique name, <br /> This name will be used to
-                      identify the secret
+                      Provide a unique and descriptive name for the secret. This name will help you
+                      identify it later.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -100,7 +100,10 @@ const CreateSecretDialog = ({ triggerText }: CreateSecretDialogProps) => {
                     <FormControl>
                       <Textarea className="resize-none" {...field} />
                     </FormControl>
-                    <FormDescription>Provide description</FormDescription>
+                    <FormDescription>
+                      Enter the secret token. It will be securely encrypted and stored. Note: You
+                      won&apos;t be able to view this value after proceeding.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -112,7 +115,6 @@ const CreateSecretDialog = ({ triggerText }: CreateSecretDialogProps) => {
             </form>
           </Form>
         </div>
-        <DialogDescription>Write something here</DialogDescription>
       </DialogContent>
     </Dialog>
   );
