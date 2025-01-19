@@ -1,7 +1,7 @@
 'use client';
 
 import { useReactFlow } from '@xyflow/react';
-import { CopyIcon, GemIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
+import { GemIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -9,7 +9,6 @@ import TooltipWrapper from '@/components/tooltip-wrapper';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { CreateFlowNode } from '@/lib/workflow/create-flow-node';
 import { TaskRegistry } from '@/lib/workflow/task/registry';
 import { AppNode } from '@/types/app-node';
 import { TaskType } from '@/types/task';
@@ -45,18 +44,6 @@ const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }
     setIsEntryPoint((prev) => !prev);
   }, [getNode, getNodes, nodeId]);
 
-  const addNodeBelow = useCallback(() => {
-    const node = getNode(nodeId) as AppNode;
-    if (!node) return;
-
-    const newNode = CreateFlowNode(node.data.type, {
-      x: node.position.x,
-      y: node.position.y + (node.measured?.height || 0) + 20,
-    });
-
-    addNodes([newNode]);
-  }, [addNodes, getNode, nodeId]);
-
   const removeNode = useCallback(() => {
     deleteElements({ nodes: [{ id: nodeId }] });
   }, [deleteElements, nodeId]);
@@ -89,9 +76,6 @@ const NodeHeader = ({ taskType, nodeId }: { taskType: TaskType; nodeId: string }
             <Switch id={nodeId} checked={isEntryPoint} onClick={toggleEntryPoint} />
           </div>
         </TooltipWrapper>
-        <Button variant="ghost" size="icon" onClick={addNodeBelow}>
-          <CopyIcon size={12} />
-        </Button>
         <Button variant="ghost" size="icon" onClick={removeNode}>
           <TrashIcon size={12} />
         </Button>
