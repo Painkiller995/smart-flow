@@ -23,20 +23,26 @@ const TaskMenu = () => {
         defaultValue={['data', 'data-handling', 'json-data', 'integrations', 'utility']}
       >
         <AccordionItem value="data">
-          <AccordionTrigger className="font-bold">Data</AccordionTrigger>
+          <AccordionTrigger className="text-xl text-secondary-foreground/50 transition-colors duration-300 ease-in-out hover:text-secondary-foreground hover:no-underline">
+            Data
+          </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.WEBHOOK_PAYLOAD} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="data-handling">
-          <AccordionTrigger className="font-bold">Data handling</AccordionTrigger>
+          <AccordionTrigger className="text-xl text-secondary-foreground/50 transition-colors duration-300 ease-in-out hover:text-secondary-foreground hover:no-underline">
+            Data handling
+          </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.PROCESS_DATA_WITH_OPEN_AI} />
             <TaskMenuButton taskType={TaskType.STORE_DATA} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="json-data">
-          <AccordionTrigger className="font-bold">JSON</AccordionTrigger>
+          <AccordionTrigger className="text-xl text-secondary-foreground/50 transition-colors duration-300 ease-in-out hover:text-secondary-foreground hover:no-underline">
+            JSON
+          </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.JSON_STORAGE_AREA} />
             <TaskMenuButton taskType={TaskType.ADD_PROPERTY_TO_JSON} />
@@ -45,7 +51,9 @@ const TaskMenu = () => {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="integrations">
-          <AccordionTrigger className="font-bold">Integrations</AccordionTrigger>
+          <AccordionTrigger className="text-xl text-secondary-foreground/50 transition-colors duration-300 ease-in-out hover:text-secondary-foreground hover:no-underline">
+            Integrations
+          </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.EXECUTE_REQUEST} />
             <TaskMenuButton taskType={TaskType.DELIVER_VIA_WEBHOOK} />
@@ -53,7 +61,9 @@ const TaskMenu = () => {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="utility">
-          <AccordionTrigger className="font-bold">Utility</AccordionTrigger>
+          <AccordionTrigger className="text-xl text-secondary-foreground/50 transition-colors duration-300 ease-in-out hover:text-secondary-foreground hover:no-underline">
+            Utility
+          </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuButton taskType={TaskType.EVALUATE_STRING} />
             <TaskMenuButton taskType={TaskType.EVALUATE_TIME} />
@@ -78,8 +88,8 @@ function TaskMenuButton({ taskType }: { taskType: TaskType }) {
 
   return (
     <Button
-      variant="secondary"
-      className="flex w-full items-center justify-between gap-2 border"
+      variant="outline"
+      className="flex w-full items-center justify-between gap-2 border border-transparent"
       draggable
       onDragStart={(event) => {
         onDragStart(event, taskType);
