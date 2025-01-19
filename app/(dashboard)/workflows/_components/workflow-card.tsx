@@ -53,7 +53,7 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
         <div className="flex items-center justify-end space-x-3">
           <div
             className={cn(
-              'flex h-10 w-10 items-center justify-center rounded-full',
+              'flex h-10 w-10 items-center justify-center rounded-sm',
               statusColors[workflow.status as WorkflowStatus]
             )}
           >
@@ -74,7 +74,7 @@ const WorkflowCard = ({ workflow }: WorkflowCardProps) => {
                 </Link>
               </TooltipWrapper>
               {isDraft && (
-                <span className="text-sx ml-2 rounded-full bg-yellow-100 px-2 py-0.5 font-medium text-yellow-800">
+                <span className="text-sx ml-2 rounded-full bg-orange-100 px-2 py-0.5 font-medium text-orange-800">
                   Draft
                 </span>
               )}

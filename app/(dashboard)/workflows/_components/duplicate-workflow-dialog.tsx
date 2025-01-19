@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 
 import { DuplicateWorkflow } from '@/actions/workflows/duplicate-workflow';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -47,13 +47,13 @@ const DuplicateWorkflowDialog = ({ workflowId }: DuplicateWorkflowDialogProps) =
       toast.success('Workflow duplicated', { id: 'duplicate-workflow' });
     },
     onError: () => {
-      toast.error('Failed to duplicate the workflow', { id: 'duplicate-workflow' });
+      // toast.error('Failed to duplicate the workflow', { id: 'duplicate-workflow' });
     },
   });
 
   const onSubmit = useCallback(
     (values: duplicateWorkflowSchemaType) => {
-      toast.loading('Duplicating workflow...', { id: 'duplicate-workflow' });
+      toast.info('Duplicating workflow...', { id: 'duplicate-workflow' });
       mutate(values);
     },
     [mutate]
@@ -94,7 +94,9 @@ const DuplicateWorkflowDialog = ({ workflowId }: DuplicateWorkflowDialogProps) =
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
-                    <FormDescription>Choose a descriptive and unique name</FormDescription>
+                    <FormDescription>
+                      Please choose a distinct and descriptive name for the new workflow.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -111,7 +113,9 @@ const DuplicateWorkflowDialog = ({ workflowId }: DuplicateWorkflowDialogProps) =
                     <FormControl>
                       <Textarea className="resize-none" {...field} />
                     </FormControl>
-                    <FormDescription>Provide description</FormDescription>
+                    <FormDescription>
+                      Provide a brief description of the workflow’s purpose or function.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -123,7 +127,6 @@ const DuplicateWorkflowDialog = ({ workflowId }: DuplicateWorkflowDialogProps) =
             </form>
           </Form>
         </div>
-        <DialogDescription>Write something here</DialogDescription>
       </DialogContent>
     </Dialog>
   );
