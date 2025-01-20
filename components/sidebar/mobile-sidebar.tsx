@@ -5,12 +5,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-import { cn } from '@/lib/utils';
-import { routes } from '@/config/routes';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { routes } from '@/config/routes';
+import { cn } from '@/lib/utils';
 import Logo from '../logo';
 import { Button, buttonVariants } from '../ui/button';
-import UserAvailableBadge from '../user-available-badge';
 
 interface MobileSidebarProps {
   allowDesktop?: boolean;
@@ -34,10 +33,6 @@ const MobileSidebar = ({ allowDesktop }: MobileSidebarProps) => {
           </SheetTrigger>
           <SheetContent side="left" className="w-[400px] space-y-4 sm:w-[540px]">
             <Logo />
-
-            <div className="p-2">
-              <UserAvailableBadge />
-            </div>
 
             <div className="flex flex-col gap-1">
               {routes.map((route) => (
