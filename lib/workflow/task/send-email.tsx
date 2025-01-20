@@ -23,6 +23,7 @@ export const SendEmailTask = {
       name: 'Sender Email Password',
       type: TaskParamType.CREDENTIAL,
       require: true,
+      hideHandle: true,
     },
     {
       name: 'Email Subject',

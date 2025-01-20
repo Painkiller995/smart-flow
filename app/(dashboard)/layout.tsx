@@ -7,6 +7,7 @@ import DesktopSidebar from '@/components/sidebar/desktop-sidebar';
 import MobileSidebar from '@/components/sidebar/mobile-sidebar';
 import { ThemeModeToggle } from '@/components/theme-mode-toggle';
 import { Separator } from '@/components/ui/separator';
+import UserAvailableBadge from '@/components/user-available-badge';
 
 function Layout({
   children,
@@ -21,6 +22,7 @@ function Layout({
           <MobileSidebar />
           <BreadcrumbHeader />
           <div className="flex items-center gap-2">
+            <UserAvailableBadge />
             <ThemeModeToggle />
             <SignedIn>
               <UserButton></UserButton>

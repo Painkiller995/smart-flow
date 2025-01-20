@@ -15,8 +15,8 @@ const DesktopSidebar = () => {
 
   return (
     <div className="relative hidden h-screen max-w-[80px] border-separate overflow-hidden border-r-2 bg-primary/5 text-muted-foreground dark:bg-secondary/30 dark:text-foreground md:block">
-      <div className="flex border-separate flex-col items-center justify-between gap-2 border-b-[1px] p-4">
-        <Logo hideText iconSize={25} />
+      <div className="flex border-separate flex-col items-center justify-between gap-2 border-b-[1px] p-1">
+        <Logo hideText iconSize={26} />
       </div>
 
       <div className="flex h-5/6 flex-col justify-between">
