@@ -5,6 +5,7 @@ import {
   CornerDownRight,
   FileTextIcon,
   GemIcon,
+  ListIcon,
   MoreVerticalIcon,
   MoveRightIcon,
   PlayIcon,
@@ -156,6 +157,11 @@ function WorkflowActions({ workflowId, workflowName }: WorkflowActionsProps) {
         <DropdownMenuContent>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
+          <DropdownMenuItem className="flex items-center gap-2">
+            <Link href={`/workflow/runs/${workflowId}`} className="flex items-center gap-2">
+              <ListIcon size={16} /> Runs
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem
             className="flex items-center gap-2 text-destructive"
             onSelect={() => {
