@@ -20,38 +20,33 @@ type FlowToExecutionPlanType = {
 
 export function FlowToExecutionPlan(nodes: AppNode[], edges: Edge[]): FlowToExecutionPlanType {
 
-    const entryPoints = nodes.filter((n) => n.data.isEntryPoint);
-
-    if (entryPoints.length > 1) {
-        return { error: { type: FlowToExecutionPlanValidationError.MULTIPLE_ENTRY_POINTS_NOT_ALLOWED } };
-    }
+    const entryPoints = nodes.filter((node) =>
+        edges.every((edge) => edge.target !== node.id)
+    );
 
     if (entryPoints.length === 0) {
         return { error: { type: FlowToExecutionPlanValidationError.NO_ENTRY_POINT } };
     }
 
-    const entryPoint = entryPoints[0];
-
+    const executionPlan: WorkflowExecutionPlan = [];
     const inputsWithErrors: AppNodeMissingInputs[] = []
-
     const planned = new Set<string>()
 
-    const invalidInputs = getInvalidInputs(entryPoint, edges, planned)
-    if (invalidInputs.length > 0) {
-        inputsWithErrors.push({
-            nodeId: entryPoint.id,
-            inputs: invalidInputs
-        })
-    }
-
-    const executionPlan: WorkflowExecutionPlan = [
-        {
-            phase: 1,
-            nodes: [entryPoint]
+    entryPoints.forEach((entryPoint, index) => {
+        const invalidInputs = getInvalidInputs(entryPoint, edges, planned);
+        if (invalidInputs.length > 0) {
+            inputsWithErrors.push({
+                nodeId: entryPoint.id,
+                inputs: invalidInputs,
+            });
         }
-    ]
 
-    planned.add(entryPoint.id)
+        executionPlan.push({
+            phase: 1,
+            nodes: [entryPoint],
+        });
+        planned.add(entryPoint.id);
+    });
 
     for (let phase = 2; phase <= nodes.length && planned.size < nodes.length; phase++) {
         const nextPhase: WorkflowExecutionPlanPhase = { phase, nodes: [] }
