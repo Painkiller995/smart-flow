@@ -23,8 +23,6 @@ export async function MergeTwoJsonExecutor(environment: ExecutionEnvironment<typ
 
     const mergedJson = { ...firstJson, ...secondJson };
 
-
-
     environment.setOutput('Merged JSON', JSON.stringify(mergedJson))
     return true
   } catch (err: any) {
