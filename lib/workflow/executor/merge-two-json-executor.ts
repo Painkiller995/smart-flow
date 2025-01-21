@@ -11,7 +11,7 @@ export async function MergeTwoJsonExecutor(environment: ExecutionEnvironment<typ
       return false;
     }
 
-    const secondJsonData = environment.getInput("First JSON")
+    const secondJsonData = environment.getInput("Second JSON")
 
     if (!secondJsonData) {
       environment.log.error("Second JSON value is not defined");
