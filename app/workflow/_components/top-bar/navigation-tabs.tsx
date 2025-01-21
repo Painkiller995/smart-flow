@@ -9,7 +9,7 @@ const NavigationTabs = ({ workflowId }: { workflowId: string }) => {
   const pathname = usePathname();
   const activeValue = pathname?.split('/')[2];
   return (
-    <Tabs value={activeValue} className="w-[400px]">
+    <Tabs value={activeValue} className="hidden w-[400px] md:block">
       <TabsList className="grid w-full grid-cols-2">
         <Link href={`/workflow/editor/${workflowId}`}>
           <TabsTrigger value="editor" className="w-full">

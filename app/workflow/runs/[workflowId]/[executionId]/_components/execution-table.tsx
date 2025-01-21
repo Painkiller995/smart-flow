@@ -42,7 +42,7 @@ function ExecutionsTable({
       <Table className="h-full">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Id</TableHead>
+            <TableHead className="hidden w-[100px] sm:table-cell">Id</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Consumed</TableHead>
             <TableHead className="text-right text-xs text-muted-foreground">Started at</TableHead>
@@ -61,7 +61,7 @@ function ExecutionsTable({
                   router.push(`/workflow/runs/${workflowId}/${execution.id}`);
                 }}
               >
-                <TableCell>
+                <TableCell className="hidden w-[100px] sm:table-cell">
                   <div className="flex flex-col">
                     <span className="font-semibold">{execution.id}</span>
                     <div className="space-x-1 text-xs text-muted-foreground">
