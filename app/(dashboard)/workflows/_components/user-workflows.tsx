@@ -2,7 +2,7 @@ import { AlertCircle, InboxIcon } from 'lucide-react';
 
 import { GetWorkflowsForUser } from '@/actions/workflows/get-workflows-for-user';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import CreateWorkflowDialog from './create-workflow-dialog';
+import CreateWorkflowDialog from './create-workflow-drawer';
 import WorkflowCard from './workflow-card';
 
 async function UserWorkflows() {

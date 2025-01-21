@@ -2,14 +2,14 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Loader2, ShieldEllipsis } from 'lucide-react';
+import { Layers2Icon, Loader2 } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { CreateSecret } from '@/actions/secrets/create-secret';
+import { CreateWorkflow } from '@/actions/workflows/create-workflow';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import {
   Form,
   FormControl,
@@ -21,51 +21,53 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { createSecretSchema, createSecretSchemaType } from '@/schema/secret';
-import CustomDialogHeader from '../../workflows/_components/custom-dialog-header';
+import { createWorkflowSchema, createWorkflowSchemaType } from '@/schema/workflow';
+import CustomDrawerHeader from './custom-drawer-header';
 
-interface CreateSecretDialogProps {
+interface CreateWorkflowDrawerProps {
   triggerText?: string;
 }
 
-const CreateSecretDialog = ({ triggerText }: CreateSecretDialogProps) => {
+const CreateWorkflowDrawer = ({ triggerText }: CreateWorkflowDrawerProps) => {
   const [open, setOpen] = useState(false);
 
-  const form = useForm<createSecretSchemaType>({
-    resolver: zodResolver(createSecretSchema),
+  const form = useForm<createWorkflowSchemaType>({
+    resolver: zodResolver(createWorkflowSchema),
     defaultValues: {
       name: '',
-      value: '',
+      description: '',
     },
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: CreateSecret,
-    onSuccess: () => {
-      toast.success('Secret created', { id: 'create-secret' });
-    },
-    onError: () => {
-      toast.error('Failed to create the secret', { id: 'create-secret' });
-    },
+    mutationFn: CreateWorkflow,
   });
 
   const onSubmit = useCallback(
-    (values: createSecretSchemaType) => {
-      toast.loading('Creating new secret...', { id: 'create-secret' });
+    (values: createWorkflowSchemaType) => {
+      toast.info('Creating new workflow...', { id: 'create-workflow' });
       mutate(values);
-      form.reset();
-      setOpen(!open);
     },
-    [form, mutate, open]
+    [mutate]
   );
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>{triggerText ?? 'Create secret'}</Button>
-      </DialogTrigger>
-      <DialogContent className="px-2">
-        <CustomDialogHeader title="Create secret" icon={ShieldEllipsis} />
+    <Drawer
+      open={open}
+      onOpenChange={(open) => {
+        form.reset();
+        setOpen(open);
+      }}
+    >
+      <DrawerTrigger asChild>
+        <Button>{triggerText ?? 'Create workflow'}</Button>
+      </DrawerTrigger>
+      <DrawerContent className="px-2">
+        <CustomDrawerHeader
+          title="Create New Workflow"
+          subTitle="Begin designing and automating your workflow"
+          icon={Layers2Icon}
+        />
         <div className="p-6">
           <Form {...form}>
             <form className="w-full space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
@@ -75,14 +77,13 @@ const CreateSecretDialog = ({ triggerText }: CreateSecretDialogProps) => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center gap-1">
-                      Name:<p className="text-xs text-primary">(required)</p>
+                      Workflow Name:<p className="text-xs text-primary">(required)</p>
                     </FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      Provide a unique and descriptive name for the secret. This name will help you
-                      identify it later.
+                      Please choose a distinct and descriptive name for the workflow.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -90,34 +91,33 @@ const CreateSecretDialog = ({ triggerText }: CreateSecretDialogProps) => {
               />
               <FormField
                 control={form.control}
-                name="value"
+                name="description"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center gap-1">
-                      Value:
-                      <p className="text-xs text-primary">(required)</p>
+                      Description:
+                      <p className="text-xs text-muted-foreground">(optional)</p>
                     </FormLabel>
                     <FormControl>
                       <Textarea className="resize-none" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Enter the secret token. It will be securely encrypted and stored. Note: You
-                      won&apos;t be able to view this value after proceeding.
+                      Provide a brief description outlining the purpose of the workflow.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <Button type="submit" className="w-full" disabled={isPending}>
-                {!isPending && 'Proceed'}
+                {!isPending && 'Create Workflow'}
                 {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </form>
           </Form>
         </div>
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
-export default CreateSecretDialog;
+export default CreateWorkflowDrawer;

@@ -6,7 +6,7 @@ import { GetSecretsForUser } from '@/actions/secrets/get-secrets-for-user';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import CreateSecretDialog from './_components/create-secret-dialog';
+import CreateSecretDrawer from './_components/create-secret-drawer';
 import DeleteSecretDialog from './_components/delete-secret-dialog';
 
 const SecretsPage = () => {
@@ -19,7 +19,7 @@ const SecretsPage = () => {
             Manage your secrets securely. All secrets are stored as encrypted values.
           </p>
         </div>
-        <CreateSecretDialog />
+        <CreateSecretDrawer />
       </div>
       <div className="h-full space-y-8 py-6">
         <Alert>
@@ -57,7 +57,7 @@ async function UserSecrets() {
               Click the button below to create your first secret
             </p>
           </div>
-          <CreateSecretDialog triggerText="Create your first secret" />
+          <CreateSecretDrawer triggerText="Create your first secret" />
         </div>
       </Card>
     );

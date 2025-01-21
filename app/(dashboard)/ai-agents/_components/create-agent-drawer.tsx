@@ -1,14 +1,16 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { BotIcon, FilePlusIcon, Loader2, PencilIcon } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import { CreateOrUpdateAgent } from '@/actions/agents/create-or-update-agent';
+import { GetAgentsForUser } from '@/actions/agents/get-agents-for-user';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import {
   Form,
   FormControl,
@@ -20,19 +22,17 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { CreateOrUpdateAgent } from '@/actions/agents/create-or-update-agent';
-import { GetAgentsForUser } from '@/actions/agents/get-agents-for-user';
 import { createAgentSchema, createAgentSchemaType } from '@/schema/agent';
-import CustomDialogHeader from '../../workflows/_components/custom-dialog-header';
+import CustomDrawerHeader from '../../workflows/_components/custom-drawer-header';
 
 type Agent = Awaited<ReturnType<typeof GetAgentsForUser>>[0];
 
-interface CreateAgentDialogProps {
+interface CreateAgentDrawerProps {
   agent?: Agent;
   triggerText?: string;
 }
 
-const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
+const CreateAgentDrawer = ({ agent, triggerText }: CreateAgentDrawerProps) => {
   const [open, setOpen] = useState(false);
 
   const form = useForm<createAgentSchemaType>({
@@ -71,15 +71,15 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
   );
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         <Button variant={'outline'}>
           {agent ? <PencilIcon /> : <FilePlusIcon />}
           {triggerText ?? 'Create agent'}
         </Button>
-      </DialogTrigger>
-      <DialogContent className="max-h-full overflow-auto px-2">
-        <CustomDialogHeader title={triggerText ?? 'Create agent'} icon={BotIcon} />
+      </DrawerTrigger>
+      <DrawerContent className="px-2">
+        <CustomDrawerHeader title={triggerText ?? 'Create agent'} icon={BotIcon} />
         <div className="p-6">
           <Form {...form}>
             <form className="w-full space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
@@ -173,9 +173,9 @@ const CreateAgentDialog = ({ agent, triggerText }: CreateAgentDialogProps) => {
             </form>
           </Form>
         </div>
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
-export default CreateAgentDialog;
+export default CreateAgentDrawer;

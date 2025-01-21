@@ -6,7 +6,7 @@ import { GetAgentsForUser } from '@/actions/agents/get-agents-for-user';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import CreateAgentDialog from './_components/create-agent-dialog';
+import CreateAgentDrawer from './_components/create-agent-drawer';
 import DeleteAgentDialog from './_components/delete-agent-dialog';
 
 const AiAgentsPage = () => {
@@ -17,7 +17,7 @@ const AiAgentsPage = () => {
           <h1 className="text-3xl font-bold">AI Agents</h1>
           <p className="text-muted-foreground">Manage your AI agents</p>
         </div>
-        <CreateAgentDialog />
+        <CreateAgentDrawer />
       </div>
       <div className="h-full space-y-8 py-6">
         <Alert>
@@ -56,7 +56,7 @@ async function UserAgents() {
               Click the button below to create your first agent
             </p>
           </div>
-          <CreateAgentDialog triggerText="Create your first agent" />
+          <CreateAgentDrawer triggerText="Create your first agent" />
         </div>
       </Card>
     );
@@ -78,7 +78,7 @@ async function UserAgents() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <CreateAgentDialog triggerText="Modify Agent" agent={agent} />
+              <CreateAgentDrawer triggerText="Modify Agent" agent={agent} />
               <DeleteAgentDialog agentName={agent.name} />
             </div>
           </Card>
