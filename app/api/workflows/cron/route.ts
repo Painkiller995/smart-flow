@@ -5,6 +5,8 @@ import prisma from "@/lib/prisma"
 import { isValidSecret } from "@/lib/security-utils"
 import { WorkflowStatus } from "@/types/workflow"
 
+export const maxDuration = 60 // 1 minute in seconds
+
 export async function GET(request: Request) {
 
     const headersList = await headers()

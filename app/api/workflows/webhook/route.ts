@@ -11,6 +11,8 @@ import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, W
 // Using the rate limiter is very important here because the secret is stored in the database
 // and every time you call this endpoint, a call to the database is initiated.
 
+export const maxDuration = 60 // 1 minute in seconds
+
 export async function GET(request: Request) {
 
     const headersList = await headers()

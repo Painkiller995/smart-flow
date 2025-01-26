@@ -7,6 +7,9 @@ import { ExecuteWorkflow } from "@/lib/workflow/execute-workflow"
 import { TaskRegistry } from "@/lib/workflow/task/registry"
 import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, WorkflowExecutionTrigger } from "@/types/workflow"
 
+
+export const maxDuration = 60 // 1 minute in seconds
+
 export async function GET(request: Request) {
 
     const headersList = await headers()

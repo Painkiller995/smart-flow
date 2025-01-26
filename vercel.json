@@ -1,7 +1,0 @@
-{
-    "functions": {
-        "api/workflows/**/*.ts": {
-            "maxDuration": 60
-        }
-    }
-}
